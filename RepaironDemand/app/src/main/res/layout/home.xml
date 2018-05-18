@@ -7,48 +7,46 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
 
-    <ImageView
-        android:id="@+id/logohome"
-        android:layout_width="98dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/iconBenutzer"
         android:layout_width="35dp"
         android:layout_height="28dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="9dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/Benutzername"
-        android:layout_width="94dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
         android:text="@string/benutzername"
         android:textAllCaps="false"
         android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/logohome"
         app:layout_constraintEnd_toStartOf="@+id/iconBenutzer"
-        app:layout_constraintStart_toEndOf="@+id/logohome"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.321" />
+
+
+    <ImageView
+        android:id="@+id/logohome"
+        android:layout_width="380dp"
+        android:layout_height="111dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.979"
+        app:srcCompat="@mipmap/logo_banner2" />
 
     <TextView
         android:id="@+id/linkImpressum"
@@ -64,66 +62,59 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="315dp"
-        android:layout_height="468dp"
+        android:layout_width="match_parent"
+        android:layout_height="367dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638">
+        app:layout_constraintVertical_bias="0.837">
 
         <TableRow>
 
             <Button
                 android:id="@+id/btnAnfrageerstellen"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
-                android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawablePadding="-85dp"
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
-                android:paddingBottom="10dp"
-                android:paddingLeft="200dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:text="@string/anfrage_erstellen"
                 android:textAllCaps="false"
                 android:textColor="#000"
                 android:textSize="@dimen/TxtSize"
-                tools:layout_editor_absoluteX="40dp"
-                tools:layout_editor_absoluteY="70dp" />
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="60dp" />
 
             <Button
                 android:id="@+id/btnEingestelleAufträge"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
-                android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawablePadding="-90dp"
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
                 android:paddingBottom="10dp"
-                android:paddingLeft="200dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:text="@string/eingestellte_aufträge"
                 android:textAllCaps="false"
                 android:textColor="#000"
                 android:textSize="@dimen/TxtSize"
                 tools:layout_editor_absoluteX="191dp"
-                tools:layout_editor_absoluteY="70dp" />
+                tools:layout_editor_absoluteY="60dp" />
         </TableRow>
 
         <TableRow>
@@ -131,16 +122,13 @@
             <Button
                 android:id="@+id/btnAufträgesuchen"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
-                android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawablePadding="-80dp"
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
                 android:paddingBottom="10dp"
-                android:paddingLeft="200dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:text="@string/aufträge_suche"
                 android:textAllCaps="false"
@@ -153,7 +141,7 @@
             <Button
                 android:id="@+id/btnAbgegebeneAngebote"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
                 android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -161,8 +149,6 @@
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
                 android:paddingBottom="10dp"
-                android:paddingLeft="200dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:text="@string/abgegebene_angebote"
                 android:textAllCaps="false"
@@ -177,7 +163,7 @@
             <Button
                 android:id="@+id/btnFeedback"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
                 android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -185,8 +171,6 @@
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
                 android:paddingBottom="10dp"
-                android:paddingLeft="100dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:text="@string/feedback"
                 android:textAllCaps="false"
@@ -198,7 +182,7 @@
             <Button
                 android:id="@+id/btnKalender"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
                 android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -206,8 +190,6 @@
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
                 android:paddingBottom="10dp"
-                android:paddingLeft="200dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:text="@string/kalender"
                 android:textAllCaps="false"
@@ -222,7 +204,7 @@
             <Button
                 android:id="@+id/btnBenachrichtigungen"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
                 android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -230,8 +212,6 @@
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
                 android:paddingBottom="10dp"
-                android:paddingLeft="200dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:text="@string/benachrichtigungen"
                 android:textAllCaps="false"
@@ -243,7 +223,7 @@
             <Button
                 android:id="@+id/btnServiceCenter"
                 android:layout_width="@dimen/BtnHomeWidth"
-                android:layout_height="@dimen/BtnHomeHeight"
+                android:layout_height="95dp"
                 android:layout_weight="1"
                 android:height="1dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -251,8 +231,6 @@
                 android:drawableStart="@mipmap/ic_launcher"
                 android:gravity="bottom|left"
                 android:paddingBottom="10dp"
-                android:paddingLeft="200dp"
-                android:paddingRight="200dp"
                 android:paddingStart="35dp"
                 android:paddingTop="0dp"
                 android:text="@string/service_center"
