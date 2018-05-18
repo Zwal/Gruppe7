@@ -7,64 +7,57 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
 
-    <Button
-        android:id="@+id/zurück"
-        android:layout_width="84dp"
+    <ImageButton
+        android:id="@+id/btnZurück"
+        android:layout_width="71dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
         android:backgroundTint="@color/colorPrimary"
-        android:drawableStart="@mipmap/ic_launcher"
-        android:text="zurück"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintVertical_bias="0.015"
+        app:srcCompat="@mipmap/baseline_arrow_back_black_18dp"/>
 
     <ImageView
         android:id="@+id/iconBenutzer"
         android:layout_width="35dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/logoAuftrag"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/logoAngebot"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toEndOf="@+id/Benutzername"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/Benutzername"
-        android:layout_width="94dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginTop="10dp"
         android:text="@string/benutzername"
         android:textAllCaps="false"
         android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@+id/logoAuftrag"
-        app:layout_constraintStart_toEndOf="@+id/zurück"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/logohome"
+        app:layout_constraintEnd_toStartOf="@+id/iconBenutzer"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.363" />
 
     <ImageView
         android:id="@+id/logoAngebot"
-        android:layout_width="98dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="380dp"
+        android:layout_height="99dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/preis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:layout_constraintVertical_bias="0.79"
+        app:srcCompat="@mipmap/logo_banner2" />
 
     <EditText
         android:id="@+id/preis"
@@ -100,7 +93,7 @@
         android:id="@+id/zeitraum_head"
         android:layout_width="65dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="348dp"
+        android:layout_marginBottom="312dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Zeitraum"
@@ -124,10 +117,10 @@
         android:textColor="#000"
         app:layout_constraintBottom_toTopOf="@+id/zeitraum_auswahl_start"
         app:layout_constraintEnd_toStartOf="@+id/zeitraum_ende"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zeitraum_head"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/zeitraum_ende"
@@ -142,7 +135,7 @@
         app:layout_constraintBottom_toTopOf="@+id/zeitraum_auswahl_Ende"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zeitraum_head"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/zeitraum_auswahl_start"
@@ -185,8 +178,7 @@
     <TextView
         android:id="@+id/beschreibung_head"
         android:layout_width="93dp"
-        android:layout_height="22dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Beschreibung"
@@ -201,7 +193,6 @@
         android:id="@+id/beschreibung"
         android:layout_width="244dp"
         android:layout_height="79dp"
-        android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
@@ -210,18 +201,19 @@
         android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/btnSenden"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.314"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSenden"
         android:layout_width="113dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Senden"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 
 
