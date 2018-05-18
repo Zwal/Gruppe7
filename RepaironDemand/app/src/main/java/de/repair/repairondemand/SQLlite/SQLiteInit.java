@@ -35,8 +35,7 @@ public class SQLiteInit {
 
     // table adresse
     public static final String COLUMN_ADRESSE_ID_PK = "adresse_id_pk";
-    public static final String COLUMN_STRASSE = "strasse";
-    public static final String COLUMN_HAUSNUMMER = "hausnummer";
+    public static final String COLUMN_STRASSE_HAUSNUMMER = "strasse_hausnummer";
     public static final String COLUMN_PLZ = "plz";
     public static final String COLUMN_ORT = "ort";
     public static final String COLUMN_LAND = "land";
@@ -103,8 +102,7 @@ public class SQLiteInit {
     public static final String SQL_CREATE_ADRESSE =
             "CREATE TABLE " + TABLE_ADRESSE +
                     "(" + COLUMN_ADRESSE_ID_PK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUMN_STRASSE + " TEXT NOT NULL, " +
-                    COLUMN_HAUSNUMMER + " INTEGER NOT NULL, " +
+                    COLUMN_STRASSE_HAUSNUMMER + " TEXT NOT NULL, " +
                     COLUMN_PLZ + " INTEGER NOT NULL, " +
                     COLUMN_ORT + " TEXT NOT NULL," +
                     COLUMN_LAND + " TEXT NOT NULL);";

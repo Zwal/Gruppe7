@@ -216,22 +216,12 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         sqLite = new SQLite(this);
         // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getReadableDatabase();
-        ///(\w*-*\w*-*\w*\s)([0-9])/g
-        Pattern sPattern = Pattern.compile("(\\w*-*\\w*-*\\w*\\s)([0-9])");
-        Matcher m = sPattern.matcher(straße);
-        String hausnummerS = "0";
-        if(m.find()) {
-            Log.e("bla", m.group(0));
-            hausnummerS = m.group(0);
-        }
-        int hausnummer = Integer.getInteger(hausnummerS);
-        Toast.makeText(this, hausnummer, Toast.LENGTH_LONG).show();
 
         Cursor cursor =
                 db.query(SQLiteInit.TABLE_ADRESSE, // a. table
                         new String[]{SQLiteInit.COLUMN_ADRESSE_ID_PK}, // b. column names
                         " strasse = ? and hausnummer = ? and plz = ? and land = ?", // c. selections
-                        new String[] {straße, hausnummerS, plz, land}, // d. selections args
+                        new String[] {straße, plz, land}, // d. selections args
                         null, // e. group by
                         null, // f. having
                         null, // g. order by
@@ -243,8 +233,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }else{
             // Create a new map of values, where column names are the keys
             ContentValues values = new ContentValues();
-            values.put(SQLiteInit.COLUMN_STRASSE, straße);
-            values.put(SQLiteInit.COLUMN_HAUSNUMMER, hausnummer);
+            values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, straße);
             values.put(SQLiteInit.COLUMN_PLZ, Integer.getInteger(plz));
             values.put(SQLiteInit.COLUMN_LAND, land);
             newRowId = db.insert(SQLiteInit.TABLE_ADRESSE, null, values);
