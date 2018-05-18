@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnZurück"
+            android:layout_width="84dp"
+            android:layout_height="41dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:text="zurück"
+            app:layout_constraintBottom_toTopOf="@+id/beschreibung"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.285" />
+
+        <ImageView
+            android:id="@+id/iconBenutzer"
+            android:layout_width="35dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/beschreibung"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.966"
+            app:layout_constraintStart_toEndOf="@+id/Benutzername"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/Benutzername"
+            android:layout_width="94dp"
+            android:layout_height="18dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/benutzername"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/beschreibung"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/zurück"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.266" />
+
+        <EditText
+            android:id="@+id/beschreibung"
+            android:layout_width="244dp"
+            android:layout_height="93dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="@string/beschreibung_anfrage"
+            android:inputType=""
+            android:singleLine="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TableLayout
+            android:id="@+id/tableLayout8"
+            android:layout_width="320dp"
+            android:layout_height="152dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/beschreibung">
+
+            <TableRow
+                android:layout_width="310dp"
+                android:layout_height="60dp">
+
+                <EditText
+                    android:id="@+id/straße"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:ems="10"
+                    android:hint="@string/stra_e_hausnr_anfrage"
+                    android:inputType="" />
+
+                <Spinner
+                    android:id="@+id/land"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:layout_marginEnd="44dp"
+                    android:layout_marginTop="24dp"
+                    android:spinnerMode="dropdown" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/hinweisLandText"
+                android:layout_width="338dp"
+                android:layout_height="31dp"
+                android:paddingLeft="162dp"
+                android:text="@string/bitte_ausw_hlen_anfrage"
+                android:textAllCaps="false"
+                android:textColor="#ff3227"
+                tools:layout_editor_absoluteX="194dp"
+                tools:layout_editor_absoluteY="239dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/stadt"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:ems="10"
+                    android:hint="@string/stadt_anfrage"
+                    android:inputType=""
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="269dp" />
+
+                <EditText
+                    android:id="@+id/plz"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:layout_marginEnd="44dp"
+                    android:ems="10"
+                    android:hint="@string/plz_anfrage"
+                    android:inputType=""
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="269dp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/tableLayout7"
+            android:layout_width="321dp"
+            android:layout_height="209dp"
+            android:layout_marginBottom="64dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TableRow
+                android:layout_width="315dp"
+                android:layout_height="80dp">
+
+                <Button
+                    android:id="@+id/btnDateRepAnfang"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:text="@string/anfang"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="377dp" />
+
+                <Button
+                    android:id="@+id/btnDateRepEnde"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:text="@string/ende"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="377dp" />
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/hinweisRepzAnfangText"
+                    android:layout_width="112dp"
+                    android:layout_height="20dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/bitte_ausw_hlen_anfrage"
+                    android:textAllCaps="false"
+                    android:textColor="#ff3227"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="427dp" />
+
+                <TextView
+                    android:id="@+id/hinweisRepzEndeText"
+                    android:layout_width="112dp"
+                    android:layout_height="20dp"
+                    android:text="@string/bitte_ausw_hlen_anfrage"
+                    android:textAllCaps="false"
+                    android:textColor="#ff3227"
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="427dp" />
+            </TableRow>
+
+            <TableRow android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/AblaufdatumAnfrageText"
+                    android:layout_width="125dp"
+                    android:layout_height="36dp"
+                    android:text="@string/ablaufdatum_anfrage"
+                    android:textColor="@android:color/black"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="454dp" />
+
+                <Button
+                    android:id="@+id/btnAblaufdatum"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:text="@string/ablauf"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="454dp" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/hinweisAblaufdatumText"
+                android:layout_width="112dp"
+                android:layout_height="20dp"
+                android:paddingLeft="162dp"
+                android:text="@string/bitte_ausw_hlen_anfrage"
+                android:textAllCaps="false"
+                android:textColor="#ff3227"
+                tools:layout_editor_absoluteX="194dp"
+                tools:layout_editor_absoluteY="504dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:paddingTop="10dp">
+
+                <EditText
+                    android:id="@+id/preisvorstellung"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:ems="10"
+                    android:hint="@string/preisvorstellung_anfrage"
+                    android:inputType=""
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="533dp" />
+
+                <Spinner
+                    android:id="@+id/kategorie"
+                    android:layout_width="@dimen/TxtAnfrageWidth"
+                    android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="533dp" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/hinweisKategorieText"
+                android:layout_width="112dp"
+                android:layout_height="27dp"
+                android:paddingLeft="162dp"
+                android:text="@string/bitte_ausw_hlen_anfrage"
+                android:textAllCaps="false"
+                android:textColor="#ff3227" />
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/reparaturzeitraumText"
+            android:layout_width="175dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/reparaturzeitraum_anfrage"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout8" />
+
+
+        <CheckBox
+            android:id="@+id/checkBoxFirma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="An Firma"
+            app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxPrivat"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout7" />
+
+        <CheckBox
+            android:id="@+id/checkBoxPrivat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:text="An Privat"
+            app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout7" />
+
+
+        <Button
+            android:id="@+id/btnErstellen"
+            android:layout_width="188dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Erstellen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/BildText"
+            android:layout_width="137dp"
+            android:layout_height="39dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Bild aufnehmen oder hochladen"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toTopOf="@+id/btnErstellen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hinweisCheckboxText"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/btnKamera"
+            android:layout_width="91dp"
+            android:layout_height="67dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:text="kamera"
+            app:layout_constraintBottom_toTopOf="@+id/btnErstellen"
+            app:layout_constraintEnd_toStartOf="@+id/btnUpload"
+            app:layout_constraintHorizontal_bias="0.757"
+            app:layout_constraintStart_toEndOf="@+id/BildText" />
+
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="91dp"
+            android:layout_height="67dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:text="upload"
+            app:layout_constraintBottom_toTopOf="@+id/btnErstellen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hinweisCheckboxText"
+            app:layout_constraintVertical_bias="1.0" />
+
+
+        <TextView
+            android:id="@+id/hinweisCheckboxText"
+            android:layout_width="330dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Mindestens eine Checkbox muss ausgewählt sein."
+            android:textAllCaps="false"
+            android:textColor="#ff3227"
+            app:layout_constraintBottom_toTopOf="@+id/btnKamera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
+

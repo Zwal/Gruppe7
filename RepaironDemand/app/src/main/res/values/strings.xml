@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Repair on Demand</string>
+    <string name="anfrage_erstellen">Anfrage erstellen</string>
+    <string name="eingestellte_aufträge">eingestellte Aufträge</string>
+    <string name="aufträge_suche">Aufträge suchen</string>
+    <string name="abgegebene_angebote">abgegebene Angebote</string>
+    <string name="feedback">Feedback</string>
+    <string name="kalender">Kalender</string>
+    <string name="benachrichtigungen">Benachrichtigungen</string>
+    <string name="service_center">Service-Center</string>
+    <string name="benutzername">Benutzername</string>
+    <string name="beschreibung_anfrage">Beschreibung</string>
+    <string name="stra_e_hausnr_anfrage">Straße, Hausnr.</string>
+    <string name="stadt_anfrage">Stadt</string>
+    <string name="plz_anfrage">PLZ</string>
+    <string name="preisvorstellung_anfrage">Preisvorstellung</string>
+    <string name="anfrageTextwidth">145dp</string>
+    <string name="anfrageTexthight">43dp</string>
+    <string name="reparaturzeitraum_anfrage">Reparaturzeitraum von/bis</string>
+    <string name="ablaufdatum_anfrage">Ablaufdatum der Anfrage</string>
+    <string name="bitte_ausw_hlen_anfrage">Bitte auswählen</string>
+    <string name="impressum"><b>Kontaktinformationen</b> \n Repair on Demand \n Mustermann Str.1
+        \n 76131 Karlsruhe \n \n Licence Number: 10000000 \n Ust-ID: LU 26370000 \n
+        Vertretungsberechtigter: Hansi \n Tel.: +49 (0) 789456123 \n \n
+        <b>Support</b> \n Support finden Sie über den Button <u>Service-Center</u> \n im <u>Home-Menu.</u></string>
+    <string name="hinweis_auftrag">Hinweis: Der genaue Standort wird nur angezeigt, \n
+    wenn das Angebot angnommen wird.</string>
+    <string name="anfang">Anfang</string>
+    <string name="ende">Ende</string>
+    <string name="ablauf">Ablauf</string>
+    <string name="start">Start</string>
+    <string name="ende">Ende</string>
+</resources>

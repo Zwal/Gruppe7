@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="BtnHomeWidth">151dp</dimen>
+    <dimen name="BtnHomeHeight">118dp</dimen>
+    <dimen name="TxtSize">12dp</dimen>
+    <dimen name="TxtSizeBig">24dp</dimen>
+    <dimen name="TxtAnfrageWidth">145dp</dimen>
+    <dimen name="TxtAnfrageHeight">43dp</dimen>
+</resources>
