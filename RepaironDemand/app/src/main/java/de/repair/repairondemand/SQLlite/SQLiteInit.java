@@ -103,7 +103,7 @@ public class SQLiteInit {
             "CREATE TABLE " + TABLE_ADRESSE +
                     "(" + COLUMN_ADRESSE_ID_PK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_STRASSE_HAUSNUMMER + " TEXT NOT NULL, " +
-                    COLUMN_PLZ + " INTEGER NOT NULL, " +
+                    COLUMN_PLZ + " TEXT NOT NULL, " +
                     COLUMN_ORT + " TEXT NOT NULL," +
                     COLUMN_LAND + " TEXT NOT NULL);";
 

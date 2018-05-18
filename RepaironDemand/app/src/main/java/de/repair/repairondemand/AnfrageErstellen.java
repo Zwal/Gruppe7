@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.sql.Blob;
 import java.util.Calendar;
 
@@ -53,7 +55,6 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         bindViews();
         init();
     }
-
 
     private void bindViews() {
         mBtnZurück = this.findViewById(R.id.btnZurück);
@@ -98,6 +99,8 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
         mBtnRepAblauf.setOnClickListener(this);
+        mBtnKamera.setOnClickListener(this);
+        mBtnUpload.setOnClickListener(this);
     }
 
     @Override
@@ -108,7 +111,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btnErstellen:
-                check();
+                check(1);
                 break;
             case R.id.btnDateRepAnfang:
                 checkBtn = 1;
@@ -191,7 +194,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void check(){
+    public void check(int userId){
         String adressId = null;
         String dateAnfang = mBtnRepAnfang.getText().toString();
         String dateEnde = mBtnRepEnde.getText().toString();
@@ -216,12 +219,14 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             String strasse = mTxtStraße.getText().toString();
             String plz = mTxtPlz.getText().toString();
             String stadt = mTxtStadt.getText().toString();
-            if(strasse != null) {
-                adressId = writeDbAdresse(land, strasse, stadt, plz);
-            }
+            adressId = writeDbAdresse(land, strasse, stadt, plz);
+
             anfrage.setmAdresseIdFk(adressId);
             anfrage.setmKategorieIdFk("1");
-            //anfrage.setmBild();
+            anfrage.setmBild(bild);
+            anfrage.setmUserId(userId);
+
+            writeDb(anfrage);
         }
     }
 
@@ -258,24 +263,26 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         return newRowId;
     }
 
-    public void writeDb(Anfrage anfrage, int userId) {
+    public void writeDb(Anfrage anfrage) {
         sqLite = new SQLite(this);
         // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, mTxtBeschreibung.getText().toString());
-        values.put(SQLiteInit.COLUMN_STARTTERMIN, "start");
-        values.put(SQLiteInit.COLUMN_ENDTERMIN, "end");
-        values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "ablauf");
-        values.put(SQLiteInit.COLUMN_PREISVORSTELLUNG, "preisv");
-        values.put(SQLiteInit.COLUMN_FIRMA, "firma");
-        values.put(SQLiteInit.COLUMN_PRIVAT, "privat");
-        values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
-        values.put(SQLiteInit.COLUMN_BILD, "");
-        values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 3);
+        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, anfrage.getmBeschreibung());
+        values.put(SQLiteInit.COLUMN_STARTTERMIN, anfrage.getmStarttermin());
+        values.put(SQLiteInit.COLUMN_ENDTERMIN, anfrage.getmEndtermin());
+        values.put(SQLiteInit.COLUMN_ABLAUFDATUM, anfrage.getmAblaufdatum());
+        values.put(SQLiteInit.COLUMN_PREISVORSTELLUNG, anfrage.getmPreisvorstellung());
+        values.put(SQLiteInit.COLUMN_FIRMA, anfrage.getmFirma());
+        values.put(SQLiteInit.COLUMN_PRIVAT, anfrage.getmPrivat());
+        values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, anfrage.getmKategorieIdFk());
+        if(anfrage.getmBild() != null){
+            values.put(SQLiteInit.COLUMN_BILD, anfrage.getmBild().toString());
+        }
+        values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, anfrage.getmUserId());
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, anfrage.getmAdresseIdFk());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
@@ -286,18 +293,33 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     public void bild(){
         if(checkBild == 1){
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(cameraIntent, 42);
+            startActivityForResult(cameraIntent, 2);
         }else if(checkBild == 2){
-
+            Intent takePictureIntent = new Intent(MediaStore.Images.Media.DATA);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, 3);
+            }
         }
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 42) {
-            Blob thumb = (Blob) data.getExtras().get("data");
-            bild = thumb;
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+            // Blob thumb = getBytesFromBitmap(imageBitmap);
+            // bild = thumb;
+        }else if (requestCode == 3 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            // Blob thumb = (Blob) data.getExtras().get("data");
+            // bild = thumb;
         }
     }
 
+    public static byte[] getBytesFromBitmap(Bitmap bitmap) {
+        if (bitmap!=null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+            return stream.toByteArray();
+        }
+        return null;
+    }
 }

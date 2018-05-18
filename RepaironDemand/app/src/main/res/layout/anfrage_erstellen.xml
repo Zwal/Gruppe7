@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
     android:fillViewport="true">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -110,6 +111,8 @@
                     android:layout_height="@dimen/TxtAnfrageHeight"
                     android:layout_marginEnd="44dp"
                     android:layout_marginTop="24dp"
+                    android:entries="@array/land"
+                    android:prompt="@string/country_prompt"
                     android:spinnerMode="dropdown" />
             </TableRow>
 
@@ -270,6 +273,8 @@
                     android:layout_height="@dimen/TxtAnfrageHeight"
                     android:spinnerMode="dropdown"
                     tools:ignore="MissingConstraints"
+                    android:entries="@array/category"
+                    android:prompt="@string/category_prompt"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="533dp" />
             </TableRow>
@@ -310,6 +315,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="An Firma"
+            android:textColor="#000"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBoxPrivat"
@@ -323,6 +329,7 @@
             android:layout_marginStart="68dp"
             android:layout_marginTop="8dp"
             android:text="An Privat"
+            android:textColor="#000"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tableLayout7" />

@@ -11,14 +11,17 @@ public class Anfrage {
     private String mPreisvorstellung;
     private String mFirma;
     private String mPrivat;
-    private String mKategorie;
+    private String mKategorieIdFk;
     private Blob mBild;
+    private String mAdresseIdFk;
+    private Integer mUserId;
+    // private String mBenutzerIdFk;
 
     public Anfrage(){}
 
     public Anfrage(String mBeschreibung, String mStarttermin, String mEndtermin,
                    String mAblaufdatum, String mPreisvorstellung, String mFirma, String mPrivat,
-                   String mKategorie, Blob mBild){
+                   String mKategorieIdFk, Blob mBild){
         this.mBeschreibung = mBeschreibung;
         this.mStarttermin = mStarttermin;
         this.mEndtermin = mEndtermin;
@@ -26,7 +29,7 @@ public class Anfrage {
         this.mPreisvorstellung = mPreisvorstellung;
         this.mFirma = mFirma;
         this.mPrivat = mPrivat;
-        this.mKategorie = mKategorie;
+        this.mKategorieIdFk = mKategorieIdFk;
         this.mBild = mBild;
     }
 
@@ -39,12 +42,12 @@ public class Anfrage {
         this.mBild = mBild;
     }
 
-    public String getmKategorie() {
-        return mKategorie;
+    public String getmKategorieIdFk() {
+        return mKategorieIdFk;
     }
 
-    public void setmKategorie(String mKategorie) {
-        this.mKategorie = mKategorie;
+    public void setmKategorieIdFk(String mKategorieIdFk) {
+        this.mKategorieIdFk = mKategorieIdFk;
     }
 
     public String getmPreisvorstellung() {
@@ -101,5 +104,21 @@ public class Anfrage {
 
     public void setmPrivat(String mPrivat) {
         this.mPrivat = mPrivat;
+    }
+
+    public String getmAdresseIdFk() {
+        return mAdresseIdFk;
+    }
+
+    public void setmAdresseIdFk(String mAdresseIdFk) {
+        this.mAdresseIdFk = mAdresseIdFk;
+    }
+
+    public Integer getmUserId() {
+        return mUserId;
+    }
+
+    public void setmUserId(Integer mUserId) {
+        this.mUserId = mUserId;
     }
 }
