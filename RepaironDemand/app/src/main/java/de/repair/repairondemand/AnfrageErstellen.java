@@ -1,6 +1,5 @@
 package de.repair.repairondemand;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,11 +7,13 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -21,9 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Blob;
 import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
@@ -34,6 +34,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private SQLite sqLite;
 
     private int checkBtn;
+    private int checkBild;
+
+    private Blob bild = null;
 
     public Button mBtnZurück, mBtnErstellen, mBtnKamera, mBtnUpload, mBtnRepAnfang, mBtnRepEnde
             , mBtnRepAblauf;
@@ -68,7 +71,14 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mTxtPreisvorstellung = this.findViewById(R.id.preisvorstellung);
 
         mSpinLand = this.findViewById(R.id.land);
+        ArrayAdapter<CharSequence> adapterLand = ArrayAdapter.createFromResource(this, R.array.land,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinLand.setAdapter(adapterLand);
+
         mSpinKategorie = this.findViewById(R.id.kategorie);
+        ArrayAdapter<CharSequence> adapterKategorie = ArrayAdapter.createFromResource(this, R.array.category,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinKategorie.setAdapter(adapterKategorie);
 
         mCboFirma = this.findViewById(R.id.checkBoxFirma);
         mCboPrivat = this.findViewById(R.id.checkBoxPrivat);
@@ -94,6 +104,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.btnZurück:
+                finish();
+                break;
             case R.id.btnErstellen:
                 check();
                 break;
@@ -108,6 +121,14 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             case R.id.btnAblaufdatum:
                 checkBtn = 3;
                 showDatePickerDialog();
+                break;
+            case R.id.btnKamera:
+                checkBild = 1;
+                bild();
+                break;
+            case R.id.btnUpload:
+                checkBild =2;
+                bild();
                 break;
         }
     }
@@ -171,23 +192,12 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     }
 
     public void check(){
-        /*private String mBeschreibung;
-        private String mStarttermin;
-        private String mEndtermin;
-        private String mAblaufdatum;
-        private String mPreisvorstellung;
-        private String mFirma;
-        private String mPrivat;
-        private String mKategorie;
-        private Blob mBild;*/
-        long adressId;
+        String adressId = null;
         String dateAnfang = mBtnRepAnfang.getText().toString();
         String dateEnde = mBtnRepEnde.getText().toString();
         String dateAblauf = mBtnRepAblauf.getText().toString();
-        Cursor c =(Cursor) mSpinLand.getSelectedItem();
-        String land = "bla"; //c.getString(c.getColumnIndex("titel"));
-        c =(Cursor) mSpinKategorie.getSelectedItem();
-        String kategorie = "la"; //c.getString(c.getColumnIndex("titel"));
+        String land = mSpinLand.getSelectedItem().toString();
+        String kategorie = mSpinKategorie.getSelectedItem().toString();
         if(dateAnfang.equals("Anfang")||dateEnde.equals("Ende")||dateAblauf.equals("Ablauf")||
                 land.equals("Land")||kategorie.equals("Kategorie")||
                 !(mCboFirma.isChecked()||mCboPrivat.isChecked())){
@@ -202,43 +212,49 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             anfrage.setmPreisvorstellung(mTxtPreisvorstellung.getText().toString());
             anfrage.setmFirma(String.valueOf(mCboFirma.isChecked()));
             anfrage.setmPrivat(String.valueOf(mCboPrivat.isChecked()));
-            anfrage.setmKategorie(kategorie);
+            anfrage.setmKategorieIdFk(kategorie);
             String strasse = mTxtStraße.getText().toString();
             String plz = mTxtPlz.getText().toString();
             String stadt = mTxtStadt.getText().toString();
             if(strasse != null) {
                 adressId = writeDbAdresse(land, strasse, stadt, plz);
             }
+            anfrage.setmAdresseIdFk(adressId);
+            anfrage.setmKategorieIdFk("1");
+            //anfrage.setmBild();
         }
     }
 
-    public long writeDbAdresse(String land, String straße, String stadt, String plz) {
+    public String writeDbAdresse(String land, String straße, String stadt, String plz) {
         sqLite = new SQLite(this);
         // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getReadableDatabase();
+        String newRowId = null;
+        try{
+            Log.e("cursor","start");
+            Cursor cursor =
+                    db.query(SQLiteInit.TABLE_ADRESSE, // a. table
+                            new String[]{SQLiteInit.COLUMN_ADRESSE_ID_PK}, // b. column names
+                            " strasse_hausnummer = ? and ort = ? and plz = ? and land = ?", // c. selections
+                            new String[] {straße, stadt, plz, land}, // d. selections args
+                            null, // e. group by
+                            null, // f. having
+                            null, // g. order by
+                            null); // h. limit
 
-        Cursor cursor =
-                db.query(SQLiteInit.TABLE_ADRESSE, // a. table
-                        new String[]{SQLiteInit.COLUMN_ADRESSE_ID_PK}, // b. column names
-                        " strasse = ? and hausnummer = ? and plz = ? and land = ?", // c. selections
-                        new String[] {straße, plz, land}, // d. selections args
-                        null, // e. group by
-                        null, // f. having
-                        null, // g. order by
-                        null); // h. limit
-        long newRowId;
-        if (cursor != null) {
-            cursor.moveToFirst();
-            newRowId = Long.getLong(cursor.getString(0));
-        }else{
-            // Create a new map of values, where column names are the keys
-            ContentValues values = new ContentValues();
-            values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, straße);
-            values.put(SQLiteInit.COLUMN_PLZ, Integer.getInteger(plz));
-            values.put(SQLiteInit.COLUMN_LAND, land);
-            newRowId = db.insert(SQLiteInit.TABLE_ADRESSE, null, values);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                newRowId = cursor.getString(0);
+            }
+        }catch(Exception ex){
+                // Create a new map of values, where column names are the keys
+                ContentValues values = new ContentValues();
+                values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, straße);
+                values.put(SQLiteInit.COLUMN_PLZ, plz);
+                values.put(SQLiteInit.COLUMN_ORT, stadt);
+                values.put(SQLiteInit.COLUMN_LAND, land);
+                newRowId = String.valueOf(db.insert(SQLiteInit.TABLE_ADRESSE, null, values));
         }
-
         return newRowId;
     }
 
@@ -265,6 +281,23 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         long newRowId = db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
 
         Toast.makeText(this, String.valueOf(newRowId), Toast.LENGTH_LONG).show();
+    }
+
+    public void bild(){
+        if(checkBild == 1){
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, 42);
+        }else if(checkBild == 2){
+
+        }
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 42) {
+            Blob thumb = (Blob) data.getExtras().get("data");
+            bild = thumb;
+        }
     }
 
 }
