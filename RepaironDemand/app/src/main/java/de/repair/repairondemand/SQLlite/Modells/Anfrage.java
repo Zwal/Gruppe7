@@ -12,7 +12,6 @@ public class Anfrage {
     private String mFirma;
     private String mPrivat;
     private String mKategorieIdFk;
-    private Blob mBild;
     private String mAdresseIdFk;
     private Integer mUserId;
     // private String mBenutzerIdFk;
@@ -21,7 +20,7 @@ public class Anfrage {
 
     public Anfrage(String mBeschreibung, String mStarttermin, String mEndtermin,
                    String mAblaufdatum, String mPreisvorstellung, String mFirma, String mPrivat,
-                   String mKategorieIdFk, Blob mBild){
+                   String mKategorieIdFk){
         this.mBeschreibung = mBeschreibung;
         this.mStarttermin = mStarttermin;
         this.mEndtermin = mEndtermin;
@@ -30,16 +29,6 @@ public class Anfrage {
         this.mFirma = mFirma;
         this.mPrivat = mPrivat;
         this.mKategorieIdFk = mKategorieIdFk;
-        this.mBild = mBild;
-    }
-
-
-    public Blob getmBild() {
-        return mBild;
-    }
-
-    public void setmBild(Blob mBild) {
-        this.mBild = mBild;
     }
 
     public String getmKategorieIdFk() {

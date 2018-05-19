@@ -1,5 +1,6 @@
 package de.repair.repairondemand;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,7 +9,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -30,11 +33,12 @@ import java.util.Calendar;
 import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class AnfrageErstellen extends AppCompatActivity implements View.OnClickListener {
 
     private SQLite sqLite;
-
+    private Bitmap imageBitmap;
     private int checkBtn;
     private int checkBild;
 
@@ -45,8 +49,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private EditText mTxtBeschreibung, mTxtStraße, mTxtStadt, mTxtPlz, mTxtPreisvorstellung;
     private Spinner mSpinLand, mSpinKategorie;
     private CheckBox mCboFirma, mCboPrivat;
-    private TextView mTvHinweisLandText, mTvHinweisRepzAnfangText, mTvHinweisRepzEndeText,
-            mTvHinweisAblaufText, mTvHinweisKategorieText, mTvHinweisChecboxText;
+    private TextView mTvHinweisLandText, mTvHinweisStrasseText, mTvHinweisStadtText, mTvHinweisPlzText,
+            mTvHinweisRepzAnfangText, mTvHinweisRepzEndeText, mTvHinweisAblaufText,
+            mTvHinweisKategorieText, mTvHinweisChecboxText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,11 +95,15 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mTvHinweisAblaufText = this.findViewById(R.id.hinweisAblaufdatumText);
         mTvHinweisKategorieText = this.findViewById(R.id.hinweisKategorieText);
         mTvHinweisChecboxText = this.findViewById(R.id.hinweisCheckboxText);
+        mTvHinweisStrasseText = this.findViewById(R.id.hinweisStrasseText);
+        mTvHinweisStadtText = this.findViewById(R.id.hinweisStadtText);
+        mTvHinweisPlzText = this.findViewById(R.id.hinweisPlzText);
 
         btnColor("white");
     }
 
     private void init() {
+        mBtnZurück.setOnClickListener(this);
         mBtnErstellen.setOnClickListener(this);
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
@@ -130,7 +139,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 bild();
                 break;
             case R.id.btnUpload:
-                checkBild =2;
+                checkBild = 2;
                 bild();
                 break;
         }
@@ -184,6 +193,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             mTvHinweisAblaufText.setTextColor(Color.WHITE);
             mTvHinweisKategorieText.setTextColor(Color.WHITE);
             mTvHinweisChecboxText.setTextColor(Color.WHITE);
+            mTvHinweisStrasseText.setTextColor(Color.WHITE);
+            mTvHinweisStadtText.setTextColor(Color.WHITE);
+            mTvHinweisPlzText.setTextColor(Color.WHITE);
         }else if(color.equals("red")){
             mTvHinweisLandText.setTextColor(Color.RED);
             mTvHinweisRepzAnfangText.setTextColor(Color.RED);
@@ -191,6 +203,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             mTvHinweisAblaufText.setTextColor(Color.RED);
             mTvHinweisKategorieText.setTextColor(Color.RED);
             mTvHinweisChecboxText.setTextColor(Color.RED);
+            mTvHinweisStrasseText.setTextColor(Color.RED);
+            mTvHinweisStadtText.setTextColor(Color.RED);
+            mTvHinweisPlzText.setTextColor(Color.RED);
         }
     }
 
@@ -201,9 +216,12 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         String dateAblauf = mBtnRepAblauf.getText().toString();
         String land = mSpinLand.getSelectedItem().toString();
         String kategorie = mSpinKategorie.getSelectedItem().toString();
-        if(dateAnfang.equals("Anfang")||dateEnde.equals("Ende")||dateAblauf.equals("Ablauf")||
-                land.equals("Land")||kategorie.equals("Kategorie")||
-                !(mCboFirma.isChecked()||mCboPrivat.isChecked())){
+        String strasse = mTxtStraße.getText().toString();
+        String plz = mTxtPlz.getText().toString();
+        String stadt = mTxtStadt.getText().toString();
+        if(strasse.equals("")|| plz.equals("") || stadt.equals("")||dateAnfang.equals("Anfang")
+                ||dateEnde.equals("Ende")||dateAblauf.equals("Ablauf")||
+                land.equals("Land")||kategorie.equals("Kategorie")||!(mCboFirma.isChecked()||mCboPrivat.isChecked())){
             btnColor("red");
         }else {
             btnColor("white");
@@ -215,15 +233,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             anfrage.setmPreisvorstellung(mTxtPreisvorstellung.getText().toString());
             anfrage.setmFirma(String.valueOf(mCboFirma.isChecked()));
             anfrage.setmPrivat(String.valueOf(mCboPrivat.isChecked()));
-            anfrage.setmKategorieIdFk(kategorie);
-            String strasse = mTxtStraße.getText().toString();
-            String plz = mTxtPlz.getText().toString();
-            String stadt = mTxtStadt.getText().toString();
+            anfrage.setmKategorieIdFk(getKategorie(kategorie));
             adressId = writeDbAdresse(land, strasse, stadt, plz);
-
             anfrage.setmAdresseIdFk(adressId);
-            anfrage.setmKategorieIdFk("1");
-            anfrage.setmBild(bild);
             anfrage.setmUserId(userId);
 
             writeDb(anfrage);
@@ -278,9 +290,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         values.put(SQLiteInit.COLUMN_FIRMA, anfrage.getmFirma());
         values.put(SQLiteInit.COLUMN_PRIVAT, anfrage.getmPrivat());
         values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, anfrage.getmKategorieIdFk());
-        if(anfrage.getmBild() != null){
-            values.put(SQLiteInit.COLUMN_BILD, anfrage.getmBild().toString());
-        }
+        values.put(SQLiteInit.COLUMN_BILD, getBytesFromBitmap(imageBitmap));
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, anfrage.getmUserId());
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, anfrage.getmAdresseIdFk());
 
@@ -290,28 +300,44 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         Toast.makeText(this, String.valueOf(newRowId), Toast.LENGTH_LONG).show();
     }
 
+
     public void bild(){
         if(checkBild == 1){
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, 2);
         }else if(checkBild == 2){
-            Intent takePictureIntent = new Intent(MediaStore.Images.Media.DATA);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, 3);
+            if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
+            } else {
+                EasyPermissions.requestPermissions(this, "Access for storage",
+                        101, galleryPermissions);
             }
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, 3);
+        }
+    }
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2 && resultCode == RESULT_OK && null != data) {
+            imageBitmap = (Bitmap) data.getExtras().get("data");
+        }else if (requestCode == 3 && resultCode == RESULT_OK && null != data) {
+            pickImage(data);
         }
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 2 && resultCode == RESULT_OK) {
-            Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-            // Blob thumb = getBytesFromBitmap(imageBitmap);
-            // bild = thumb;
-        }else if (requestCode == 3 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            // Blob thumb = (Blob) data.getExtras().get("data");
-            // bild = thumb;
-        }
+    public void pickImage(Intent data){
+        Uri selectedImage = data.getData();
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+        Cursor cursor = getContentResolver().query(selectedImage,
+                filePathColumn, null, null, null);
+        cursor.moveToFirst();
+
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String picturePath = cursor.getString(columnIndex);
+        cursor.close();
+
+        imageBitmap = BitmapFactory.decodeFile(picturePath);
     }
 
     public static byte[] getBytesFromBitmap(Bitmap bitmap) {
@@ -321,5 +347,30 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             return stream.toByteArray();
         }
         return null;
+    }
+
+    public String getKategorie(String kategorie){
+        sqLite = new SQLite(this);
+        SQLiteDatabase db = sqLite.getReadableDatabase();
+        String id = null;
+        try{
+            Cursor cursor =
+                    db.query(SQLiteInit.TABLE_KATEGORIE, // a. table
+                            new String[]{SQLiteInit.COLUMN_KATEGORIE_ID_PK}, // b. column names
+                            " beschreibung = ?", // c. selections
+                            new String[] {kategorie}, // d. selections args
+                            null, // e. group by
+                            null, // f. having
+                            null, // g. order by
+                            null); // h. limit
+
+            if (cursor != null) {
+                cursor.moveToFirst();
+                id = cursor.getString(0);
+            }
+        }catch(Exception ex){
+        }
+        Log.e("id", id);
+        return id;
     }
 }

@@ -116,16 +116,29 @@
                     android:spinnerMode="dropdown" />
             </TableRow>
 
-            <TextView
-                android:id="@+id/hinweisLandText"
-                android:layout_width="338dp"
-                android:layout_height="31dp"
-                android:paddingLeft="162dp"
-                android:text="@string/bitte_ausw_hlen_anfrage"
-                android:textAllCaps="false"
-                android:textColor="#ff3227"
-                tools:layout_editor_absoluteX="194dp"
-                tools:layout_editor_absoluteY="239dp" />
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/hinweisStrasseText"
+                    android:layout_width="112dp"
+                    android:layout_height="20dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/bitte_ausw_hlen_anfrage"
+                    android:textAllCaps="false"
+                    android:textColor="#ff3227"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="427dp" />
+
+                <TextView
+                    android:id="@+id/hinweisLandText"
+                    android:layout_width="112dp"
+                    android:layout_height="20dp"
+                    android:text="@string/bitte_ausw_hlen_anfrage"
+                    android:textAllCaps="false"
+                    android:textColor="#ff3227"
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="427dp" />
+            </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
@@ -153,6 +166,29 @@
                     android:inputType=""
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="269dp" />
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/hinweisStadtText"
+                    android:layout_width="112dp"
+                    android:layout_height="20dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/bitte_ausw_hlen_anfrage"
+                    android:textAllCaps="false"
+                    android:textColor="#ff3227"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="427dp" />
+
+                <TextView
+                    android:id="@+id/hinweisPlzText"
+                    android:layout_width="112dp"
+                    android:layout_height="20dp"
+                    android:text="@string/bitte_ausw_hlen_anfrage"
+                    android:textAllCaps="false"
+                    android:textColor="#ff3227"
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="427dp" />
             </TableRow>
 
         </TableLayout>
