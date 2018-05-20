@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 //import android.widget.ListView;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.google.maps.android.SphericalUtil;
 import java.util.Calendar;
 import java.util.List;
 
+import de.repair.repairondemand.AuftragList.AuftragAdapter;
 import de.repair.repairondemand.SQLlite.AdresseArray;
 import de.repair.repairondemand.SQLlite.AnfrageArray;
 import de.repair.repairondemand.SQLlite.ByteArray;
@@ -44,6 +46,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     private TextView mTvRadius;
     private ByteArray byteArray;
     private AnfrageArray anfrageArray;
+    private ListView mLv;
     // private ListView mListResult;
 
     @Override
@@ -55,6 +58,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     private void bindViews() {
+        mLv = this.findViewById(R.id.listV);
         mBtnZurück = this.findViewById(R.id.zurück);
         mBtnRepAnfang = this.findViewById(R.id.btnDateRepAnfang);
         mBtnRepEnde = this.findViewById(R.id.btnDateRepEnde);
@@ -212,7 +216,8 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     public void setAufträge(){
-        
+        // Adapter setzten
+        mLv.setAdapter(new AuftragAdapter(this, this.anfrageList, this.byteList));
     }
 
     public Adresse getAdresse(String fk){
