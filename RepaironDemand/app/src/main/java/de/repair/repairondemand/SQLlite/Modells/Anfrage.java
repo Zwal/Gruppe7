@@ -4,6 +4,7 @@ import java.sql.Blob;
 
 public class Anfrage {
 
+    private String mId;
     private String mBeschreibung;
     private String mStarttermin;
     private String mEndtermin;
@@ -18,7 +19,7 @@ public class Anfrage {
 
     public Anfrage(){}
 
-    public Anfrage(String mBeschreibung, String mStarttermin, String mEndtermin,
+    public Anfrage(String mId, String mBeschreibung, String mStarttermin, String mEndtermin,
                    String mAblaufdatum, String mPreisvorstellung, String mFirma, String mPrivat,
                    String mKategorieIdFk){
         this.mBeschreibung = mBeschreibung;
@@ -29,6 +30,7 @@ public class Anfrage {
         this.mFirma = mFirma;
         this.mPrivat = mPrivat;
         this.mKategorieIdFk = mKategorieIdFk;
+        this.mId = mId;
     }
 
     public String getmKategorieIdFk() {
@@ -109,5 +111,13 @@ public class Anfrage {
 
     public void setmUserId(Integer mUserId) {
         this.mUserId = mUserId;
+    }
+
+    public String getmId() {
+        return mId;
+    }
+
+    public void setmId(String mId) {
+        this.mId = mId;
     }
 }

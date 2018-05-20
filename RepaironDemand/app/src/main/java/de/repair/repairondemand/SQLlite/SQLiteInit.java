@@ -61,7 +61,7 @@ public class SQLiteInit {
     // benutzer_id_fk, adresse_id_fk
 
     // table Kategorie
-    public static final String COLUMN_KATEGORIE_ID_PK = "vorname";
+    public static final String COLUMN_KATEGORIE_ID_PK = "kategorie_id_pk";
     // beschreibung
 
     // table auftragKategorie
