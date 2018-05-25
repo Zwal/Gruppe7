@@ -24,11 +24,14 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import de.repair.repairondemand.AuftragList.AuftragAdapter;
 import de.repair.repairondemand.SQLlite.AdresseArray;
+import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
 import de.repair.repairondemand.SQLlite.AnfrageArray;
 import de.repair.repairondemand.SQLlite.ByteArray;
 import de.repair.repairondemand.SQLlite.Modells.Adresse;
@@ -77,6 +80,8 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
         mBtnSuchen.setOnClickListener(this);
+        mSeekbar.setMax(100);
+        mSeekbar.setProgress(50);
         mSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -139,24 +144,26 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
             AufträgeSuchen aufträgeSuchen = (AufträgeSuchen) getActivity();
-            aufträgeSuchen.date(year, month, day);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate = format.format(calendar.getTime());
+
+            aufträgeSuchen.date(strDate);
         }
     }
 
-    public void date(int year, int month, int day){
+    public void date(String date){
         if(checkBtn==1) {
-            mBtnRepAnfang.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnRepAnfang.setText(date);
         }else if(checkBtn==2) {
-            mBtnRepEnde.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnRepEnde.setText(date);
         }
     }
 
     Geocoder geocoder;
     List<Address> address;
-    String loc = "76131 Karlsruhe, Deutschland";
-    String loc1 = "76351 Linkenheim-Hochstetten, Deutschland";
 
     public int getDistance(String adresse1, String adresse2){
         // Hier Wert der bei der Suche nicht ausgewählt werden kann,
@@ -184,25 +191,26 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         return distance;
     }
 
-    List<Anfrage> anfrageList;
-    List<byte[]> byteList;
+    ArrayList<Anfrage> anfrageList = new AnfrageArray().getAnfrageList();
+    List<byte[]> byteList = new ByteArray().getByteList();
     List<Adresse> adresseList;
 
     public void extractAufträge(){
         int radius = mSeekbar.getProgress();
         Adresse adresse;
-        List<Anfrage> anfrageList = new AnfrageArray().getAnfrageList();
+        ArrayList<Anfrage> anfrageList = new AnfrageArray().getAnfrageList();
         List<byte[]> byteList = new ByteArray().getByteList();
         this.adresseList = new AdresseArray().getAdresseList();
-        Adresse adresseUser = getAdresse("1");
+
+        Adresse adresseUser = getAdresse(new AktuellerBenutzer().getId(this));
         int count = 0;
+        Log.e("AdresseUser", adresseUser.toString());
 
         for(Anfrage a : this.anfrageList){
-            Anfrage an = a;
             byte[] by = this.byteList.get(count);
             adresse = getAdresse(a.getmAdresseIdFk());
             if(getDistance(adresseUser.toString(), adresse.toString()) <= radius){
-                anfrageList.add(an);
+                anfrageList.add(a);
                 byteList.add(by);
                 this.adresseList.add(adresse);
             }
@@ -216,7 +224,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     public void setAufträge(){
-        // Adapter setzten
+        // Adapter setzen
         mLv.setAdapter(new AuftragAdapter(this, this.anfrageList, this.byteList));
     }
 
@@ -253,46 +261,49 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
         Anfrage anfrage;
-        List<Anfrage> anfrageList;
-        List<byte[]> byteList;
         try{
             Cursor cursor =
                     db.query(SQLiteInit.TABLE_ANFRAGE, // a. table
                             new String[]{SQLiteInit.COLUMN_BESCHREIBUNG,
                                     SQLiteInit.COLUMN_ADRESSE_ID_FK, SQLiteInit.COLUMN_ANFRAGE_ID_PK,
                                     SQLiteInit.COLUMN_BILD}, // b. column names
-                            " kategorie_id_fk = ? and starttermin >= ? and endtermin <= ?", // c. selections
+                            " kategorie_id_fk = ? and starttermin BETWEEN  ? and ? " +
+                                    "and endtermin BETWEEN ? and ?", // c. selections
                             new String[] {getKategorie(mSpinKategorie.getSelectedItem().toString()),
-                            mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString()}, // d. selections args
+                            mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString(),
+                                    mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString()}, // d. selections args
                             null, // e. group by
                             null, // f. having
                             null, // g. order by
                             null); // h. limit
-
             if (cursor != null) {
-                int count = cursor.getColumnCount()-1;
-                anfrageArray = new AnfrageArray();
-                byteArray = new ByteArray();
-                anfrageList = anfrageArray.getAnfrageList();
-                byteList = byteArray.getByteList();
+                int count = cursor.getCount()-1;
+                Log.e("count", String.valueOf(count));
+
                 cursor.moveToFirst();
                 while(count >= 0) {
                     anfrage = new Anfrage();
+
                     anfrage.setmBeschreibung(cursor.getString(0));
                     anfrage.setmAdresseIdFk(cursor.getString(1));
                     anfrage.setmId(cursor.getString(2));
-                    anfrageList.add(anfrage);
-                    byteList.add(cursor.getBlob(3));
+
+                    boolean b = this.anfrageList.add(anfrage);
+                    Log.e("size", "" + b + anfrage.getmBeschreibung());
+                    this.byteList.add(cursor.getBlob(3));
                     count--;
                     if(count >= 0){
                         cursor.moveToNext();
                     }
                 }
-                this.anfrageList = anfrageList;
-                this.byteList = byteList;
-                extractAufträge();
+
+                if(this.anfrageList.size() != 0) {
+                    Log.e("extrAuftr", "");
+                    extractAufträge();
+                }
             }
         }catch(Exception ex){
+            ex.printStackTrace();
         }
     }
 
@@ -317,7 +328,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         }catch(Exception ex){
         }
-        Log.e("id", id);
+        Log.e("kategorieid", id);
         return id;
     }
 

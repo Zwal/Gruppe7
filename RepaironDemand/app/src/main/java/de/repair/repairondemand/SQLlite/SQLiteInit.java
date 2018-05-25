@@ -10,6 +10,7 @@ public class SQLiteInit {
     public static final String TABLE_ANGEBOT = "angebot";
     public static final String TABLE_KATEGORIE = "kategorie";
     public static final String TABLE_AUFTRAGKATEGORIE = "auftragKategorie";
+    public static final String TABLE_AKTUELLER_BENUTZER = "aktuellerBenutzer";
 
     // table privatperson
     public static final String COLUMN_PERS_ID_PK = "pers_id_pk";
@@ -73,6 +74,13 @@ public class SQLiteInit {
     // starttermin, endtermin, beschreibung
     public static final String COLUMN_ANFRAGE_ID_FK = "anfrage_id_fk";
     // benutzer_id_fk
+
+    // table aktueller Benutzer
+    // benutzer_id_pk
+
+    public static final String SQL_CREATE_AKTUELLER_BENUTZER =
+            "CREATE TABLE " + TABLE_AKTUELLER_BENUTZER +
+                    "(" + COLUMN_BENUTZER_ID_PK + " INTEGER PRIMARY KEY);";
 
     public static final String SQL_CREATE_PRIVATPERSON =
             "CREATE TABLE " + TABLE_PRIVATPERSON +
@@ -150,9 +158,9 @@ public class SQLiteInit {
                     "(" + COLUMN_AUFTRAGS_ID_FK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_KATEGORIE_ID_PK + " INTEGER NOT NULL);";
 
-    String[] tableArray = new String[]{SQL_CREATE_PRIVATPERSON, SQL_CREATE_FIRMA, SQL_CREATE_ADRESSE,
-            SQL_CREATE_BENUTZERKONTO, SQL_CREATE_ANFRAGE, SQL_CREATE_ANGEBOT,
-            SQL_CREATE_KATEGORIE, SQL_CREATE_AUFTRAGKATEGORIE};
+    String[] tableArray = new String[]{SQL_CREATE_AKTUELLER_BENUTZER, SQL_CREATE_PRIVATPERSON,
+            SQL_CREATE_FIRMA, SQL_CREATE_ADRESSE, SQL_CREATE_BENUTZERKONTO,
+            SQL_CREATE_ANFRAGE, SQL_CREATE_ANGEBOT, SQL_CREATE_KATEGORIE, SQL_CREATE_AUFTRAGKATEGORIE};
 
     public String[] tableArray(){
         return tableArray;

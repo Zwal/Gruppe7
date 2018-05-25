@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Blob;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import de.repair.repairondemand.SQLlite.Modells.Anfrage;
@@ -168,20 +169,24 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
             AnfrageErstellen anfrageErstellen = (AnfrageErstellen) getActivity();
-            anfrageErstellen.date(year, month, day);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate = format.format(calendar.getTime());
+
+            anfrageErstellen.date(strDate);
         }
     }
 
-    public void date(int year, int month, int day){
+    public void date(String date){
         if(checkBtn==1) {
-            mBtnRepAnfang.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnRepAnfang.setText(date);
         }else if(checkBtn==2) {
-            mBtnRepEnde.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                String.valueOf(year));
+            mBtnRepEnde.setText(date);
         }else if(checkBtn==3){
-            mBtnRepAblauf.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnRepAblauf.setText(date);
         }
     }
 
@@ -219,6 +224,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         String strasse = mTxtStraße.getText().toString();
         String plz = mTxtPlz.getText().toString();
         String stadt = mTxtStadt.getText().toString();
+        Log.e("privat", String.valueOf(mCboPrivat.isChecked()));
         if(strasse.equals("")|| plz.equals("") || stadt.equals("")||dateAnfang.equals("Anfang")
                 ||dateEnde.equals("Ende")||dateAblauf.equals("Ablauf")||
                 land.equals("Land")||kategorie.equals("Kategorie")||!(mCboFirma.isChecked()||mCboPrivat.isChecked())){

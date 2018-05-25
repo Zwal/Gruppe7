@@ -2,6 +2,7 @@ package de.repair.repairondemand.SQLlite;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.ListIterator;
 import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 
 public class AnfrageArray {
-    List<Anfrage> anfrageList = new List<Anfrage>() {
+    private ArrayList<Anfrage> manfrageList = new ArrayList<Anfrage>() {
         @Override
         public int size() {
             return 0;
@@ -136,8 +137,8 @@ public class AnfrageArray {
 
      }
 
-    public List<Anfrage> getAnfrageList() {
-        return anfrageList;
+    public ArrayList<Anfrage> getAnfrageList() {
+        return manfrageList;
     }
 }
 

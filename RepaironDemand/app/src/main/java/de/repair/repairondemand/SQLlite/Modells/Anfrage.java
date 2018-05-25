@@ -120,4 +120,9 @@ public class Anfrage {
     public void setmId(String mId) {
         this.mId = mId;
     }
+
+    @Override
+    public String toString() {
+        return getmBeschreibung();
+    }
 }

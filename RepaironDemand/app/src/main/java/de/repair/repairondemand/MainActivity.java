@@ -12,12 +12,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    private AktuellerBenutzer aktuellerBenutzer;
     private Button mBtnLogin;
     private TextView mTxtImpressum, mTxtPassVerg, mTxtRegister;
     private EditText mEdTxtEmail, mEdTxtPasswort;
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnlogin:
                 initData();
                 if(checkUser(mEdTxtEmail.getText().toString(), mEdTxtPasswort.getText().toString()) == 1) {
+                    aktuellerBenutzer = new AktuellerBenutzer();
+                    aktuellerBenutzer.writeId(
+                            aktuellerBenutzer.getIdUser(this,mEdTxtEmail.getText().toString()),this);
                     startActivityIntent = new Intent(this, Home.class);
                     startActivity(startActivityIntent);
                 }
@@ -113,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void initData(){
         writeKategorie();
         writeUser();
+        writeAuftrag();
+        writeAdresse();
         mEdTxtEmail.setText("7@repair.de");
         mEdTxtPasswort.setText("123");
     }
@@ -135,6 +141,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_USERNAME, "7@repair.de");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
         db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
+    }
 
+    public void writeAuftrag(){
+        sqLite = new SQLite(this);
+        SQLiteDatabase db = sqLite.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "beschr");
+        values.put(SQLiteInit.COLUMN_STARTTERMIN, "2018-05-25");
+        values.put(SQLiteInit.COLUMN_ENDTERMIN, "2018-05-30");
+        values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "2018-05-25");
+        values.put(SQLiteInit.COLUMN_PREISVORSTELLUNG, "10");
+        values.put(SQLiteInit.COLUMN_FIRMA, "true");
+        values.put(SQLiteInit.COLUMN_PRIVAT, "false");
+        values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
+        values.put(SQLiteInit.COLUMN_BILD, "");
+        values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 2);
+        db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
+    }
+
+    public void writeAdresse(){
+        sqLite = new SQLite(this);
+        SQLiteDatabase db = sqLite.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        // current user
+        values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, "Kaiserstraße 1");
+        values.put(SQLiteInit.COLUMN_PLZ, "76351");
+        values.put(SQLiteInit.COLUMN_ORT, "Linkenheim-Hochstetten");
+        values.put(SQLiteInit.COLUMN_LAND, "Deutschland");
+        db.insert(SQLiteInit.TABLE_ADRESSE, null, values);
+
+        values = new ContentValues();
+        values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, "Kaiserstraße 1");
+        values.put(SQLiteInit.COLUMN_PLZ, "76133");
+        values.put(SQLiteInit.COLUMN_ORT, "Karlsruhe");
+        values.put(SQLiteInit.COLUMN_LAND, "Deutschland");
+        db.insert(SQLiteInit.TABLE_ADRESSE, null, values);
     }
 }
