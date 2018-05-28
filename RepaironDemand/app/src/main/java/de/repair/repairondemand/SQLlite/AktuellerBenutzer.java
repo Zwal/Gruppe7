@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class AktuellerBenutzer {
 
@@ -18,8 +17,8 @@ public class AktuellerBenutzer {
             Cursor cursor =
                     db.query(SQLiteInit.TABLE_AKTUELLER_BENUTZER, // a. table
                             new String[]{SQLiteInit.COLUMN_BENUTZER_ID_PK}, // b. column names
-                            null, // c. selections
-                            null, // d. selections args
+                            " rowid = ?", // c. selections
+                            new String[]{"1"}, // d. selections args
                             null, // e. group by
                             null, // f. having
                             null, // g. order by
@@ -41,10 +40,12 @@ public class AktuellerBenutzer {
         try {
             // Create a new map of values, where column names are the keys
             ContentValues values = new ContentValues();
-            values.put(SQLiteInit.COLUMN_BENUTZER_ID_PK, Integer.getInteger(id));
+            values.put(SQLiteInit.COLUMN_BENUTZER_ID_PK, id);
 
-            db.update(SQLiteInit.TABLE_AKTUELLER_BENUTZER, values, " rowid = 1", null);
-            Log.e("update", id);
+            int i = db.update(SQLiteInit.TABLE_AKTUELLER_BENUTZER, values, " rowid = ?", new String[]{"1"});
+            if(i == 0){
+                db.insert(SQLiteInit.TABLE_AKTUELLER_BENUTZER, null, values);
+            }
         } catch (Exception ex) {
         }
     }
@@ -70,7 +71,6 @@ public class AktuellerBenutzer {
             }
         }catch(Exception ex){
         }
-        Log.e("readid", id);
         return id;
     }
 }

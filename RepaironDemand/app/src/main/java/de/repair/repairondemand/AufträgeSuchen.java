@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
@@ -30,10 +29,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import de.repair.repairondemand.AuftragList.AuftragAdapter;
-import de.repair.repairondemand.SQLlite.AdresseArray;
 import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
-import de.repair.repairondemand.SQLlite.AnfrageArray;
-import de.repair.repairondemand.SQLlite.ByteArray;
 import de.repair.repairondemand.SQLlite.Modells.Adresse;
 import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
@@ -47,8 +43,6 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     private Spinner mSpinKategorie;
     private SeekBar mSeekbar;
     private TextView mTvRadius;
-    private ByteArray byteArray;
-    private AnfrageArray anfrageArray;
     private ListView mLv;
     // private ListView mListResult;
 
@@ -191,29 +185,31 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         return distance;
     }
 
-    ArrayList<Anfrage> anfrageList = new AnfrageArray().getAnfrageList();
-    List<byte[]> byteList = new ByteArray().getByteList();
-    List<Adresse> adresseList;
+    ArrayList<Anfrage> anfrageList;
+    ArrayList<byte[]> byteList = new ArrayList<byte[]>(){};
+    ArrayList<Adresse> adresseList;
 
     public void extractAufträge(){
         int radius = mSeekbar.getProgress();
         Adresse adresse;
-        ArrayList<Anfrage> anfrageList = new AnfrageArray().getAnfrageList();
-        List<byte[]> byteList = new ByteArray().getByteList();
-        this.adresseList = new AdresseArray().getAdresseList();
+        ArrayList<Anfrage> anfrageList = new ArrayList<Anfrage>(){};
+        ArrayList<byte[]> byteList = new ArrayList<byte[]>(){};
+        this.adresseList = new ArrayList<Adresse>(){};
 
-        Adresse adresseUser = getAdresse(new AktuellerBenutzer().getId(this));
+        Adresse adresseUser = getAdresse(getAdresseFk(new AktuellerBenutzer().getId(this)));
         int count = 0;
-        Log.e("AdresseUser", adresseUser.toString());
+        Log.e("currentU", adresseUser.toString());
 
         for(Anfrage a : this.anfrageList){
             byte[] by = this.byteList.get(count);
             adresse = getAdresse(a.getmAdresseIdFk());
             if(getDistance(adresseUser.toString(), adresse.toString()) <= radius){
+                Log.e("add", "list");
                 anfrageList.add(a);
                 byteList.add(by);
                 this.adresseList.add(adresse);
             }
+            count++;
         }
 
         if(anfrageList != null){
@@ -226,6 +222,55 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     public void setAufträge(){
         // Adapter setzen
         mLv.setAdapter(new AuftragAdapter(this, this.anfrageList, this.byteList));
+    }
+
+    public String getAdresseFk(String id){
+        sqLite = new SQLite(this);
+        SQLiteDatabase db = sqLite.getReadableDatabase();
+        String fk = null;
+        try{
+            Cursor cursor =
+                    db.query(SQLiteInit.TABLE_BENUTZERKONTO, // a. table
+                            new String[]{SQLiteInit.COLUMN_USERNAME}, // b. column names
+                            " benutzer_id_pk = ?", // c. selections
+                            new String[] {id}, // d. selections args
+                            null, // e. group by
+                            null, // f. having
+                            null, // g. order by
+                            null); // h. limit
+
+
+            cursor.moveToFirst();
+            String username = cursor.getString(0);
+
+            cursor =
+                    db.query(SQLiteInit.TABLE_PRIVATPERSON, // a. table
+                            new String[]{SQLiteInit.COLUMN_ADRESSE_ID_FK}, // b. column names
+                            " email = ?", // c. selections
+                            new String[] {username}, // d. selections args
+                            null, // e. group by
+                            null, // f. having
+                            null, // g. order by
+                            null); // h. limit
+            if(cursor != null){
+                cursor.moveToFirst();
+                fk = cursor.getString(0);
+            }else{
+                cursor =
+                        db.query(SQLiteInit.TABLE_FIRMA, // a. table
+                                new String[]{SQLiteInit.COLUMN_ADRESSE_ID_FK}, // b. column names
+                                " email = ?", // c. selections
+                                new String[] {username}, // d. selections args
+                                null, // e. group by
+                                null, // f. having
+                                null, // g. order by
+                                null); // h. limit
+                cursor.moveToFirst();
+                fk = cursor.getString(0);
+            }
+        }catch(Exception ex){
+        }
+        return fk;
     }
 
     public Adresse getAdresse(String fk){
@@ -252,7 +297,6 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         }catch(Exception ex){
         }
-
         return adresse;
     }
 
@@ -261,6 +305,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
         Anfrage anfrage;
+        this.anfrageList = new ArrayList<Anfrage>(){};
         try{
             Cursor cursor =
                     db.query(SQLiteInit.TABLE_ANFRAGE, // a. table
@@ -278,7 +323,6 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                             null); // h. limit
             if (cursor != null) {
                 int count = cursor.getCount()-1;
-                Log.e("count", String.valueOf(count));
 
                 cursor.moveToFirst();
                 while(count >= 0) {
@@ -288,15 +332,13 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                     anfrage.setmAdresseIdFk(cursor.getString(1));
                     anfrage.setmId(cursor.getString(2));
 
-                    boolean b = this.anfrageList.add(anfrage);
-                    Log.e("size", "" + b + anfrage.getmBeschreibung());
+                    this.anfrageList.add(anfrage);
                     this.byteList.add(cursor.getBlob(3));
                     count--;
                     if(count >= 0){
                         cursor.moveToNext();
                     }
                 }
-
                 if(this.anfrageList.size() != 0) {
                     Log.e("extrAuftr", "");
                     extractAufträge();
@@ -328,9 +370,6 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         }catch(Exception ex){
         }
-        Log.e("kategorieid", id);
         return id;
     }
-
-
 }

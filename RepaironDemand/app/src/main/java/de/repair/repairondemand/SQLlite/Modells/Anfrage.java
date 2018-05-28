@@ -1,6 +1,5 @@
 package de.repair.repairondemand.SQLlite.Modells;
 
-import java.sql.Blob;
 
 public class Anfrage {
 
