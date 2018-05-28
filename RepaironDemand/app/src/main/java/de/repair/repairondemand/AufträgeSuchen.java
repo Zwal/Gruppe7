@@ -221,8 +221,9 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
     public void setAufträge(){
         // Adapter setzen
-        mLv.setAdapter(new AuftragAdapter(this, this.anfrageList, this.byteList));
+        mLv.setAdapter(new AuftragAdapter(this, mLv, this.anfrageList, this.byteList, this.adresseList));
     }
+
 
     public String getAdresseFk(String id){
         sqLite = new SQLite(this);

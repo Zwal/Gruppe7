@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         writeKategorie();
         writeUser();
         writeAuftrag();
-        writeAdresse();
         writePrivat();
+        writeAdresse();
         mEdTxtEmail.setText("7@repair.de");
         mEdTxtPasswort.setText("123");
     }

@@ -30,6 +30,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
 
     private Intent startActivityIntent;
 
+    private String anfrageId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,8 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         init();
         // über Intent von AngebotSuchen.java, kommt für den
         // folgenden Aufruf die ID des Auftrags
-        getAuftrag("1");
+        anfrageId = getIntent().getExtras().getString("anfrageId");
+        getAuftrag(anfrageId);
     }
 
 
@@ -67,6 +69,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btnAngebotabgeben:
                 startActivityIntent = new Intent(this, AngebotAbgeben.class);
+                startActivityIntent.putExtra("anfrageId", anfrageId);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnProfilansehen:

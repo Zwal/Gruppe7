@@ -144,7 +144,7 @@ public class SQLiteInit {
                     COLUMN_PREISVORSTELLUNG + " TEXT NOT NULL, " +
                     COLUMN_STARTTERMIN + " TEXT NOT NULL, " +
                     COLUMN_ENDTERMIN + " TEXT NOT NULL, " +
-                    COLUMN_BESCHREIBUNG + " TEXT NOT NULL, " +
+                    COLUMN_BESCHREIBUNG + " TEXT, " +
                     COLUMN_ANFRAGE_ID_FK + " INTEGER NOT NULL, " +
                     COLUMN_BENUTZER_ID_FK + " INTEGER NOT NULL);";
 
