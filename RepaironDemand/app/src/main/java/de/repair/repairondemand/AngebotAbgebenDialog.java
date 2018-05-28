@@ -2,7 +2,9 @@ package de.repair.repairondemand;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -20,6 +22,8 @@ public class AngebotAbgebenDialog extends DialogFragment {
 
 
     private Angebot angebot;
+
+    private Intent startActivityIntent;
 
     public AngebotAbgebenDialog() {
         // Empty constructor required for DialogFragment
@@ -84,7 +88,9 @@ public class AngebotAbgebenDialog extends DialogFragment {
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SQLiteInit.TABLE_ANGEBOT, null, values);
 
-        Toast.makeText(getActivity(), String.valueOf(newRowId), Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Angebot verbindlich abgegeben.", Toast.LENGTH_LONG).show();
+        startActivityIntent =  new Intent(getActivity(), Home.class);
+        startActivity(startActivityIntent);
     }
 }
 

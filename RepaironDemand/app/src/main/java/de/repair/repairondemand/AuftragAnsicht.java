@@ -1,6 +1,5 @@
 package de.repair.repairondemand;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,10 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import java.sql.Blob;
 
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
@@ -40,8 +36,10 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         init();
         // über Intent von AngebotSuchen.java, kommt für den
         // folgenden Aufruf die ID des Auftrags
-        anfrageId = getIntent().getExtras().getString("anfrageId");
-        getAuftrag(anfrageId);
+        if(getIntent().hasExtra("anfrageId")) {
+            anfrageId = getIntent().getExtras().getString("anfrageId");
+            getAuftrag(anfrageId);
+        }
     }
 
 

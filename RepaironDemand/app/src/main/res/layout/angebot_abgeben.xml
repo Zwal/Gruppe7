@@ -9,7 +9,7 @@
     tools:layout_editor_absoluteY="25dp">
 
     <Button
-        android:id="@+id/zurück"
+        android:id="@+id/btnZurück"
         android:layout_width="84dp"
         android:layout_height="41dp"
         android:layout_marginBottom="8dp"
@@ -48,7 +48,7 @@
         android:textAllCaps="false"
         android:textColor="#000"
         app:layout_constraintBottom_toTopOf="@+id/logoAuftrag"
-        app:layout_constraintStart_toEndOf="@+id/zurück"
+        app:layout_constraintStart_toEndOf="@+id/btnZurück"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.363" />
 

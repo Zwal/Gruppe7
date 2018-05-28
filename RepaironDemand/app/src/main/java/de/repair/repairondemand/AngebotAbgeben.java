@@ -50,7 +50,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
     }
 
     private void bindViews() {
-        mBtnZurück = this.findViewById(R.id.zurück);
+        mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnZeitStart = this.findViewById(R.id.zeitraum_auswahl_start);
         mBtnZeitEnde = this.findViewById(R.id.zeitraum_auswahl_Ende);
         mBtnSenden = this.findViewById(R.id.btnSenden);
@@ -76,7 +76,8 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         int viewId = view.getId();
         switch (viewId) {
             case R.id.btnZurück:
-                startActivityIntent =  new Intent(this, AufträgeSuchen.class);
+                startActivityIntent =  new Intent(this, AuftragAnsicht.class);
+                startActivityIntent.putExtra("anfrageId", anfrageId);
                 startActivity(startActivityIntent);
                 break;
             case R.id.zeitraum_auswahl_start:
