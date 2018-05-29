@@ -72,6 +72,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btnProfilansehen:
                 startActivityIntent = new Intent(this, Profile.class);
+                startActivityIntent.putExtra("anfrageId", anfrageId);
                 startActivity(startActivityIntent);
                 break;
         }

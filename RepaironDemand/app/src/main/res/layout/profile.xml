@@ -140,7 +140,7 @@
             app:layout_constraintEnd_toStartOf="@+id/dStar2"
             app:layout_constraintHorizontal_bias="0.839"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/dStar2"
@@ -150,7 +150,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
             app:layout_constraintEnd_toStartOf="@+id/dStar3"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/dStar3"
@@ -160,7 +160,7 @@
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
             app:layout_constraintEnd_toStartOf="@+id/dStar4"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/dStar4"
@@ -170,7 +170,7 @@
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
             app:layout_constraintEnd_toStartOf="@+id/dStar5"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/dStar5"
@@ -180,7 +180,7 @@
             android:layout_marginEnd="76dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <TextView
             android:id="@+id/kompetenz"
@@ -206,7 +206,7 @@
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/kStar2"
@@ -218,7 +218,7 @@
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
             app:layout_constraintStart_toEndOf="@+id/kStar1"
             app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/kStar3"
@@ -228,7 +228,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
             app:layout_constraintStart_toEndOf="@+id/kStar2"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/kStar4"
@@ -240,7 +240,7 @@
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
             app:layout_constraintStart_toEndOf="@+id/kStar3"
             app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/kStar5"
@@ -255,7 +255,7 @@
             app:layout_constraintHorizontal_bias="0.009"
             app:layout_constraintStart_toEndOf="@+id/kStar4"
             app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <TextView
             android:id="@+id/freundlichkeit"
@@ -280,7 +280,7 @@
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fStar3"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/fStar2"
@@ -292,7 +292,7 @@
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
             app:layout_constraintStart_toEndOf="@+id/fStar1"
             app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/fStar3"
@@ -302,7 +302,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
             app:layout_constraintStart_toEndOf="@+id/fStar2"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/fStar4"
@@ -314,7 +314,7 @@
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
             app:layout_constraintStart_toEndOf="@+id/fStar3"
             app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/fStar5"
@@ -329,7 +329,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/fStar4"
             app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <TextView
         android:id="@+id/pünktlichkeit"
@@ -355,7 +355,7 @@
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/pStar2"
@@ -367,7 +367,7 @@
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
             app:layout_constraintStart_toEndOf="@+id/pStar1"
             app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/pStar3"
@@ -377,7 +377,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
             app:layout_constraintStart_toEndOf="@+id/pStar2"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/pStar4"
@@ -389,7 +389,7 @@
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
             app:layout_constraintStart_toEndOf="@+id/pStar3"
             app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/pStar5"
@@ -404,7 +404,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/pStar4"
             app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <TextView
             android:id="@+id/gesamteindruck"
@@ -430,7 +430,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/gStar2"
@@ -442,7 +442,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gStar1"
             app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/gStar3"
@@ -452,7 +452,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gStar2"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/gStar4"
@@ -464,7 +464,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gStar3"
             app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
         <ImageView
             android:id="@+id/gStar5"
@@ -479,7 +479,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/gStar4"
             app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/stern_white" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

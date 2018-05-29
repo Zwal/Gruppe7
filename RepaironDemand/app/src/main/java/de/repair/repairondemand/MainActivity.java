@@ -118,9 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 register = cursor.getColumnCount();
             }
         }catch(Exception ex){
-
         }
-
         return register;
     }
 
@@ -164,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "2018-05-25");
         values.put(SQLiteInit.COLUMN_PREISVORSTELLUNG, "10");
         values.put(SQLiteInit.COLUMN_FIRMA, "true");
-        values.put(SQLiteInit.COLUMN_PRIVAT, "false");
+        values.put(SQLiteInit.COLUMN_PRIVAT, "true");
         values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
         values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(d));
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);

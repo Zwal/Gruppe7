@@ -73,4 +73,40 @@ public class AktuellerBenutzer {
         }
         return id;
     }
+
+    public String getTypeUser(Context context){
+        sqLite = new SQLite(context);
+        SQLiteDatabase db = sqLite.getReadableDatabase();
+        String type = null;
+        String id = getId(context);
+        try{
+            Cursor cursor =
+                    db.query(SQLiteInit.TABLE_PRIVATPERSON, // a. table
+                            new String[]{SQLiteInit.COLUMN_NAME}, // b. column names
+                            " benutzer_id_fk = ?", // c. selections
+                            new String[] {id}, // d. selections args
+                            null, // e. group by
+                            null, // f. having
+                            null, // g. order by
+                            null); // h. limit
+            if(cursor != null){
+                cursor.moveToFirst();
+                type = "privat";
+            }else{
+                cursor =
+                        db.query(SQLiteInit.TABLE_FIRMA, // a. table
+                                new String[]{SQLiteInit.COLUMN_NAME}, // b. column names
+                                " benutzer_id_fk = ?", // c. selections
+                                new String[] {id}, // d. selections args
+                                null, // e. group by
+                                null, // f. having
+                                null, // g. order by
+                                null); // h. limit
+                cursor.moveToFirst();
+                type = "firma";
+            }
+        }catch(Exception ex){
+        }
+        return type;
+    }
 }

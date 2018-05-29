@@ -307,15 +307,16 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         SQLiteDatabase db = sqLite.getReadableDatabase();
         Anfrage anfrage;
         this.anfrageList = new ArrayList<Anfrage>(){};
+        String type = new AktuellerBenutzer().getTypeUser(this);
         try{
             Cursor cursor =
                     db.query(SQLiteInit.TABLE_ANFRAGE, // a. table
                             new String[]{SQLiteInit.COLUMN_BESCHREIBUNG,
                                     SQLiteInit.COLUMN_ADRESSE_ID_FK, SQLiteInit.COLUMN_ANFRAGE_ID_PK,
                                     SQLiteInit.COLUMN_BILD}, // b. column names
-                            " kategorie_id_fk = ? and starttermin BETWEEN  ? and ? " +
+                            type + " = ? and kategorie_id_fk = ? and starttermin BETWEEN  ? and ? " +
                                     "and endtermin BETWEEN ? and ?", // c. selections
-                            new String[] {getKategorie(mSpinKategorie.getSelectedItem().toString()),
+                            new String[] {"true", getKategorie(mSpinKategorie.getSelectedItem().toString()),
                             mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString(),
                                     mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString()}, // d. selections args
                             null, // e. group by
