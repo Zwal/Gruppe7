@@ -314,9 +314,10 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                             new String[]{SQLiteInit.COLUMN_BESCHREIBUNG,
                                     SQLiteInit.COLUMN_ADRESSE_ID_FK, SQLiteInit.COLUMN_ANFRAGE_ID_PK,
                                     SQLiteInit.COLUMN_BILD}, // b. column names
-                            type + " = ? and kategorie_id_fk = ? and starttermin BETWEEN  ? and ? " +
+                            type + " = ? and benutzer_id_fk != ? and kategorie_id_fk = ? and starttermin BETWEEN  ? and ? " +
                                     "and endtermin BETWEEN ? and ?", // c. selections
-                            new String[] {"true", getKategorie(mSpinKategorie.getSelectedItem().toString()),
+                            new String[] {"true", new AktuellerBenutzer().getId(this),
+                                    getKategorie(mSpinKategorie.getSelectedItem().toString()),
                             mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString(),
                                     mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString()}, // d. selections args
                             null, // e. group by

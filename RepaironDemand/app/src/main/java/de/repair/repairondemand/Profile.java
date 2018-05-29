@@ -39,9 +39,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     String anfrageId = null;
 
-    String name = null;
 
-    String quali = null;
 
     ArrayList<String> anfrageIds = null;
     ArrayList<String> kompetenz = null;
@@ -106,6 +104,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         AiVg = new ImageView[]{mIvGStar1,mIvGStar2,mIvGStar3,mIvGStar4,mIvGStar5};
 
         getAnfrageUserData(getAnfrageUserId());
+
         getAnfrageIds(getAnfrageUserId());
     }
 
@@ -137,7 +136,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                             null); // h. limit
             if(cursor != null){
                 cursor.moveToFirst();
-                fk = "privat";
+                fk = cursor.getString(0);
             }
         }catch(Exception ex){
         }
@@ -159,8 +158,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                             null); // h. limit
             if(cursor != null){
                 cursor.moveToFirst();
-                name = cursor.getString(0);
-                quali = cursor.getString(1);
+                mTvName.setText("Name: " + cursor.getString(0));
+                mTvQuali.setText("Qualifikation: " + cursor.getString(1));
             }else{
                 cursor =
                         db.query(SQLiteInit.TABLE_FIRMA, // a. table
@@ -172,8 +171,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                 null, // g. order by
                                 null); // h. limit
                 cursor.moveToFirst();
-                name = cursor.getString(0);
-                quali = cursor.getString(1);
+                mTvName.setText("Name: " + cursor.getString(0));
+                mTvQuali.setText("Qualifikation: " + cursor.getString(1));
             }
         }catch(Exception ex){
         }
@@ -271,7 +270,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     public int getMittelwert(ArrayList<String> list){
         int count = 0;
         for(String zahl : list){
-            count += Integer.getInteger(zahl);
+            count = count + Integer.parseInt(zahl);
         }
         countMiddle+=count;
         int middle = count / list.size();
