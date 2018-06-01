@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -160,11 +161,11 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
     public void btnColor(String color){
         if(color.equals("white")){
-            mTvHinweisPreis.setTextColor(Color.WHITE);
-            mTvHinweisZeitraum.setTextColor(Color.WHITE);
+            mTvHinweisPreis.setVisibility(ListView.INVISIBLE);
+            mTvHinweisZeitraum.setVisibility(ListView.INVISIBLE);
         }else if(color.equals("red")){
-            mTvHinweisPreis.setTextColor(Color.RED);
-            mTvHinweisZeitraum.setTextColor(Color.RED);
+            mTvHinweisPreis.setVisibility(ListView.VISIBLE);
+            mTvHinweisZeitraum.setVisibility(ListView.VISIBLE);
         }
     }
 

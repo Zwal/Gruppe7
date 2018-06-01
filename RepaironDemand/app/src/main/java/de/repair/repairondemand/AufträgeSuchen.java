@@ -94,8 +94,8 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     private void init() {
-        mTvDateError.setTextColor(Color.WHITE);
-        mTvKeineAufträge.setTextColor(Color.WHITE);
+        mTvDateError.setTextColor(Color.RED);
+        mTvKeineAufträge.setTextColor(Color.RED);
         mBtnZurück.setOnClickListener(this);
         mBtnKlappen.setOnClickListener(this);
         mBtnRepAnfang.setOnClickListener(this);
@@ -135,7 +135,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.zurück:
+            case R.id.btnZurück:
                 startActivityIntent = new Intent(this, Home.class);
                 startActivity(startActivityIntent);
                 break;
@@ -171,10 +171,8 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             Date dateBis = formatter.parse(mBtnRepEnde.getText().toString());
 
             if(dateBis.compareTo(dateVon) < 0 ){
-                mTvDateError.setTextColor(Color.RED);
+                mTvDateError.setVisibility(TextView.VISIBLE);
                 b = false;
-            }else{
-                mTvDateError.setTextColor(Color.WHITE);
             }
         } catch (ParseException e) {
             Log.e("except", e.getMessage());
@@ -454,7 +452,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         }catch(Exception ex){
             keineAufträge = true;
-            mTvKeineAufträge.setTextColor(Color.RED);
+            mTvKeineAufträge.setVisibility(TextView.VISIBLE);
             ex.printStackTrace();
         }
         db.close();

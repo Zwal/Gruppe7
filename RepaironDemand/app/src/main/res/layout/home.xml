@@ -24,28 +24,25 @@
         android:id="@+id/Benutzername"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
         android:text="@string/benutzername"
         android:textAllCaps="false"
         android:textColor="#000"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/logohome"
         app:layout_constraintEnd_toStartOf="@+id/iconBenutzer"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
         android:id="@+id/logohome"
-        android:layout_width="380dp"
+        android:layout_width="400dp"
         android:layout_height="111dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979"
+        app:layout_constraintTop_toBottomOf="@+id/iconBenutzer"
         app:srcCompat="@mipmap/logo_banner2" />
 
     <TextView
@@ -95,7 +92,7 @@
                 android:textAlignment="center"/>
 
             <Button
-                android:id="@+id/btnEingestelleAufträge"
+                android:id="@+id/btnEingestellteAufträge"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
                 android:layout_weight="1"

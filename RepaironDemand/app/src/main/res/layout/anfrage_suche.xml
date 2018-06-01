@@ -29,10 +29,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Klap"
-        app:layout_constraintEnd_toStartOf="@+id/Benutzername"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toEndOf="@+id/zurück"
+        android:text="Filter"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -48,13 +48,13 @@
         android:id="@+id/Benutzername"
         android:layout_width="94dp"
         android:layout_height="18dp"
-        android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
         android:text="@string/benutzername"
         android:textAllCaps="false"
         android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@+id/listV"
-        app:layout_constraintEnd_toStartOf="@+id/iconBenutzer" />
+        app:layout_constraintEnd_toStartOf="@+id/iconBenutzer"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -64,8 +64,9 @@
         android:layout_height="493dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.785"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="71dp">
+        tools:layout_editor_absoluteY="116dp">
 
 
         <Spinner
@@ -132,6 +133,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="@string/date_error"
+            android:visibility="invisible"
             android:textAllCaps="false"
             android:textColor="#000"
             app:layout_constraintBottom_toTopOf="@+id/radiusText"
@@ -189,21 +191,6 @@
             app:layout_constraintHorizontal_bias="0.598"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="98dp"
-            android:layout_height="46dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/kategorie"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.929"
-            app:srcCompat="@mipmap/ic_launcher" />
-
         <TextView
             android:id="@+id/txtKeineAufträge"
             android:layout_width="265dp"
@@ -214,6 +201,7 @@
             android:text="@string/keine_aufträge"
             android:textAllCaps="false"
             android:textColor="#000"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
