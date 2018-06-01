@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     aktuellerBenutzer.writeId(
                             aktuellerBenutzer.getIdUser(this,mEdTxtEmail.getText().toString()),this);
                     startActivityIntent = new Intent(this, Home.class);
-                    Log.e("aktuelleUser", new AktuellerBenutzer().getId(this));
+                    Log.e("aktuelleUser", "" + new AktuellerBenutzer().getId(this));
                     startActivity(startActivityIntent);
                 }
                 break;
