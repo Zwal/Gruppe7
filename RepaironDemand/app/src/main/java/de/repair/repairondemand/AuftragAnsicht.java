@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +19,8 @@ import de.repair.repairondemand.SQLlite.SQLiteInit;
 public class AuftragAnsicht extends AppCompatActivity implements View.OnClickListener {
 
     private SQLite sqLite;
-    private Button mBtnZurück, mBtnProfil, mBtnAngebotAbgeben;
-
+    private Button mBtnProfil, mBtnAngebotAbgeben;
+    private ImageButton mBtnZurück;
     private ImageView mImViAuftragBild;
 
     private TextView mTvBeschreibung, mTvStandort;

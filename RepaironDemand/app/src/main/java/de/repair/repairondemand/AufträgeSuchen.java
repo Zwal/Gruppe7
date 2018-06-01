@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.DatePicker;
 //import android.widget.ListView;
 import android.widget.ListView;
@@ -39,7 +40,8 @@ import de.repair.repairondemand.SQLlite.SQLiteInit;
 public class AufträgeSuchen extends AppCompatActivity implements View.OnClickListener {
     private SQLite sqLite;
     private int checkBtn;
-    public Button mBtnZurück, mBtnRepAnfang, mBtnRepEnde, mBtnSuchen;
+    public Button mBtnRepAnfang, mBtnRepEnde, mBtnSuchen;
+    public ImageButton mBtnZurück;
     private Spinner mSpinKategorie;
     private SeekBar mSeekbar;
     private TextView mTvRadius;
@@ -56,7 +58,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
     private void bindViews() {
         mLv = this.findViewById(R.id.listV);
-        mBtnZurück = this.findViewById(R.id.zurück);
+        mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnRepAnfang = this.findViewById(R.id.btnDateRepAnfang);
         mBtnRepEnde = this.findViewById(R.id.btnDateRepEnde);
         mSpinKategorie = this.findViewById(R.id.kategorie);
@@ -99,7 +101,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.zurück:
+            case R.id.btnZurück:
                 finish();
                 break;
             case R.id.btnDateRepAnfang:
