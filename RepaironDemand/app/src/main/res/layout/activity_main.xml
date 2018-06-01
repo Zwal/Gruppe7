@@ -8,17 +8,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="151dp"
+        android:layout_width="380dp"
         android:layout_height="113dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/emailInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/logo_banner2" />
 
     <EditText
         android:id="@+id/emailInput"

@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -44,9 +45,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private int checkBild;
 
     private Blob bild = null;
-
-    public Button mBtnZurück, mBtnErstellen, mBtnKamera, mBtnUpload, mBtnRepAnfang, mBtnRepEnde
+    public Button  mBtnErstellen, mBtnRepAnfang, mBtnRepEnde
             , mBtnRepAblauf;
+    public ImageButton mBtnZurück, mBtnKamera, mBtnUpload;
     private EditText mTxtBeschreibung, mTxtStraße, mTxtStadt, mTxtPlz, mTxtPreisvorstellung;
     private Spinner mSpinLand, mSpinKategorie;
     private CheckBox mCboFirma, mCboPrivat;
@@ -109,8 +110,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
         mBtnRepAblauf.setOnClickListener(this);
-        mBtnKamera.setOnClickListener(this);
+        mBtnZurück.setOnClickListener(this);
         mBtnUpload.setOnClickListener(this);
+        mBtnKamera.setOnClickListener(this);
     }
 
     @Override

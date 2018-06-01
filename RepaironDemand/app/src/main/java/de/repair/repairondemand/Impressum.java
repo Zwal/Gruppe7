@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class Impressum extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mBtnZurück;
+    private ImageButton mBtnZurück;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.DatePicker;
 //import android.widget.ListView;
 import android.widget.ListView;
@@ -46,7 +47,8 @@ import de.repair.repairondemand.SQLlite.SQLiteInit;
 public class AufträgeSuchen extends AppCompatActivity implements View.OnClickListener {
     private SQLite sqLite;
     private int checkBtn;
-    public Button mBtnZurück, mBtnRepAnfang, mBtnRepEnde, mBtnSuchen, mBtnKlappen;
+    public ImageButton mBtnZurück;
+    public Button mBtnRepAnfang, mBtnRepEnde, mBtnSuchen, mBtnKlappen;
     private Spinner mSpinKategorie;
     private SeekBar mSeekbar;
     private TextView mTvRadius, mTvDateError, mTvKeineAufträge;
@@ -77,7 +79,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         mklapView = this.findViewById(R.id.constraintLayout1);
         mLv = this.findViewById(R.id.listV);
         mBtnKlappen = this.findViewById(R.id.btnKlappen);
-        mBtnZurück = this.findViewById(R.id.zurück);
+        mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnRepAnfang = this.findViewById(R.id.btnDateRepAnfang);
         mBtnRepEnde = this.findViewById(R.id.btnDateRepEnde);
         mSpinKategorie = this.findViewById(R.id.kategorie);
