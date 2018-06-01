@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
-        android:hint="Email Adresse oder Username"
+        android:hint="Email oder User"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/passwortInput"
         app:layout_constraintEnd_toEndOf="parent"

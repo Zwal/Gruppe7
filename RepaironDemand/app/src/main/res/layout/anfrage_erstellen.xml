@@ -125,6 +125,7 @@
                     android:text="@string/bitte_ausw_hlen_anfrage"
                     android:textAllCaps="false"
                     android:textColor="#ff3227"
+                    android:visibility="invisible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="427dp" />
 
@@ -135,6 +136,7 @@
                     android:text="@string/bitte_ausw_hlen_anfrage"
                     android:textAllCaps="false"
                     android:textColor="#ff3227"
+                    android:visibility="invisible"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="427dp" />
             </TableRow>
@@ -176,6 +178,7 @@
                     android:text="@string/bitte_ausw_hlen_anfrage"
                     android:textAllCaps="false"
                     android:textColor="#ff3227"
+                    android:visibility="invisible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="427dp" />
 
@@ -186,6 +189,7 @@
                     android:text="@string/bitte_ausw_hlen_anfrage"
                     android:textAllCaps="false"
                     android:textColor="#ff3227"
+                    android:visibility="invisible"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="427dp" />
             </TableRow>
@@ -240,6 +244,7 @@
                     android:text="@string/bitte_ausw_hlen_anfrage"
                     android:textAllCaps="false"
                     android:textColor="#ff3227"
+                    android:visibility="invisible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="427dp" />
 
@@ -250,6 +255,7 @@
                     android:text="@string/bitte_ausw_hlen_anfrage"
                     android:textAllCaps="false"
                     android:textColor="#ff3227"
+                    android:visibility="invisible"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="427dp" />
             </TableRow>
@@ -284,6 +290,7 @@
                 android:text="@string/bitte_ausw_hlen_anfrage"
                 android:textAllCaps="false"
                 android:textColor="#ff3227"
+                android:visibility="invisible"
                 tools:layout_editor_absoluteX="194dp"
                 tools:layout_editor_absoluteY="504dp" />
 
@@ -321,7 +328,8 @@
                 android:paddingLeft="162dp"
                 android:text="@string/bitte_ausw_hlen_anfrage"
                 android:textAllCaps="false"
-                android:textColor="#ff3227" />
+                android:textColor="#ff3227"
+                android:visibility="invisible"/>
 
         </TableLayout>
 
@@ -439,6 +447,7 @@
             android:text="Mindestens eine Checkbox muss ausgewählt sein."
             android:textAllCaps="false"
             android:textColor="#ff3227"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/btnKamera"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

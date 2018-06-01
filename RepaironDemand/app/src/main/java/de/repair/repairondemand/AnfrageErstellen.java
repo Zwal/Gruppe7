@@ -1,10 +1,12 @@
 package de.repair.repairondemand;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -124,6 +127,20 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnErstellen:
                 check(1);
+                if(check(1)){
+                    finish();
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+                    dlgAlert.setMessage("Ihr Auftrag wurde erfolgreich aufgenommen.");
+                    dlgAlert.create().show();
+                    dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    dlgAlert.setTitle("Angelegt");
+                    dlgAlert.setCancelable(true);
+
+                    break;
+                }
                 break;
             case R.id.btnDateRepAnfang:
                 checkBtn = 1;
@@ -194,29 +211,29 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
 
     public void btnColor(String color){
         if(color.equals("white")){
-            mTvHinweisLandText.setTextColor(Color.WHITE);
-            mTvHinweisRepzAnfangText.setTextColor(Color.WHITE);
-            mTvHinweisRepzEndeText.setTextColor(Color.WHITE);
-            mTvHinweisAblaufText.setTextColor(Color.WHITE);
-            mTvHinweisKategorieText.setTextColor(Color.WHITE);
-            mTvHinweisChecboxText.setTextColor(Color.WHITE);
-            mTvHinweisStrasseText.setTextColor(Color.WHITE);
-            mTvHinweisStadtText.setTextColor(Color.WHITE);
-            mTvHinweisPlzText.setTextColor(Color.WHITE);
+            mTvHinweisLandText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisRepzAnfangText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisRepzEndeText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisAblaufText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisKategorieText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisChecboxText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisStrasseText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisStadtText.setVisibility(ListView.INVISIBLE);
+            mTvHinweisPlzText.setVisibility(ListView.INVISIBLE);
         }else if(color.equals("red")){
-            mTvHinweisLandText.setTextColor(Color.RED);
-            mTvHinweisRepzAnfangText.setTextColor(Color.RED);
-            mTvHinweisRepzEndeText.setTextColor(Color.RED);
-            mTvHinweisAblaufText.setTextColor(Color.RED);
-            mTvHinweisKategorieText.setTextColor(Color.RED);
-            mTvHinweisChecboxText.setTextColor(Color.RED);
-            mTvHinweisStrasseText.setTextColor(Color.RED);
-            mTvHinweisStadtText.setTextColor(Color.RED);
-            mTvHinweisPlzText.setTextColor(Color.RED);
+            mTvHinweisLandText.setVisibility(ListView.VISIBLE);
+            mTvHinweisRepzAnfangText.setVisibility(ListView.VISIBLE);
+            mTvHinweisRepzEndeText.setVisibility(ListView.VISIBLE);
+            mTvHinweisAblaufText.setVisibility(ListView.VISIBLE);
+            mTvHinweisKategorieText.setVisibility(ListView.VISIBLE);
+            mTvHinweisChecboxText.setVisibility(ListView.VISIBLE);
+            mTvHinweisStrasseText.setVisibility(ListView.VISIBLE);
+            mTvHinweisStadtText.setVisibility(ListView.VISIBLE);
+            mTvHinweisPlzText.setVisibility(ListView.VISIBLE);
         }
     }
 
-    public void check(int userId){
+    public boolean check(int userId){
         String adressId = null;
         String dateAnfang = mBtnRepAnfang.getText().toString();
         String dateEnde = mBtnRepEnde.getText().toString();
@@ -231,6 +248,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 ||dateEnde.equals("Ende")||dateAblauf.equals("Ablauf")||
                 land.equals("Land")||kategorie.equals("Kategorie")||!(mCboFirma.isChecked()||mCboPrivat.isChecked())){
             btnColor("red");
+            return false;
         }else {
             btnColor("white");
             Anfrage anfrage = new Anfrage();
@@ -247,6 +265,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             anfrage.setmUserId(userId);
 
             writeDb(anfrage);
+
+            return true;
+
         }
     }
 
