@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,8 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
+import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
 
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     aktuellerBenutzer.writeId(
                             aktuellerBenutzer.getIdUser(this,mEdTxtEmail.getText().toString()),this);
                     startActivityIntent = new Intent(this, Home.class);
+                    Log.e("aktuelleUser", new AktuellerBenutzer().getId(this));
                     startActivity(startActivityIntent);
                 }
                 break;
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }catch(Exception ex){
         }
+        db.close();
         return register;
     }
 
@@ -130,8 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         writePrivatOther();
         writeAdresse();
         writeFeedback();
-        mEdTxtEmail.setText("7@repair.de");
-        mEdTxtPasswort.setText("123");
+        if(mEdTxtEmail.getText().toString().equals("")) {
+            mEdTxtEmail.setText("7@repair.de");
+            mEdTxtPasswort.setText("123");
+        }
     }
 
     public void writeKategorie(){
@@ -157,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_USERNAME, "8@repair.de");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
         db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
+        db.close();
     }
 
     public void writeAuftrag(){
@@ -189,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 2);
         db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
+        db.close();
     }
 
 
@@ -212,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_ORT, "Karlsruhe");
         values.put(SQLiteInit.COLUMN_LAND, "Deutschland");
         db.insert(SQLiteInit.TABLE_ADRESSE, null, values);
+        db.close();
     }
 
     public void writePrivat() {
@@ -230,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, writeAdressePrivat("Kaiserstraße 1","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
         db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
+        db.close();
     }
 
     public void writePrivatOther() {
@@ -248,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, getIdAdressePrivat("Kaiserstraße 1","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
         db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
+        db.close();
     }
 
     public String writeAdressePrivat(String strasse, String plz, String ort, String land){
@@ -260,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_ORT, ort);
         values.put(SQLiteInit.COLUMN_LAND, land);
         db.insert(SQLiteInit.TABLE_ADRESSE, null, values);
+        db.close();
 
         return getIdAdressePrivat(strasse, plz, ort, land);
     }
@@ -284,6 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }catch(Exception ex){
         }
+        db.close();
         return id;
     }
 
@@ -299,5 +313,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_PÜNKTLICHKEIT, "5");
         values.put(SQLiteInit.COLUMN_GESAMTEINDRUCK, "5");
         db.insert(SQLiteInit.TABLE_AUFTRAGS_FEEDBACK, null, values);
+        db.close();
     }
 }

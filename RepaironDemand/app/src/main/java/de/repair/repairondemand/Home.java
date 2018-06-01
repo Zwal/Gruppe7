@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Home extends AppCompatActivity implements View.OnClickListener {
@@ -25,7 +26,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.home);
         bindViews();
         init();
-
     }
 
     private void bindViews() {
