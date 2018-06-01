@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toTopOf="@+id/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@mipmap/baseline_account_circle_black_24" />
 
         <TextView
             android:id="@+id/Benutzername"

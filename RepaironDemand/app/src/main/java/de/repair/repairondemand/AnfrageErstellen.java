@@ -45,9 +45,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private int checkBild;
 
     private Blob bild = null;
-    public Button  mBtnErstellen, mBtnKamera, mBtnUpload, mBtnRepAnfang, mBtnRepEnde
+    public Button  mBtnErstellen, mBtnRepAnfang, mBtnRepEnde
             , mBtnRepAblauf;
-    public ImageButton mBtnZurück;
+    public ImageButton mBtnZurück, mBtnKamera, mBtnUpload;
     private EditText mTxtBeschreibung, mTxtStraße, mTxtStadt, mTxtPlz, mTxtPreisvorstellung;
     private Spinner mSpinLand, mSpinKategorie;
     private CheckBox mCboFirma, mCboPrivat;
