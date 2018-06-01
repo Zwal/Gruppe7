@@ -30,7 +30,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
     private void bindViews() {
         mBtnAnfrageerstellen = this.findViewById(R.id.btnAnfrageerstellen);
-        mBtnEingestellteAufträge = this.findViewById(R.id.btnEingestelleAufträge);
+        mBtnEingestellteAufträge = this.findViewById(R.id.btnEingestellteAufträge);
         mBtnAufträgesuche = this.findViewById(R.id.btnAufträgesuchen);
         mBtnAbgegebeneAngebote = this.findViewById(R.id.btnAbgegebeneAngebote);
         mBtnFeedback= this.findViewById(R.id.btnFeedback);
@@ -60,7 +60,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 startActivityIntent =  new Intent(this, AnfrageErstellen.class);
                 startActivity(startActivityIntent);
                 break;
-            case R.id.btnEingestelleAufträge:
+            case R.id.btnEingestellteAufträge:
                 startActivityIntent =  new Intent(this, NotAvailable.class);
                 startActivity(startActivityIntent);
                 break;

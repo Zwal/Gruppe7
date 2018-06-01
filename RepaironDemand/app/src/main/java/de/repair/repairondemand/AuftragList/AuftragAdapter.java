@@ -33,18 +33,24 @@ public class AuftragAdapter extends BaseAdapter {
     private ListView mLv;
     private ArrayList<Adresse> addressList;
     private Intent startActivityIntent;
+    private String kategorie, anfang, ende, radius;
 
     Context context;
     private static LayoutInflater inflater = null;
 
     public AuftragAdapter(Context context, ListView mLv, ArrayList<Anfrage> anfrageList,
-                          ArrayList<byte[]> byteList, ArrayList<Adresse> addressList) {
+                          ArrayList<byte[]> byteList, ArrayList<Adresse> addressList, String kategorie,
+                          String anfang, String ende, String radius) {
         // TODO Auto-generated constructor stub
         this.context = context;
         this.anfrageList = anfrageList;
         this.byteList = byteList;
         this.addressList = addressList;
         this.mLv = mLv;
+        this.kategorie = kategorie;
+        this.anfang = anfang;
+        this.ende = ende;
+        this.radius = radius;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -111,6 +117,10 @@ public class AuftragAdapter extends BaseAdapter {
 
             startActivityIntent =  new Intent(context, AuftragAnsicht.class);
             startActivityIntent.putExtra("anfrageId", anfrageId);
+            startActivityIntent.putExtra("kategorie", kategorie);
+            startActivityIntent.putExtra("anfang", anfang);
+            startActivityIntent.putExtra("ende", ende);
+            startActivityIntent.putExtra("radius", radius);
 
             context.startActivity(startActivityIntent);
         }

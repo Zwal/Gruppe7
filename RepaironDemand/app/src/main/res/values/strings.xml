@@ -19,10 +19,8 @@
     <string name="reparaturzeitraum_anfrage">Reparaturzeitraum von/bis</string>
     <string name="ablaufdatum_anfrage">Ablaufdatum der Anfrage</string>
     <string name="bitte_ausw_hlen_anfrage">Bitte auswählen</string>
-    <string name="impressum"><b>Kontaktinformationen</b> \n Repair on Demand \n Mustermann Str.1
-        \n 76131 Karlsruhe \n \n Licence Number: 10000000 \n Ust-ID: LU 26370000 \n
-        Vertretungsberechtigter: Hansi \n Tel.: +49 (0) 789456123 \n \n
-        <b>Support</b> \n Support finden Sie über den Button <u>Service-Center</u> \n im <u>Home-Menu.</u></string>
+    <string name="impressum"><b>Kontaktinformationen</b> \nRepair on Demand \nMustermann Str.1
+        \n76131 Karlsruhe \n\nLicence Number: 10000000 \nUst-ID: LU 26370000 \nVertretungsberechtigter: Hansi \nTel.: +49 (0) 789456123\n\n<b>Support</b>\nSupport finden Sie über den Button <u>Service-Center</u> \nim <u>Home-Menu.</u></string>
     <string name="hinweis_auftrag">Hinweis: Der genaue Standort wird nur angezeigt, \n
     wenn das Angebot angnommen wird.</string>
     <string name="anfang">Anfang</string>
@@ -42,4 +40,6 @@
         <item>Dach</item>
     </string-array>
     <string name="category_prompt">Kategorie</string>
+    <string name="date_error">Das angegebene Enddatum muss größer als das Anfangsdatum sein.</string>
+    <string name="keine_aufträge">Es wurden keine Aufträge gefunden.</string>
 </resources>
