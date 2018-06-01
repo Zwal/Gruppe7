@@ -1,10 +1,487 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:layout_editor_absoluteY="25dp">
+    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+    android:fillViewport="true">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="25dp">
+
+        <Button
+            android:id="@+id/btnZurück"
+            android:layout_width="84dp"
+            android:layout_height="41dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:text="zurück"
+            app:layout_constraintBottom_toTopOf="@+id/mensch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/iconBenutzer"
+            android:layout_width="35dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/Benutzername"
+            android:layout_width="94dp"
+            android:layout_height="18dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/benutzername"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/logo"
+            app:layout_constraintEnd_toStartOf="@+id/iconBenutzer"
+            app:layout_constraintHorizontal_bias="0.947"
+            app:layout_constraintStart_toEndOf="@+id/btnZurück"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.531" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="98dp"
+            android:layout_height="46dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="227dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Name: "
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/qualifikation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/mensch"
+            android:layout_width="36dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/qualifikation"
+            app:layout_constraintEnd_toStartOf="@+id/name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/qualifikation"
+            android:layout_width="227dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Qualifikation: "
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/durchBewertung"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/durchBewertung"
+            android:layout_width="227dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Durchschnittsbewertung:"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/dStar3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/dStar1"
+            android:layout_width="36dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/kompetenz"
+            app:layout_constraintEnd_toStartOf="@+id/dStar2"
+            app:layout_constraintHorizontal_bias="0.839"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/dStar2"
+            android:layout_width="36dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/kompetenz"
+            app:layout_constraintEnd_toStartOf="@+id/dStar3"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/dStar3"
+            android:layout_width="36dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/kompetenz"
+            app:layout_constraintEnd_toStartOf="@+id/dStar4"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/dStar4"
+            android:layout_width="36dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/kompetenz"
+            app:layout_constraintEnd_toStartOf="@+id/dStar5"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/dStar5"
+            android:layout_width="36dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="76dp"
+            app:layout_constraintBottom_toTopOf="@+id/kompetenz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/stern_white" />
+
+        <TextView
+            android:id="@+id/kompetenz"
+            android:layout_width="88dp"
+            android:layout_height="21dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Kompetenz"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/kStar3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/kStar1"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/kStar2"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
+            app:layout_constraintStart_toEndOf="@+id/kStar1"
+            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/kStar3"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
+            app:layout_constraintStart_toEndOf="@+id/kStar2"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/kStar4"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
+            app:layout_constraintStart_toEndOf="@+id/kStar3"
+            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/kStar5"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toEndOf="@+id/kStar4"
+            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
+            app:srcCompat="@drawable/stern_white" />
+
+        <TextView
+            android:id="@+id/freundlichkeit"
+            android:layout_width="94dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Freundlichkeit"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/fStar3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/fStar1"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="88dp"
+            app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fStar3"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/fStar2"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
+            app:layout_constraintStart_toEndOf="@+id/fStar1"
+            app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/fStar3"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
+            app:layout_constraintStart_toEndOf="@+id/fStar2"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/fStar4"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
+            app:layout_constraintStart_toEndOf="@+id/fStar3"
+            app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/fStar5"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/fStar4"
+            app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
+            app:srcCompat="@drawable/stern_white" />
+
+        <TextView
+        android:id="@+id/pünktlichkeit"
+        android:layout_width="94dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Pünktlichkeit"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        app:layout_constraintBottom_toTopOf="@+id/pStar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/pStar1"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/pStar2"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
+            app:layout_constraintStart_toEndOf="@+id/pStar1"
+            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/pStar3"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
+            app:layout_constraintStart_toEndOf="@+id/pStar2"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/pStar4"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
+            app:layout_constraintStart_toEndOf="@+id/pStar3"
+            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/pStar5"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/pStar4"
+            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
+            app:srcCompat="@drawable/stern_white" />
+
+        <TextView
+            android:id="@+id/gesamteindruck"
+            android:layout_width="109dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Gesamteindruck"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintBottom_toTopOf="@+id/gStar3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/gStar1"
+            android:layout_width="30dp"
+            android:layout_height="21dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/gStar2"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gStar1"
+            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/gStar3"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gStar2"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/gStar4"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gStar3"
+            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
+            app:srcCompat="@drawable/stern_white" />
+
+        <ImageView
+            android:id="@+id/gStar5"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/gStar4"
+            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
+            app:srcCompat="@drawable/stern_white" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -1,6 +1,6 @@
 package de.repair.repairondemand;
 
-import android.app.Activity;
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,11 +8,16 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.CheckBox;
@@ -22,28 +27,33 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.sql.Blob;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class AnfrageErstellen extends AppCompatActivity implements View.OnClickListener {
 
     private SQLite sqLite;
-
+    private Bitmap imageBitmap;
     private int checkBtn;
+    private int checkBild;
 
+    private Blob bild = null;
     public Button  mBtnErstellen, mBtnKamera, mBtnUpload, mBtnRepAnfang, mBtnRepEnde
             , mBtnRepAblauf;
     public ImageButton mBtnZurück;
     private EditText mTxtBeschreibung, mTxtStraße, mTxtStadt, mTxtPlz, mTxtPreisvorstellung;
     private Spinner mSpinLand, mSpinKategorie;
     private CheckBox mCboFirma, mCboPrivat;
-    private TextView mTvHinweisLandText, mTvHinweisRepzAnfangText, mTvHinweisRepzEndeText,
-            mTvHinweisAblaufText, mTvHinweisKategorieText, mTvHinweisChecboxText;
+    private TextView mTvHinweisLandText, mTvHinweisStrasseText, mTvHinweisStadtText, mTvHinweisPlzText,
+            mTvHinweisRepzAnfangText, mTvHinweisRepzEndeText, mTvHinweisAblaufText,
+            mTvHinweisKategorieText, mTvHinweisChecboxText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +62,6 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         bindViews();
         init();
     }
-
 
     private void bindViews() {
         mBtnZurück = this.findViewById(R.id.btnZurück);
@@ -70,7 +79,14 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mTxtPreisvorstellung = this.findViewById(R.id.preisvorstellung);
 
         mSpinLand = this.findViewById(R.id.land);
+        ArrayAdapter<CharSequence> adapterLand = ArrayAdapter.createFromResource(this, R.array.land,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinLand.setAdapter(adapterLand);
+
         mSpinKategorie = this.findViewById(R.id.kategorie);
+        ArrayAdapter<CharSequence> adapterKategorie = ArrayAdapter.createFromResource(this, R.array.category,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinKategorie.setAdapter(adapterKategorie);
 
         mCboFirma = this.findViewById(R.id.checkBoxFirma);
         mCboPrivat = this.findViewById(R.id.checkBoxPrivat);
@@ -81,16 +97,22 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mTvHinweisAblaufText = this.findViewById(R.id.hinweisAblaufdatumText);
         mTvHinweisKategorieText = this.findViewById(R.id.hinweisKategorieText);
         mTvHinweisChecboxText = this.findViewById(R.id.hinweisCheckboxText);
+        mTvHinweisStrasseText = this.findViewById(R.id.hinweisStrasseText);
+        mTvHinweisStadtText = this.findViewById(R.id.hinweisStadtText);
+        mTvHinweisPlzText = this.findViewById(R.id.hinweisPlzText);
 
         btnColor("white");
     }
 
     private void init() {
+        mBtnZurück.setOnClickListener(this);
         mBtnErstellen.setOnClickListener(this);
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
         mBtnRepAblauf.setOnClickListener(this);
         mBtnZurück.setOnClickListener(this);
+        mBtnUpload.setOnClickListener(this);
+        mBtnKamera.setOnClickListener(this);
     }
 
     @Override
@@ -101,7 +123,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btnErstellen:
-                check();
+                check(1);
                 break;
             case R.id.btnDateRepAnfang:
                 checkBtn = 1;
@@ -114,6 +136,14 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             case R.id.btnAblaufdatum:
                 checkBtn = 3;
                 showDatePickerDialog();
+                break;
+            case R.id.btnKamera:
+                checkBild = 1;
+                bild();
+                break;
+            case R.id.btnUpload:
+                checkBild = 2;
+                bild();
                 break;
         }
     }
@@ -141,20 +171,24 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
             AnfrageErstellen anfrageErstellen = (AnfrageErstellen) getActivity();
-            anfrageErstellen.date(year, month, day);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate = format.format(calendar.getTime());
+
+            anfrageErstellen.date(strDate);
         }
     }
 
-    public void date(int year, int month, int day){
+    public void date(String date){
         if(checkBtn==1) {
-            mBtnRepAnfang.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnRepAnfang.setText(date);
         }else if(checkBtn==2) {
-            mBtnRepEnde.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                String.valueOf(year));
+            mBtnRepEnde.setText(date);
         }else if(checkBtn==3){
-            mBtnRepAblauf.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnRepAblauf.setText(date);
         }
     }
 
@@ -166,6 +200,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             mTvHinweisAblaufText.setTextColor(Color.WHITE);
             mTvHinweisKategorieText.setTextColor(Color.WHITE);
             mTvHinweisChecboxText.setTextColor(Color.WHITE);
+            mTvHinweisStrasseText.setTextColor(Color.WHITE);
+            mTvHinweisStadtText.setTextColor(Color.WHITE);
+            mTvHinweisPlzText.setTextColor(Color.WHITE);
         }else if(color.equals("red")){
             mTvHinweisLandText.setTextColor(Color.RED);
             mTvHinweisRepzAnfangText.setTextColor(Color.RED);
@@ -173,30 +210,26 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             mTvHinweisAblaufText.setTextColor(Color.RED);
             mTvHinweisKategorieText.setTextColor(Color.RED);
             mTvHinweisChecboxText.setTextColor(Color.RED);
+            mTvHinweisStrasseText.setTextColor(Color.RED);
+            mTvHinweisStadtText.setTextColor(Color.RED);
+            mTvHinweisPlzText.setTextColor(Color.RED);
         }
     }
 
-    public void check(){
-        /*private String mBeschreibung;
-        private String mStarttermin;
-        private String mEndtermin;
-        private String mAblaufdatum;
-        private String mPreisvorstellung;
-        private String mFirma;
-        private String mPrivat;
-        private String mKategorie;
-        private Blob mBild;*/
-        long adressId;
+    public void check(int userId){
+        String adressId = null;
         String dateAnfang = mBtnRepAnfang.getText().toString();
         String dateEnde = mBtnRepEnde.getText().toString();
         String dateAblauf = mBtnRepAblauf.getText().toString();
-        Cursor c =(Cursor) mSpinLand.getSelectedItem();
-        String land = "bla"; //c.getString(c.getColumnIndex("titel"));
-        c =(Cursor) mSpinKategorie.getSelectedItem();
-        String kategorie = "la"; //c.getString(c.getColumnIndex("titel"));
-        if(dateAnfang.equals("Anfang")||dateEnde.equals("Ende")||dateAblauf.equals("Ablauf")||
-                land.equals("Land")||kategorie.equals("Kategorie")||
-                !(mCboFirma.isChecked()||mCboPrivat.isChecked())){
+        String land = mSpinLand.getSelectedItem().toString();
+        String kategorie = mSpinKategorie.getSelectedItem().toString();
+        String strasse = mTxtStraße.getText().toString();
+        String plz = mTxtPlz.getText().toString();
+        String stadt = mTxtStadt.getText().toString();
+        Log.e("privat", String.valueOf(mCboPrivat.isChecked()));
+        if(strasse.equals("")|| plz.equals("") || stadt.equals("")||dateAnfang.equals("Anfang")
+                ||dateEnde.equals("Ende")||dateAblauf.equals("Ablauf")||
+                land.equals("Land")||kategorie.equals("Kategorie")||!(mCboFirma.isChecked()||mCboPrivat.isChecked())){
             btnColor("red");
         }else {
             btnColor("white");
@@ -208,64 +241,66 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             anfrage.setmPreisvorstellung(mTxtPreisvorstellung.getText().toString());
             anfrage.setmFirma(String.valueOf(mCboFirma.isChecked()));
             anfrage.setmPrivat(String.valueOf(mCboPrivat.isChecked()));
-            anfrage.setmKategorie(kategorie);
-            String strasse = mTxtStraße.getText().toString();
-            String plz = mTxtPlz.getText().toString();
-            String stadt = mTxtStadt.getText().toString();
-            if(strasse != null) {
-                adressId = writeDbAdresse(land, strasse, stadt, plz);
-            }
+            anfrage.setmKategorieIdFk(getKategorie(kategorie));
+            adressId = writeDbAdresse(land, strasse, stadt, plz);
+            anfrage.setmAdresseIdFk(adressId);
+            anfrage.setmUserId(userId);
+
+            writeDb(anfrage);
         }
     }
 
-    public long writeDbAdresse(String land, String straße, String stadt, String plz) {
+    public String writeDbAdresse(String land, String straße, String stadt, String plz) {
         sqLite = new SQLite(this);
         // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getReadableDatabase();
+        String newRowId = null;
+        try{
+            Log.e("cursor","start");
+            Cursor cursor =
+                    db.query(SQLiteInit.TABLE_ADRESSE, // a. table
+                            new String[]{SQLiteInit.COLUMN_ADRESSE_ID_PK}, // b. column names
+                            " strasse_hausnummer = ? and ort = ? and plz = ? and land = ?", // c. selections
+                            new String[] {straße, stadt, plz, land}, // d. selections args
+                            null, // e. group by
+                            null, // f. having
+                            null, // g. order by
+                            null); // h. limit
 
-        Cursor cursor =
-                db.query(SQLiteInit.TABLE_ADRESSE, // a. table
-                        new String[]{SQLiteInit.COLUMN_ADRESSE_ID_PK}, // b. column names
-                        " strasse = ? and hausnummer = ? and plz = ? and land = ?", // c. selections
-                        new String[] {straße, plz, land}, // d. selections args
-                        null, // e. group by
-                        null, // f. having
-                        null, // g. order by
-                        null); // h. limit
-        long newRowId;
-        if (cursor != null) {
-            cursor.moveToFirst();
-            newRowId = Long.getLong(cursor.getString(0));
-        }else{
-            // Create a new map of values, where column names are the keys
-            ContentValues values = new ContentValues();
-            values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, straße);
-            values.put(SQLiteInit.COLUMN_PLZ, Integer.getInteger(plz));
-            values.put(SQLiteInit.COLUMN_LAND, land);
-            newRowId = db.insert(SQLiteInit.TABLE_ADRESSE, null, values);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                newRowId = cursor.getString(0);
+            }
+        }catch(Exception ex){
+                // Create a new map of values, where column names are the keys
+                ContentValues values = new ContentValues();
+                values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, straße);
+                values.put(SQLiteInit.COLUMN_PLZ, plz);
+                values.put(SQLiteInit.COLUMN_ORT, stadt);
+                values.put(SQLiteInit.COLUMN_LAND, land);
+                newRowId = String.valueOf(db.insert(SQLiteInit.TABLE_ADRESSE, null, values));
         }
-
         return newRowId;
     }
 
-    public void writeDb(Anfrage anfrage, int userId) {
+    public void writeDb(Anfrage anfrage) {
         sqLite = new SQLite(this);
         // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, mTxtBeschreibung.getText().toString());
-        values.put(SQLiteInit.COLUMN_STARTTERMIN, "start");
-        values.put(SQLiteInit.COLUMN_ENDTERMIN, "end");
-        values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "ablauf");
-        values.put(SQLiteInit.COLUMN_PREISVORSTELLUNG, "preisv");
-        values.put(SQLiteInit.COLUMN_FIRMA, "firma");
-        values.put(SQLiteInit.COLUMN_PRIVAT, "privat");
-        values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
-        values.put(SQLiteInit.COLUMN_BILD, "");
-        values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 3);
+        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, anfrage.getmBeschreibung());
+        values.put(SQLiteInit.COLUMN_STARTTERMIN, anfrage.getmStarttermin());
+        values.put(SQLiteInit.COLUMN_ENDTERMIN, anfrage.getmEndtermin());
+        values.put(SQLiteInit.COLUMN_ABLAUFDATUM, anfrage.getmAblaufdatum());
+        values.put(SQLiteInit.COLUMN_PREISVORSTELLUNG, anfrage.getmPreisvorstellung());
+        values.put(SQLiteInit.COLUMN_FIRMA, anfrage.getmFirma());
+        values.put(SQLiteInit.COLUMN_PRIVAT, anfrage.getmPrivat());
+        values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, anfrage.getmKategorieIdFk());
+        values.put(SQLiteInit.COLUMN_BILD, getBytesFromBitmap(imageBitmap));
+        values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, anfrage.getmUserId());
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, anfrage.getmAdresseIdFk());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
@@ -273,4 +308,77 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         Toast.makeText(this, String.valueOf(newRowId), Toast.LENGTH_LONG).show();
     }
 
+
+    public void bild(){
+        if(checkBild == 1){
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, 2);
+        }else if(checkBild == 2){
+            if (EasyPermissions.hasPermissions(this, galleryPermissions)) {
+            } else {
+                EasyPermissions.requestPermissions(this, "Access for storage",
+                        101, galleryPermissions);
+            }
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, 3);
+        }
+    }
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2 && resultCode == RESULT_OK && null != data) {
+            imageBitmap = (Bitmap) data.getExtras().get("data");
+        }else if (requestCode == 3 && resultCode == RESULT_OK && null != data) {
+            pickImage(data);
+        }
+    }
+
+    public void pickImage(Intent data){
+        Uri selectedImage = data.getData();
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+        Cursor cursor = getContentResolver().query(selectedImage,
+                filePathColumn, null, null, null);
+        cursor.moveToFirst();
+
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String picturePath = cursor.getString(columnIndex);
+        cursor.close();
+
+        imageBitmap = BitmapFactory.decodeFile(picturePath);
+    }
+
+    public static byte[] getBytesFromBitmap(Bitmap bitmap) {
+        if (bitmap!=null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+            return stream.toByteArray();
+        }
+        return null;
+    }
+
+    public String getKategorie(String kategorie){
+        sqLite = new SQLite(this);
+        SQLiteDatabase db = sqLite.getReadableDatabase();
+        String id = null;
+        try{
+            Cursor cursor =
+                    db.query(SQLiteInit.TABLE_KATEGORIE, // a. table
+                            new String[]{SQLiteInit.COLUMN_KATEGORIE_ID_PK}, // b. column names
+                            " beschreibung = ?", // c. selections
+                            new String[] {kategorie}, // d. selections args
+                            null, // e. group by
+                            null, // f. having
+                            null, // g. order by
+                            null); // h. limit
+
+            if (cursor != null) {
+                cursor.moveToFirst();
+                id = cursor.getString(0);
+            }
+        }catch(Exception ex){
+        }
+        Log.e("id", id);
+        return id;
+    }
 }

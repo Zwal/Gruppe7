@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:layout_editor_absoluteY="25dp">
 
     <ImageButton
@@ -61,8 +62,8 @@
 
     <EditText
         android:id="@+id/preis"
-        android:layout_width="@string/anfrageTextwidth"
-        android:layout_height="@string/anfrageTexthight"
+        android:layout_width="@dimen/TxtAnfrageWidth"
+        android:layout_height="@dimen/TxtAnfrageHeight"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -139,8 +140,8 @@
 
     <Button
         android:id="@+id/zeitraum_auswahl_start"
-        android:layout_width="@string/anfrageTextwidth"
-        android:layout_height="@string/anfrageTexthight"
+        android:layout_width="@dimen/TxtAnfrageWidth"
+        android:layout_height="@dimen/TxtAnfrageHeight"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="8dp"
@@ -152,8 +153,8 @@
 
     <Button
         android:id="@+id/zeitraum_auswahl_Ende"
-        android:layout_width="@string/anfrageTextwidth"
-        android:layout_height="@string/anfrageTexthight"
+        android:layout_width="@dimen/TxtAnfrageWidth"
+        android:layout_height="@dimen/TxtAnfrageHeight"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="32dp"
         android:text="@string/ende"

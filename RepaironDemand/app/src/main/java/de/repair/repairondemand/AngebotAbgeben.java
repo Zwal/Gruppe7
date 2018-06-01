@@ -3,18 +3,29 @@ package de.repair.repairondemand;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
+import de.repair.repairondemand.SQLlite.Modells.Angebot;
+import de.repair.repairondemand.SQLlite.SQLite;
+import de.repair.repairondemand.SQLlite.SQLiteInit;
 
 public class AngebotAbgeben extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,10 +40,13 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
     private int checkBtn;
 
+    private String anfrageId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.angebot_abgeben);
+        anfrageId = getIntent().getExtras().getString("anfrageId");
         bindViews();
         init();
     }
@@ -64,7 +78,9 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         int viewId = view.getId();
         switch (viewId) {
             case R.id.btnZurück:
-                finish();
+                startActivityIntent =  new Intent(this, AuftragAnsicht.class);
+                startActivityIntent.putExtra("anfrageId", anfrageId);
+                startActivity(startActivityIntent);
                 break;
             case R.id.zeitraum_auswahl_start:
                 checkBtn = 1;
@@ -81,7 +97,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
     }
 
     public void showDatePickerDialog() {
-        DialogFragment newFragment = new AnfrageErstellen.DatePickerFragment();
+        DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(this.getFragmentManager(), "datePicker");
     }
     public static class DatePickerFragment extends DialogFragment
@@ -102,17 +118,21 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
             AngebotAbgeben angebotAbgeben = (AngebotAbgeben) getActivity();
-            angebotAbgeben.date(year, month, day);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate = format.format(calendar.getTime());
+
+            angebotAbgeben.date(strDate);
         }
     }
 
-    public void date(int year, int month, int day){
+    public void date(String date){
         if(checkBtn==1) {
-            mBtnZeitStart.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnZeitStart.setText(date);
         }else if(checkBtn==2) {
-            mBtnZeitEnde.setText(String.valueOf(day) + "." + String.valueOf(month) + "." +
-                    String.valueOf(year));
+            mBtnZeitEnde.setText(date);
         }
     }
 
@@ -122,6 +142,12 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         String dateEnde = mBtnZeitEnde.getText().toString();
         if(preis == null || dateStart.equals("Start") || dateEnde.equals("Ende") ){
             btnColor("red");
+        }else{
+            btnColor("white");
+            FragmentManager fm = getSupportFragmentManager();
+            AngebotAbgebenDialog alertDialog = AngebotAbgebenDialog.newInstance("Angebot abgeben",
+                    writeAngebotDb());
+            alertDialog.show(fm, "fragment_alert");
         }
     }
 
@@ -133,5 +159,18 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
             mTvHinweisPreis.setTextColor(Color.RED);
             mTvHinweisZeitraum.setTextColor(Color.RED);
         }
+    }
+
+    public Angebot writeAngebotDb(){
+        Angebot angebot = new Angebot();
+        angebot.setmPreis(mTxtPreis.getText().toString());
+        Log.e("Preis",mTxtPreis.getText().toString() );
+        angebot.setmZeitStart(mBtnZeitStart.getText().toString());
+        angebot.setmZeitEnde(mBtnZeitEnde.getText().toString());
+        angebot.setmBeschreibung(mTxtBeschreibung.getText().toString());
+        angebot.setmAnfrageId(anfrageId);
+        angebot.setmBenutzerId(new AktuellerBenutzer().getId(this));
+
+        return angebot;
     }
 }

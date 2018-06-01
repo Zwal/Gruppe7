@@ -29,4 +29,17 @@
     <string name="ende">Ende</string>
     <string name="ablauf">Ablauf</string>
     <string name="start">Start</string>
+    <string-array name="land">
+        <item>Land</item>
+        <item>Deutschland</item>
+        <item>Russland</item>
+        <item>Türkei</item>
+    </string-array>
+    <string name="country_prompt">Land</string>
+    <string-array name="category">
+        <item>Kategorie</item>
+        <item>Sanitär</item>
+        <item>Dach</item>
+    </string-array>
+    <string name="category_prompt">Kategorie</string>
 </resources>
