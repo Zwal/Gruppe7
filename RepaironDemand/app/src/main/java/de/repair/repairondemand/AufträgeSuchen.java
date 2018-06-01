@@ -47,9 +47,8 @@ import de.repair.repairondemand.SQLlite.SQLiteInit;
 public class AufträgeSuchen extends AppCompatActivity implements View.OnClickListener {
     private SQLite sqLite;
     private int checkBtn;
-    public Button mBtnRepAnfang, mBtnRepEnde, mBtnSuchen;
     public ImageButton mBtnZurück;
-    public Button mBtnZurück, mBtnRepAnfang, mBtnRepEnde, mBtnSuchen, mBtnKlappen;
+    public Button mBtnRepAnfang, mBtnRepEnde, mBtnSuchen, mBtnKlappen;
     private Spinner mSpinKategorie;
     private SeekBar mSeekbar;
     private TextView mTvRadius, mTvDateError, mTvKeineAufträge;
