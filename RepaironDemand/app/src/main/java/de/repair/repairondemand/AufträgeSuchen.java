@@ -135,7 +135,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.zurück:
+            case R.id.btnZurück:
                 startActivityIntent = new Intent(this, Home.class);
                 startActivity(startActivityIntent);
                 break;
