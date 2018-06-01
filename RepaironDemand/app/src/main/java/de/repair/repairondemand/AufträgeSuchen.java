@@ -3,14 +3,17 @@ package de.repair.repairondemand;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,13 +23,17 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.repair.repairondemand.AuftragList.AuftragAdapter;
@@ -42,37 +49,56 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     private int checkBtn;
     public Button mBtnRepAnfang, mBtnRepEnde, mBtnSuchen;
     public ImageButton mBtnZurück;
+    public Button mBtnZurück, mBtnRepAnfang, mBtnRepEnde, mBtnSuchen, mBtnKlappen;
     private Spinner mSpinKategorie;
     private SeekBar mSeekbar;
-    private TextView mTvRadius;
+    private TextView mTvRadius, mTvDateError, mTvKeineAufträge;
     private ListView mLv;
+    private View mklapView;
+    private String check = null;
+    private boolean keineAufträge;
+    private String kategorie, anfang, ende, radius;
+    private Intent startActivityIntent;
     // private ListView mListResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anfrage_suche);
+        if(getIntent().hasExtra("kategorie")) {
+            kategorie = getIntent().getExtras().getString("kategorie");
+            anfang = getIntent().getExtras().getString("anfang");
+            ende = getIntent().getExtras().getString("ende");
+            radius = getIntent().getExtras().getString("radius");
+        }
         bindViews();
         init();
     }
 
     private void bindViews() {
+        mTvKeineAufträge = this.findViewById(R.id.txtKeineAufträge);
+        mklapView = this.findViewById(R.id.constraintLayout1);
         mLv = this.findViewById(R.id.listV);
+        mBtnKlappen = this.findViewById(R.id.btnKlappen);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnRepAnfang = this.findViewById(R.id.btnDateRepAnfang);
         mBtnRepEnde = this.findViewById(R.id.btnDateRepEnde);
         mSpinKategorie = this.findViewById(R.id.kategorie);
         mBtnSuchen = this.findViewById(R.id.btnSuchen);
         mTvRadius = this.findViewById(R.id.txtRadius);
+        mTvDateError = this.findViewById(R.id.txtDateError);
         ArrayAdapter<CharSequence> adapterKategorie = ArrayAdapter.createFromResource(this, R.array.category,
                 android.R.layout.simple_spinner_dropdown_item);
         mSpinKategorie.setAdapter(adapterKategorie);
         mSeekbar = this.findViewById(R.id.seekBar);
-        // mListResult = this.findViewById(R.id.listView);
+        check = "zu";
     }
 
     private void init() {
+        mTvDateError.setTextColor(Color.WHITE);
+        mTvKeineAufträge.setTextColor(Color.WHITE);
         mBtnZurück.setOnClickListener(this);
+        mBtnKlappen.setOnClickListener(this);
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
         mBtnSuchen.setOnClickListener(this);
@@ -95,14 +121,24 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                 mTvRadius.setText(String.valueOf(seekBar.getProgress()) + " km");
             }
         });
+        mLv.setVisibility(ListView.INVISIBLE);
+        if(kategorie != null){
+            mSpinKategorie.setSelection(Integer.parseInt(getKategorie(kategorie)));
+            mBtnRepAnfang.setText(anfang);
+            mBtnRepEnde.setText(ende);
+            mSeekbar.setProgress(Integer.valueOf(radius));
+        }
     }
+
+    boolean b;
 
     @Override
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.btnZurück:
-                finish();
+            case R.id.zurück:
+                startActivityIntent = new Intent(this, Home.class);
+                startActivity(startActivityIntent);
                 break;
             case R.id.btnDateRepAnfang:
                 checkBtn = 1;
@@ -113,9 +149,71 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                 showDatePickerDialog();
                 break;
             case R.id.btnSuchen:
-                getAufträgeDb();
+                b = checkDate();
+                if(b) {
+                    getAufträgeDb();
+                    if(!keineAufträge) {
+                        klappen();
+                    }
+                }
+                break;
+            case R.id.btnKlappen:
+                klappen();
                 break;
         }
+    }
+
+    public boolean checkDate(){
+        boolean b = true;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+
+            Date dateVon = formatter.parse(mBtnRepAnfang.getText().toString());
+            Date dateBis = formatter.parse(mBtnRepEnde.getText().toString());
+
+            if(dateBis.compareTo(dateVon) < 0 ){
+                mTvDateError.setTextColor(Color.RED);
+                b = false;
+            }else{
+                mTvDateError.setTextColor(Color.WHITE);
+            }
+        } catch (ParseException e) {
+            Log.e("except", e.getMessage());
+        }
+        return b;
+    }
+
+    public void klappen(){
+        if(check.equals("offen")){
+            slideUp(mklapView);
+            mLv.setVisibility(ListView.INVISIBLE);
+            check = "zu";
+        }else{
+            slideDown(mklapView);
+            mLv.setVisibility(ListView.VISIBLE);
+            check = "offen";
+        }
+    }
+
+    public void slideDown(View view){
+        TranslateAnimation animate = new TranslateAnimation(
+                0,                 // fromXDelta
+                view.getHeight(),                 // toXDelta
+                0,                 // fromYDelta
+                0); // toYDelta
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
+    public void slideUp(View view){
+        view.setVisibility(View.VISIBLE);
+        TranslateAnimation animate = new TranslateAnimation(
+                view.getHeight(),                 // fromXDelta
+                0,                 // toXDelta
+                0,  // fromYDelta
+                0);                // toYDelta
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
     }
 
     public void showDatePickerDialog() {
@@ -223,7 +321,9 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
     public void setAufträge(){
         // Adapter setzen
-        mLv.setAdapter(new AuftragAdapter(this, mLv, this.anfrageList, this.byteList, this.adresseList));
+        mLv.setAdapter(new AuftragAdapter(this, mLv, this.anfrageList, this.byteList, this.adresseList,
+                mSpinKategorie.getSelectedItem().toString(), mBtnRepAnfang.getText().toString(),
+                mBtnRepEnde.getText().toString(), String.valueOf(mSeekbar.getProgress())));
     }
 
 
@@ -273,6 +373,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         }catch(Exception ex){
         }
+        db.close();
         return fk;
     }
 
@@ -300,6 +401,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         }catch(Exception ex){
         }
+        db.close();
         return adresse;
     }
 
@@ -346,12 +448,17 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                 }
                 if(this.anfrageList.size() != 0) {
                     Log.e("extrAuftr", "");
+                    mTvKeineAufträge.setTextColor(Color.WHITE);
+                    keineAufträge = false;
                     extractAufträge();
                 }
             }
         }catch(Exception ex){
+            keineAufträge = true;
+            mTvKeineAufträge.setTextColor(Color.RED);
             ex.printStackTrace();
         }
+        db.close();
     }
 
     public String getKategorie(String kategorie){
@@ -375,6 +482,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         }catch(Exception ex){
         }
+        db.close();
         return id;
     }
 }

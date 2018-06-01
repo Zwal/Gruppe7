@@ -35,7 +35,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     String anfrageId = null;
 
-
+    private String kategorie, anfang, ende, radius;
 
     ArrayList<String> anfrageIds = null;
     ArrayList<String> kompetenz = null;
@@ -51,6 +51,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
         anfrageId = getIntent().getExtras().getString("anfrageId");
+        if(getIntent().hasExtra("kategorie")) {
+            kategorie = getIntent().getExtras().getString("kategorie");
+            anfang = getIntent().getExtras().getString("anfang");
+            ende = getIntent().getExtras().getString("ende");
+            radius = getIntent().getExtras().getString("radius");
+        }
         bindViews();
         init();
     }
@@ -111,6 +117,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, AuftragAnsicht.class);
                 startActivityIntent.putExtra("anfrageId", anfrageId);
+                startActivityIntent.putExtra("kategorie", kategorie);
+                startActivityIntent.putExtra("anfang", anfang);
+                startActivityIntent.putExtra("ende", ende);
+                startActivityIntent.putExtra("radius", radius);
                 startActivity(startActivityIntent);
                 break;
         }

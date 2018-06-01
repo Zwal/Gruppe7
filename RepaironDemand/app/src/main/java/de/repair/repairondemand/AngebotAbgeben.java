@@ -37,11 +37,19 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
     private String anfrageId;
 
+    private String kategorie, anfang, ende, radius;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.angebot_abgeben);
         anfrageId = getIntent().getExtras().getString("anfrageId");
+        if(getIntent().hasExtra("kategorie")) {
+            kategorie = getIntent().getExtras().getString("kategorie");
+            anfang = getIntent().getExtras().getString("anfang");
+            ende = getIntent().getExtras().getString("ende");
+            radius = getIntent().getExtras().getString("radius");
+        }
         bindViews();
         init();
     }
@@ -75,6 +83,10 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, AuftragAnsicht.class);
                 startActivityIntent.putExtra("anfrageId", anfrageId);
+                startActivityIntent.putExtra("kategorie", kategorie);
+                startActivityIntent.putExtra("anfang", anfang);
+                startActivityIntent.putExtra("ende", ende);
+                startActivityIntent.putExtra("radius", radius);
                 startActivity(startActivityIntent);
                 break;
             case R.id.zeitraum_auswahl_start:

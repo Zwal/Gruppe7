@@ -29,6 +29,8 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
 
     private String anfrageId;
 
+    private String kategorie, anfang, ende, radius;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,10 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         // folgenden Aufruf die ID des Auftrags
         if(getIntent().hasExtra("anfrageId")) {
             anfrageId = getIntent().getExtras().getString("anfrageId");
+            kategorie = getIntent().getExtras().getString("kategorie");
+            anfang = getIntent().getExtras().getString("anfang");
+            ende = getIntent().getExtras().getString("ende");
+            radius = getIntent().getExtras().getString("radius");
             getAuftrag(anfrageId);
         }
     }
@@ -64,16 +70,29 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         int viewId = view.getId();
         switch (viewId) {
             case R.id.btnZurück:
-                finish();
+                startActivityIntent = new Intent(this, AufträgeSuchen.class);
+                startActivityIntent.putExtra("kategorie", kategorie);
+                startActivityIntent.putExtra("anfang", anfang);
+                startActivityIntent.putExtra("ende", ende);
+                startActivityIntent.putExtra("radius", radius);
+                startActivity(startActivityIntent);
                 break;
             case R.id.btnAngebotabgeben:
                 startActivityIntent = new Intent(this, AngebotAbgeben.class);
                 startActivityIntent.putExtra("anfrageId", anfrageId);
+                startActivityIntent.putExtra("kategorie", kategorie);
+                startActivityIntent.putExtra("anfang", anfang);
+                startActivityIntent.putExtra("ende", ende);
+                startActivityIntent.putExtra("radius", radius);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnProfilansehen:
                 startActivityIntent = new Intent(this, Profile.class);
                 startActivityIntent.putExtra("anfrageId", anfrageId);
+                startActivityIntent.putExtra("kategorie", kategorie);
+                startActivityIntent.putExtra("anfang", anfang);
+                startActivityIntent.putExtra("ende", ende);
+                startActivityIntent.putExtra("radius", radius);
                 startActivity(startActivityIntent);
                 break;
         }
