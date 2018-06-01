@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -35,8 +36,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
 
     private int checkBtn;
 
-    public Button mBtnZurück, mBtnErstellen, mBtnKamera, mBtnUpload, mBtnRepAnfang, mBtnRepEnde
+    public Button  mBtnErstellen, mBtnKamera, mBtnUpload, mBtnRepAnfang, mBtnRepEnde
             , mBtnRepAblauf;
+    public ImageButton mBtnZurück;
     private EditText mTxtBeschreibung, mTxtStraße, mTxtStadt, mTxtPlz, mTxtPreisvorstellung;
     private Spinner mSpinLand, mSpinKategorie;
     private CheckBox mCboFirma, mCboPrivat;
@@ -88,12 +90,16 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
         mBtnRepAblauf.setOnClickListener(this);
+        mBtnZurück.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.btnZurück:
+                finish();
+                break;
             case R.id.btnErstellen:
                 check();
                 break;

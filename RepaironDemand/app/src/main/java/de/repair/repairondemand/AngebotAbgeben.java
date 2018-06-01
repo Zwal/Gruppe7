@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +18,8 @@ import java.util.Calendar;
 
 public class AngebotAbgeben extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mBtnZurück, mBtnZeitStart, mBtnZeitEnde, mBtnSenden;
+    private Button mBtnZeitStart, mBtnZeitEnde, mBtnSenden;
+    private ImageButton mBtnZurück;
 
     private EditText mTxtPreis, mTxtBeschreibung;
 
@@ -36,7 +38,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
     }
 
     private void bindViews() {
-        mBtnZurück = this.findViewById(R.id.zurück);
+        mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnZeitStart = this.findViewById(R.id.zeitraum_auswahl_start);
         mBtnZeitEnde = this.findViewById(R.id.zeitraum_auswahl_Ende);
         mBtnSenden = this.findViewById(R.id.btnSenden);
