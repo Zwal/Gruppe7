@@ -45,7 +45,7 @@ public class AktuellerBenutzer {
 
             db.delete(SQLiteInit.TABLE_AKTUELLER_BENUTZER, "rowid" + "=" + 1, null);
             long row = db.insert(SQLiteInit.TABLE_AKTUELLER_BENUTZER, null, values);
-
+            db.close();
             Log.e("insertUser", "" + id + " " + getId(context) + " " + row);
         } catch (Exception ex) {
         }
