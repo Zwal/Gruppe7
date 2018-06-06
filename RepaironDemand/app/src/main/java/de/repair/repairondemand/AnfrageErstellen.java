@@ -47,6 +47,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private Bitmap imageBitmap;
     private int checkBtn;
     private int checkBild;
+    private Intent startActivityIntent;
 
     private Blob bild = null;
     public Button  mBtnErstellen, mBtnRepAnfang, mBtnRepEnde
@@ -127,7 +128,10 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btnErstellen:
-                check(new AktuellerBenutzer().getId(this));
+                if(check(new AktuellerBenutzer().getId(this))) {
+                    startActivityIntent = new Intent(this, Home.class);
+                    startActivity(startActivityIntent);
+                }
                 break;
             case R.id.btnDateRepAnfang:
                 checkBtn = 1;
@@ -313,7 +317,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
 
-        Toast.makeText(this, String.valueOf(newRowId), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Auftrag erstellt.", Toast.LENGTH_LONG).show();
     }
 
 

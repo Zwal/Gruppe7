@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Intent startActivityIntent;
 
-    private Drawable d;
+    private Drawable house, bagger;
 
 
     @Override
@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mCboRemember = this.findViewById(R.id.checkBoxRemember);
 
-        d = this.getDrawable(R.drawable.ic_launcher);
+        house = this.getDrawable(R.drawable.house);
+        bagger = this.getDrawable(R.drawable.bagger);
     }
 
     private void init() {
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "beschr");
+        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "Auftrag für ein Hausbau.");
         values.put(SQLiteInit.COLUMN_STARTTERMIN, "2018-05-25");
         values.put(SQLiteInit.COLUMN_ENDTERMIN, "2018-05-30");
         values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "2018-05-25");
@@ -182,13 +183,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_FIRMA, "true");
         values.put(SQLiteInit.COLUMN_PRIVAT, "true");
         values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
-        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(d));
+        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(house));
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 2);
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 3);
         db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
 
         values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "beschr");
+        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "Grube ausheben.");
         values.put(SQLiteInit.COLUMN_STARTTERMIN, "2018-05-25");
         values.put(SQLiteInit.COLUMN_ENDTERMIN, "2018-05-30");
         values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "2018-05-25");
@@ -196,9 +197,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_FIRMA, "true");
         values.put(SQLiteInit.COLUMN_PRIVAT, "true");
         values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
-        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(d));
+        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(bagger));
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 2);
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 3);
         db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
         db.close();
     }
