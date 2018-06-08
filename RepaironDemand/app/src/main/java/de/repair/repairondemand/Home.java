@@ -24,7 +24,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
     private Button mBtnAnfrageerstellen, mBtnEingestellteAufträge,
     mBtnAufträgesuche, mBtnAbgegebeneAngebote, mBtnFeedback, mBtnKalender,
-    mBtnBenachrichtigungen, mBtnServiceCenter;
+    mBtnBenachrichtigungen, mBtnServiceCenter ;
     private Spinner mSpinProfile;
     private TextView mTxtImpressum, mUsername;
     private String[] mSpinnerCont;
@@ -131,7 +131,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnServiceCenter:
-                startActivityIntent =  new Intent(this, NotAvailable.class);
+                startActivityIntent =  new Intent(this, ServiceCenter.class);
                 startActivity(startActivityIntent);
                 break;
             case R.id.linkImpressum:
