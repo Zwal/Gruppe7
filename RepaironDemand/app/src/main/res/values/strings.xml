@@ -47,4 +47,20 @@
     <string name="category_prompt">Kategorie</string>
     <string name="date_error">Das angegebene Enddatum muss größer als das Anfangsdatum sein.</string>
     <string name="keine_aufträge">Es wurden keine Aufträge gefunden.</string>
+    <string name="passwort_frage">Ich kann mein Passwort nicht ändern.</string>
+    <string name="passwort_antwort">Gehen Sie oben rechts auf Profil und drücken Sie oben rechts auf Passwort ändern.</string>
+    <string name="auträgeEinsehen_frage">Wo kann ich meine Aufträge einsehen?</string>
+    <string name="aufträgeEinsehen_antwort">Gehen Sie im Home-Menu auf eingestellte Aufträge.</string>
+    <string name="aufträgeAbbrechen_frage">Wie kann ich ein Auftrag abbrechen?</string>
+    <string name="aufträgeAbbrechen_antwort">Gehen Sie im Home-Menu auf eingestellte Aufträge.
+        Anschließend klicken Sie auf einen Auftrag, den Sie dann über einen Button abbrechen können</string>
+    <string name="supportErreichen_frage">Wie kann ich den Support erreichen?</string>
+    <string name="supportErreichen_antwort">Gehen Sie im Service_center auf den Button Support.
+        Dann werden Ihnen die Kontaktdaten eingeblendet.</string>
+    <string name="auftragnehmer_frage">Der Auftragnehmer ist nicht gekommen.</string>
+    <string name="auftragnehmer_antwort">Nehmen Sie Kontakt mit dem Support auf, der sich darum kümmern wird.</string>
+    <string name="zahlung_frage">Keine Zahlungsmöglichkeit auswählbar.</string>
+    <string name="zahlung_antwort">Nehmen Sie Kontakt mit dem Support auf, der sich darum kümmern wird.</string>
+    <string name="nutzungsbedingungen"><b>Nutzungsbedingungen</b> \nBitte lesen Sie die Bedingungen aufmerksam durch.</string>
+
 </resources>

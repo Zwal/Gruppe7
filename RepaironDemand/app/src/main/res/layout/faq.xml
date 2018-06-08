@@ -1,0 +1,142 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
+
+
+    <ImageButton
+        android:id="@+id/btnZurück"
+        android:layout_width="71dp"
+        android:layout_height="41dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/baseline_arrow_back_black_24" />
+
+    <ImageView
+        android:id="@+id/iconlogo"
+        android:layout_width="72dp"
+        android:layout_height="44dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="41dp" />
+
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="FAQ"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="110dp" />
+
+    <TextView
+        android:id="@+id/antwort"
+        android:layout_width="327dp"
+        android:layout_height="355dp"
+        android:text="FAQ"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="203dp" />
+
+    <Button
+        android:id="@+id/btnKlappe"
+        android:layout_width="88dp"
+        android:layout_height="31dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:text="Fragen"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="144dp" />
+
+    <Button
+        android:id="@+id/btnPasswort"
+        android:layout_width="325dp"
+        android:layout_height="47dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:text="@string/passwort_frage"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="202dp" />
+
+    <Button
+        android:id="@+id/btnAuftragEinsehen"
+        android:layout_width="325dp"
+        android:layout_height="47dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:text="@string/auträgeEinsehen_frage"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="260dp" />
+
+    <Button
+        android:id="@+id/btnAuftragAbbrechen"
+        android:layout_width="325dp"
+        android:layout_height="47dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:text="@string/aufträgeAbbrechen_frage"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="320dp" />
+
+    <Button
+        android:id="@+id/btnSupportErreichen"
+        android:layout_width="325dp"
+        android:layout_height="47dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:text="@string/supportErreichen_frage"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="379dp" />
+
+    <Button
+        android:id="@+id/btnAuftragnehmer"
+        android:layout_width="325dp"
+        android:layout_height="47dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:text="@string/auftragnehmer_frage"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="443dp" />
+
+    <Button
+        android:id="@+id/btnZahlung"
+        android:layout_width="325dp"
+        android:layout_height="47dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:text="@string/zahlung_frage"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="504dp" />
+
+</android.support.constraint.ConstraintLayout>
