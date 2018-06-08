@@ -83,6 +83,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.btnAufträgesuchen:
                 startActivityIntent =  new Intent(this, AufträgeSuchen.class);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnAbgegebeneAngebote:
@@ -107,6 +108,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.linkImpressum:
                 startActivityIntent =  new Intent(this, Impressum.class);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
         }

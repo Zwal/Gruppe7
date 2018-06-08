@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.linkImpressum:
                 startActivityIntent = new Intent(this, Impressum.class);
+                startActivityIntent.putExtra("main", "main");
                 startActivity(startActivityIntent);
                 break;
             case R.id.linkPasswortvergessen:
@@ -238,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_TELEFON, "000");
         values.put(SQLiteInit.COLUMN_QUALIFIKATION, "Streichen");
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, new AktuellerBenutzer().getIdUser(
-                this, "7@repair.de"));
+                this, "user1"));
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, writeAdressePrivat("Kaiserstraße 1","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
         long u = db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
@@ -258,12 +260,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_TELEFON, "000");
         values.put(SQLiteInit.COLUMN_QUALIFIKATION, "Streichen");
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, new AktuellerBenutzer().getIdUser(
-                this, "8@repair.de"));
+                this, "user2"));
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, writeAdressePrivat("Kaiserstraße 2","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
         long u = db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
         Log.e("uo",u +" " + new AktuellerBenutzer().getIdUser(
-                this, "8@repair.de"));
+                this, "user2"));
         db.close();
     }
 
@@ -311,13 +313,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
         // current user
-        values.put(SQLiteInit.COLUMN_ANFRAGE_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_FEEDBACK_TEXT, "feedbackText");
-        values.put(SQLiteInit.COLUMN_KOMPETENZ, "4");
-        values.put(SQLiteInit.COLUMN_FREUNDLICHKEIT, "5");
-        values.put(SQLiteInit.COLUMN_PÜNKTLICHKEIT, "5");
-        values.put(SQLiteInit.COLUMN_GESAMTEINDRUCK, "5");
-        db.insert(SQLiteInit.TABLE_AUFTRAGS_FEEDBACK, null, values);
+        try{
+            values.put(SQLiteInit.COLUMN_ANFRAGE_ID_FK, 2);
+            values.put(SQLiteInit.COLUMN_FEEDBACK_TEXT, "feedbackText");
+            values.put(SQLiteInit.COLUMN_KOMPETENZ, "4");
+            values.put(SQLiteInit.COLUMN_FREUNDLICHKEIT, "5");
+            values.put(SQLiteInit.COLUMN_PÜNKTLICHKEIT, "5");
+            values.put(SQLiteInit.COLUMN_GESAMTEINDRUCK, "5");
+            db.insert(SQLiteInit.TABLE_AUFTRAGS_FEEDBACK, null, values);
+        }catch (Exception ex){
+        }
+
         db.close();
     }
 }

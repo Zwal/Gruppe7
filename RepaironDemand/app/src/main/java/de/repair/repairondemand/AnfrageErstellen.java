@@ -59,7 +59,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private CheckBox mCboFirma, mCboPrivat;
     private TextView mTvHinweisLandText, mTvHinweisStrasseText, mTvHinweisStadtText, mTvHinweisPlzText,
             mTvHinweisRepzAnfangText, mTvHinweisRepzEndeText, mTvHinweisAblaufText,
-            mTvHinweisKategorieText, mTvHinweisChecboxText;
+            mTvHinweisKategorieText, mTvHinweisChecboxText, mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     }
 
     private void bindViews() {
+        mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnErstellen = this.findViewById(R.id.btnErstellen);
         mBtnKamera = this.findViewById(R.id.btnKamera);
@@ -120,6 +121,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mBtnZurück.setOnClickListener(this);
         mBtnUpload.setOnClickListener(this);
         mBtnKamera.setOnClickListener(this);
+        mUsername.setText(username);
     }
 
     @Override

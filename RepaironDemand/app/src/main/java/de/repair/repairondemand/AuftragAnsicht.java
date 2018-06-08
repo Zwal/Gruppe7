@@ -23,13 +23,13 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
     private ImageButton mBtnZurück;
     private ImageView mImViAuftragBild;
 
-    private TextView mTvBeschreibung, mTvStandort;
+    private TextView mTvBeschreibung, mTvStandort, mUsername;
 
     private Intent startActivityIntent;
 
     private String anfrageId;
 
-    private String kategorie, anfang, ende, radius;
+    private String kategorie, anfang, ende, radius, username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         init();
         // über Intent von AngebotSuchen.java, kommt für den
         // folgenden Aufruf die ID des Auftrags
+        username = getIntent().getExtras().getString("username");
         if(getIntent().hasExtra("anfrageId")) {
             anfrageId = getIntent().getExtras().getString("anfrageId");
             kategorie = getIntent().getExtras().getString("kategorie");
@@ -51,6 +52,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
 
 
     private void bindViews() {
+        mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnProfil = this.findViewById(R.id.btnProfilansehen);
         mBtnAngebotAbgeben = this.findViewById(R.id.btnAngebotabgeben);
@@ -63,6 +65,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         mBtnZurück.setOnClickListener(this);
         mBtnProfil.setOnClickListener(this);
         mBtnAngebotAbgeben.setOnClickListener(this);
+        mUsername.setText(username);
     }
 
     @Override
@@ -75,6 +78,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnAngebotabgeben:
@@ -84,6 +88,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnProfilansehen:
@@ -93,6 +98,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
         }
