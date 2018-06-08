@@ -33,6 +33,11 @@
         <item>Russland</item>
         <item>Türkei</item>
     </string-array>
+    <string-array name="spinnerProfile">
+        <item>Profil</item>
+        <item>Einstellungen</item>
+        <item>Ausloggen</item>
+    </string-array>
     <string name="country_prompt">Land</string>
     <string-array name="category">
         <item>Kategorie</item>

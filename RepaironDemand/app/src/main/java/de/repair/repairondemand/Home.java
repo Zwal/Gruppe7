@@ -1,11 +1,15 @@
 package de.repair.repairondemand;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Home extends AppCompatActivity implements View.OnClickListener {
@@ -14,8 +18,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     private Button mBtnAnfrageerstellen, mBtnEingestellteAufträge,
     mBtnAufträgesuche, mBtnAbgegebeneAngebote, mBtnFeedback, mBtnKalender,
     mBtnBenachrichtigungen, mBtnServiceCenter;
-
     private TextView mTxtImpressum;
+    private Spinner mSpinProfile;
 
     private Intent startActivityIntent;
 
@@ -38,6 +42,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         mBtnBenachrichtigungen = this.findViewById(R.id.btnBenachrichtigungen);
         mBtnServiceCenter = this.findViewById(R.id.btnServiceCenter);
         mTxtImpressum = this.findViewById(R.id.linkImpressum);
+        mSpinProfile = this.findViewById(R.id.spinnerProfile);
+        ArrayAdapter<CharSequence> adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinProfile.setAdapter(adapterSpinnerProfile);
     }
 
     private void init() {
