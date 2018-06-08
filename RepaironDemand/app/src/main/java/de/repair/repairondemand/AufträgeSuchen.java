@@ -446,18 +446,32 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         Anfrage anfrage;
         this.anfrageList = new ArrayList<Anfrage>(){};
         String type = new AktuellerBenutzer().getTypeUser(this);
+        String selectionAll = type + " = ?";
+        String selectionNotAll = type + " = ? and benutzer_id_fk != ? and kategorie_id_fk = ? and starttermin BETWEEN  ? and ? " +
+                "and endtermin BETWEEN ? and ?";
+        String[] argsAll = new String[]{"true"};
+        String[] argsNotAll = new String[]{"true", new AktuellerBenutzer().getId(this),
+                getKategorie(mSpinKategorie.getSelectedItem().toString()),
+                mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString(),
+                mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString()};
+        String selection = null;
+        String[] args = null;
+        if(mSpinKategorie.getSelectedItem().toString().equals("Kategorie") &&
+        mBtnRepAnfang.getText().toString().equals("Anfang") && mBtnRepEnde.getText().toString().equals("Ende")){
+            selection = selectionAll;
+            args = argsAll;
+        }else{
+            selection = selectionNotAll;
+            args = argsNotAll;
+        }
         try{
             Cursor cursor =
                     db.query(SQLiteInit.TABLE_ANFRAGE, // a. table
                             new String[]{SQLiteInit.COLUMN_BESCHREIBUNG,
                                     SQLiteInit.COLUMN_ADRESSE_ID_FK, SQLiteInit.COLUMN_ANFRAGE_ID_PK,
                                     SQLiteInit.COLUMN_BILD}, // b. column names
-                            type + " = ? and benutzer_id_fk != ? and kategorie_id_fk = ? and starttermin BETWEEN  ? and ? " +
-                                    "and endtermin BETWEEN ? and ?", // c. selections
-                            new String[] {"true", new AktuellerBenutzer().getId(this),
-                                    getKategorie(mSpinKategorie.getSelectedItem().toString()),
-                            mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString(),
-                                    mBtnRepAnfang.getText().toString(), mBtnRepEnde.getText().toString()}, // d. selections args
+                            selection, // c. selections
+                            args, // d. selections args
                             null, // e. group by
                             null, // f. having
                             null, // g. order by
