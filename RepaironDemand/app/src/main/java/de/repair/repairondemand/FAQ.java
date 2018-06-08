@@ -14,7 +14,8 @@ import android.widget.ImageButton;
 public class FAQ extends AppCompatActivity implements View.OnClickListener {
 
     private Button mBtnPasswort, mBtnAufträgeEinsehen, mBtnAuftragAbbrechen, mBtnSupportErreichen,
-            mBtnAuftragnehmer, mBtnZahlung, mBtnZurück, mBtnKlappe;
+            mBtnAuftragnehmer, mBtnZahlung, mBtnKlappe;
+    private ImageButton mBtnZurück;
     private TextView mTvAntwort;
 
     private Intent startActivityIntent;

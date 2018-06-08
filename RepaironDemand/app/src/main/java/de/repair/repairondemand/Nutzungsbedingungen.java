@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 
 public class Nutzungsbedingungen extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mBtnZurück;
+    private ImageButton mBtnZurück;
 
     private Intent startActivityIntent;
     private String username;

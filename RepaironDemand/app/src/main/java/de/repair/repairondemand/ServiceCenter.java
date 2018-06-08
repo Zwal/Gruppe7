@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 public class ServiceCenter extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mBtnFAQ, mBtnSupport, mBtnBeschwerde, mBtnNutzungsbedingungen, mBtnZurück;
+    private Button mBtnFAQ, mBtnSupport, mBtnBeschwerde, mBtnNutzungsbedingungen;
+    private ImageButton mBtnZurück;
 
     private Intent startActivityIntent;
     private String username;
@@ -43,11 +46,6 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.btnFAQ:
-                startActivityIntent =  new Intent(this, FAQ.class);
-                startActivityIntent.putExtra("username", username);
-                startActivity(startActivityIntent);
-                break;
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, Home.class);
                 startActivityIntent.putExtra("username", username);
@@ -65,6 +63,11 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnNutzungsbedingungen:
                 startActivityIntent =  new Intent(this, Nutzungsbedingungen.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
+            case R.id.btnFAQ:
+                startActivityIntent =  new Intent(this, FAQ.class);
                 startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;

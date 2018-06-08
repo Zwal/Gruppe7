@@ -130,6 +130,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.btnServiceCenter:
                 startActivityIntent =  new Intent(this, ServiceCenter.class);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.linkImpressum:

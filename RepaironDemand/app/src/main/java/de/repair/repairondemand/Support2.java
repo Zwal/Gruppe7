@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 public class Support2 extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mBtnZurück, mBtnSenden;
+    private Button mBtnSenden;
     private Intent startActivityIntent;
     private String username;
-    private ImageButton mUpload;
+    private ImageButton mBtnZurück, mUpload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
