@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 public class Support2 extends AppCompatActivity implements View.OnClickListener {
@@ -18,7 +19,7 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.support1);
+        setContentView(R.layout.support_b);
         username = getIntent().getExtras().getString("username");
         bindViews();
         init();
@@ -47,15 +48,10 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnSenden:
-                startActivityIntent =  new Intent(this, Support2.class);
+                Toast.makeText(this, "Abgeschickt.", Toast.LENGTH_LONG).show();
+                startActivityIntent =  new Intent(this, Home.class);
                 startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
-                break;
-            case R.id.btnUpload:
-                startActivityIntent =  new Intent(this, Support2.class);
-                startActivityIntent.putExtra("username", username);
-                startActivity(startActivityIntent);
-                break;
         }
     }
 }

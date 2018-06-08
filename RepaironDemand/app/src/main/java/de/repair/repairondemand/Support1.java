@@ -25,7 +25,7 @@ public class Support1 extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.support1);
+        setContentView(R.layout.support_a);
         username = getIntent().getExtras().getString("username");
         bindViews();
         init();
@@ -33,7 +33,7 @@ public class Support1 extends AppCompatActivity implements View.OnClickListener 
 
     private void bindViews() {
         mBtnZurück = this.findViewById(R.id.btnZurück);
-        mBtnSupport2 = this.findViewById(R.id.btnSupport2);
+        mBtnSupport2 = this.findViewById(R.id.btnSupport);
     }
 
     private void init() {

@@ -42,6 +42,18 @@
             android:name=".AngebotAbgeben" />
         <activity
             android:name=".Profile" />
+        <activity
+            android:name=".ServiceCenter" />
+        <activity
+            android:name=".FAQ" />
+        <activity
+            android:name=".Nutzungsbedingungen" />
+        <activity
+            android:name=".Support1" />
+        <activity
+            android:name=".Support2" />
+        <activity
+            android:name=".Beschwerde" />
     </application>
 
 </manifest>
