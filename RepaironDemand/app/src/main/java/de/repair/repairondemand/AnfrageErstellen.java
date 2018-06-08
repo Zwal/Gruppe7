@@ -48,6 +48,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private int checkBtn;
     private int checkBild;
     private Intent startActivityIntent;
+    private String username;
 
     private Blob bild = null;
     public Button  mBtnErstellen, mBtnRepAnfang, mBtnRepEnde
@@ -64,6 +65,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anfrage_erstellen);
+        username = getIntent().getExtras().getString("username");
         bindViews();
         init();
     }
@@ -125,11 +127,14 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         int viewId = view.getId();
         switch (viewId) {
             case R.id.btnZurück:
-                finish();
+                startActivityIntent = new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
                 break;
             case R.id.btnErstellen:
                 if(check(new AktuellerBenutzer().getId(this))) {
                     startActivityIntent = new Intent(this, Home.class);
+                    startActivityIntent.putExtra("username", username);
                     startActivity(startActivityIntent);
                 }
                 break;

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:theme="@style/Theme.AppCompat.Light">
 
     <ImageView
         android:id="@+id/imageView"
@@ -27,7 +28,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
-        android:hint="Email oder User"
+        android:hint="Username"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/passwortInput"
         app:layout_constraintEnd_toEndOf="parent"

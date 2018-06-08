@@ -1,9 +1,12 @@
 package de.repair.repairondemand;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View;
@@ -18,21 +21,25 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     private Button mBtnAnfrageerstellen, mBtnEingestellteAufträge,
     mBtnAufträgesuche, mBtnAbgegebeneAngebote, mBtnFeedback, mBtnKalender,
     mBtnBenachrichtigungen, mBtnServiceCenter;
-    private TextView mTxtImpressum;
     private Spinner mSpinProfile;
+    private TextView mTxtImpressum, mUsername;
 
     private Intent startActivityIntent;
+    private String username;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        username = getIntent().getExtras().getString("username");
         bindViews();
         init();
     }
 
+
     private void bindViews() {
+        mUsername = this.findViewById(R.id.Benutzername);
         mBtnAnfrageerstellen = this.findViewById(R.id.btnAnfrageerstellen);
         mBtnEingestellteAufträge = this.findViewById(R.id.btnEingestellteAufträge);
         mBtnAufträgesuche = this.findViewById(R.id.btnAufträgesuchen);
@@ -58,6 +65,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         mBtnBenachrichtigungen.setOnClickListener(this);
         mBtnServiceCenter.setOnClickListener(this);
         mTxtImpressum.setOnClickListener(this);
+        mUsername.setText(username);
     }
 
     @Override
@@ -66,6 +74,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         switch (viewId) {
             case R.id.btnAnfrageerstellen:
                 startActivityIntent =  new Intent(this, AnfrageErstellen.class);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnEingestellteAufträge:

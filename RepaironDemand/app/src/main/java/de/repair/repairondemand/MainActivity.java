@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,10 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
-import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
 
@@ -30,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AktuellerBenutzer aktuellerBenutzer;
     private Button mBtnLogin;
     private TextView mTxtImpressum, mTxtPassVerg, mTxtRegister;
-    private EditText mEdTxtEmail, mEdTxtPasswort;
+    private EditText mEdTxtUsername, mEdTxtPasswort;
     private CheckBox mCboRemember;
 
     private SQLite sqLite;
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTxtPassVerg = this.findViewById(R.id.linkPasswortvergessen);
         mTxtRegister = this.findViewById(R.id.linkRegister);
 
-        mEdTxtEmail = this.findViewById(R.id.emailInput);
+        mEdTxtUsername = this.findViewById(R.id.emailInput);
         mEdTxtPasswort = this.findViewById(R.id.passwortInput);
 
         mCboRemember = this.findViewById(R.id.checkBoxRemember);
@@ -77,11 +74,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (viewId) {
             case R.id.btnlogin:
                 initData();
-                if(checkUser(mEdTxtEmail.getText().toString(), mEdTxtPasswort.getText().toString()) == 1) {
+                if(checkUser(mEdTxtUsername.getText().toString(), mEdTxtPasswort.getText().toString()) == 1) {
                     aktuellerBenutzer = new AktuellerBenutzer();
                     aktuellerBenutzer.writeId(
-                            aktuellerBenutzer.getIdUser(this,mEdTxtEmail.getText().toString()),this);
+                            aktuellerBenutzer.getIdUser(this, mEdTxtUsername.getText().toString()),this);
                     startActivityIntent = new Intent(this, Home.class);
+                    startActivityIntent.putExtra("username", mEdTxtUsername.getText().toString());
                     Log.e("aktuellerUser", "" + new AktuellerBenutzer().getId(this));
                     startActivity(startActivityIntent);
                 }
@@ -138,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         writePrivatOther();
         writeAdresse();
         writeFeedback();
-        if(mEdTxtEmail.getText().toString().equals("")) {
-            mEdTxtEmail.setText("7@repair.de");
+        if(mEdTxtUsername.getText().toString().equals("")) {
+            mEdTxtUsername.setText("user1");
             mEdTxtPasswort.setText("123");
         }
     }
@@ -159,12 +157,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_USERNAME, "7@repair.de");
+        values.put(SQLiteInit.COLUMN_USERNAME, "user1");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
         long u1 = db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
         Log.e("u",u1 +"");
         values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_USERNAME, "8@repair.de");
+        values.put(SQLiteInit.COLUMN_USERNAME, "user2");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
         long u2 = db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
         Log.e("u",u2 +"");
