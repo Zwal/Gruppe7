@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.ImageButton;
 
 
 public class ServiceCenter extends AppCompatActivity implements View.OnClickListener {
@@ -26,7 +24,7 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
     }
 
     private void bindViews() {
-        mBtnZurück = this.findViewById(R.id.btnZurück);
+        mBtnZurück = this.findViewById(R.id.btnZurück) ;
         mBtnFAQ = this.findViewById(R.id.btnFAQ);
         mBtnSupport = this.findViewById(R.id.btnSupport);
         mBtnBeschwerde = this.findViewById(R.id.btnBeschwerde);
@@ -56,7 +54,7 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnSupport:
-                startActivityIntent =  new Intent(this, Support.class);
+                startActivityIntent =  new Intent(this, Support1.class);
                 startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;

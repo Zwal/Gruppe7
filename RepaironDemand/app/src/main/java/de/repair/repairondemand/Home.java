@@ -22,7 +22,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
     private Button mBtnAnfrageerstellen, mBtnEingestellteAufträge,
     mBtnAufträgesuche, mBtnAbgegebeneAngebote, mBtnFeedback, mBtnKalender,
-    mBtnBenachrichtigungen, mBtnServiceCenter;
+    mBtnBenachrichtigungen, mBtnServiceCenter ;
     private Spinner mSpinProfile;
     private TextView mTxtImpressum, mUsername;
     private String[] mSpinnerCont;

@@ -1,4 +1,4 @@
 package de.repair.repairondemand;
 
-public class Support {
+public class Support2 {
 }
