@@ -13,7 +13,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@mipmap/background2">
 
         <ImageButton
             android:id="@+id/btnZurück"
@@ -101,6 +102,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:ems="10"
+                    android:alpha="0.9"
                     android:hint="@string/stra_e_hausnr_anfrage"
                     android:inputType="" />
 
@@ -112,6 +114,7 @@
                     android:layout_marginTop="24dp"
                     android:entries="@array/land"
                     android:prompt="@string/country_prompt"
+                    android:alpha="0.9"
                     android:spinnerMode="dropdown" />
             </TableRow>
 
@@ -154,6 +157,7 @@
                     android:ems="10"
                     android:hint="@string/stadt_anfrage"
                     android:inputType=""
+                    android:alpha="0.9"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="269dp" />
 
@@ -165,6 +169,7 @@
                     android:ems="10"
                     android:hint="@string/plz_anfrage"
                     android:inputType=""
+                    android:alpha="0.9"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="269dp" />
             </TableRow>
@@ -200,11 +205,12 @@
             android:id="@+id/tableLayout7"
             android:layout_width="321dp"
             android:layout_height="209dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="164dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
             app:layout_constraintStart_toStartOf="parent">
 
             <TableRow
@@ -215,9 +221,10 @@
                     android:id="@+id/btnDateRepAnfang"
                     android:layout_width="@dimen/TxtAnfrageWidth"
                     android:layout_height="@dimen/TxtAnfrageHeight"
-                    android:text="@string/anfang"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:text="@string/anfang"
+                    android:alpha="0.9"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="377dp" />
 
@@ -225,9 +232,10 @@
                     android:id="@+id/btnDateRepEnde"
                     android:layout_width="@dimen/TxtAnfrageWidth"
                     android:layout_height="@dimen/TxtAnfrageHeight"
-                    android:text="@string/ende"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:alpha="0.9"
+                    android:text="@string/ende"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="377dp" />
 
@@ -264,10 +272,12 @@
 
                 <TextView
                     android:id="@+id/AblaufdatumAnfrageText"
-                    android:layout_width="125dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="@string/ablaufdatum_anfrage"
                     android:textColor="@android:color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="454dp" />
 
@@ -275,9 +285,10 @@
                     android:id="@+id/btnAblaufdatum"
                     android:layout_width="@dimen/TxtAnfrageWidth"
                     android:layout_height="@dimen/TxtAnfrageHeight"
-                    android:text="@string/ablauf"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:text="@string/ablauf"
+                    android:alpha="0.9"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="454dp" />
             </TableRow>
@@ -306,6 +317,7 @@
                     android:ems="10"
                     android:hint="@string/preisvorstellung_anfrage"
                     android:inputType=""
+                    android:alpha="0.9"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="533dp" />
 
@@ -313,10 +325,11 @@
                     android:id="@+id/kategorie"
                     android:layout_width="@dimen/TxtAnfrageWidth"
                     android:layout_height="@dimen/TxtAnfrageHeight"
-                    android:spinnerMode="dropdown"
-                    tools:ignore="MissingConstraints"
                     android:entries="@array/category"
                     android:prompt="@string/category_prompt"
+                    android:spinnerMode="dropdown"
+                    android:alpha="0.9"
+                    tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="533dp" />
             </TableRow>
@@ -329,13 +342,13 @@
                 android:text="@string/bitte_ausw_hlen_anfrage"
                 android:textAllCaps="false"
                 android:textColor="#ff3227"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
         </TableLayout>
 
         <TextView
             android:id="@+id/reparaturzeitraumText"
-            android:layout_width="175dp"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -343,6 +356,8 @@
             android:layout_marginTop="8dp"
             android:text="@string/reparaturzeitraum_anfrage"
             android:textColor="@android:color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tableLayout7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -358,7 +373,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="An Firma"
+            android:padding="2dp"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBoxPrivat"
@@ -371,8 +389,11 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="8dp"
+            android:padding="2dp"
             android:text="An Privat"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tableLayout7" />
@@ -386,6 +407,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Erstellen"
+            android:alpha="0.9"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -399,6 +421,8 @@
             android:layout_marginTop="8dp"
             android:text="Bild aufnehmen oder hochladen"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/btnErstellen"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hinweisCheckboxText"
@@ -412,8 +436,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@null"
-            android:backgroundTint="@color/colorPrimary"
+            android:alpha="0.7"
+            android:backgroundTint="#00C2C2"
             app:layout_constraintBottom_toTopOf="@+id/btnErstellen"
             app:layout_constraintEnd_toStartOf="@+id/btnUpload"
             app:layout_constraintHorizontal_bias="0.757"
@@ -428,8 +452,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="36dp"
             android:layout_weight="1"
-            android:background="@null"
-            android:backgroundTint="@color/colorPrimary"
+            android:alpha="0.8"
+            android:backgroundTint="#00C2C2"
             app:layout_constraintBottom_toTopOf="@+id/btnErstellen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hinweisCheckboxText"

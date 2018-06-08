@@ -267,7 +267,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     public void setFeedback(int count, ImageView[] iVA){
         for(int i = 0; i < count; i++){
-            iVA[i].setImageDrawable(this.getDrawable(R.drawable.stern_black));
+            iVA[i].setImageDrawable(this.getDrawable(R.mipmap.baseline_star_black_24));
         }
     }
 
