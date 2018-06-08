@@ -35,6 +35,7 @@ import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
 import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
@@ -46,6 +47,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private Bitmap imageBitmap;
     private int checkBtn;
     private int checkBild;
+    private Intent startActivityIntent;
 
     private Blob bild = null;
     public Button  mBtnErstellen, mBtnRepAnfang, mBtnRepEnde
@@ -126,20 +128,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btnErstellen:
-                check(1);
-                if(check(1)){
-                    finish();
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-                    dlgAlert.setMessage("Ihr Auftrag wurde erfolgreich aufgenommen.");
-                    dlgAlert.create().show();
-                    dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    });
-                    dlgAlert.setTitle("Angelegt");
-                    dlgAlert.setCancelable(true);
-
-                    break;
+                if(check(new AktuellerBenutzer().getId(this))) {
+                    startActivityIntent = new Intent(this, Home.class);
+                    startActivity(startActivityIntent);
                 }
                 break;
             case R.id.btnDateRepAnfang:
@@ -233,7 +224,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public boolean check(int userId){
+    public boolean check(String userId){
         String adressId = null;
         String dateAnfang = mBtnRepAnfang.getText().toString();
         String dateEnde = mBtnRepEnde.getText().toString();
@@ -262,7 +253,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
             anfrage.setmKategorieIdFk(getKategorie(kategorie));
             adressId = writeDbAdresse(land, strasse, stadt, plz);
             anfrage.setmAdresseIdFk(adressId);
-            anfrage.setmUserId(userId);
+            anfrage.setmUserId(Integer.parseInt(userId));
 
             writeDb(anfrage);
 
@@ -326,7 +317,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
 
-        Toast.makeText(this, String.valueOf(newRowId), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Auftrag erstellt.", Toast.LENGTH_LONG).show();
     }
 
 

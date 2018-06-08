@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class AktuellerBenutzer {
 
@@ -42,10 +43,10 @@ public class AktuellerBenutzer {
             ContentValues values = new ContentValues();
             values.put(SQLiteInit.COLUMN_BENUTZER_ID_PK, id);
 
-            int i = db.update(SQLiteInit.TABLE_AKTUELLER_BENUTZER, values, " rowid = ?", new String[]{"1"});
-            if(i == 0){
-                db.insert(SQLiteInit.TABLE_AKTUELLER_BENUTZER, null, values);
-            }
+            db.delete(SQLiteInit.TABLE_AKTUELLER_BENUTZER, "rowid" + "=" + 1, null);
+            long row = db.insert(SQLiteInit.TABLE_AKTUELLER_BENUTZER, null, values);
+            db.close();
+            Log.e("insertUser", "" + id + " " + getId(context) + " " + row);
         } catch (Exception ex) {
         }
     }

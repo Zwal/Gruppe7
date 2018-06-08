@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Intent startActivityIntent;
 
-    private Drawable d;
+    private Drawable house, bagger;
 
 
     @Override
@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mCboRemember = this.findViewById(R.id.checkBoxRemember);
 
-        d = this.getDrawable(R.drawable.ic_launcher);
+        house = this.getDrawable(R.drawable.house);
+        bagger = this.getDrawable(R.drawable.bagger);
     }
 
     private void init() {
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     aktuellerBenutzer.writeId(
                             aktuellerBenutzer.getIdUser(this,mEdTxtEmail.getText().toString()),this);
                     startActivityIntent = new Intent(this, Home.class);
-                    Log.e("aktuelleUser", new AktuellerBenutzer().getId(this));
+                    Log.e("aktuellerUser", "" + new AktuellerBenutzer().getId(this));
                     startActivity(startActivityIntent);
                 }
                 break;
@@ -119,7 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             null); // h. limit
 
             if (cursor != null) {
-                register = cursor.getColumnCount();
+                if(cursor.getColumnCount() > 0){
+                    register = 1;
+                }
             }
         }catch(Exception ex){
         }
@@ -158,12 +161,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ContentValues values = new ContentValues();
         values.put(SQLiteInit.COLUMN_USERNAME, "7@repair.de");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
-        db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
-
+        long u1 = db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
+        Log.e("u",u1 +"");
         values = new ContentValues();
         values.put(SQLiteInit.COLUMN_USERNAME, "8@repair.de");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
-        db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
+        long u2 = db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
+        Log.e("u",u2 +"");
         db.close();
     }
 
@@ -171,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "beschr");
+        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "Auftrag für ein Hausbau.");
         values.put(SQLiteInit.COLUMN_STARTTERMIN, "2018-05-25");
         values.put(SQLiteInit.COLUMN_ENDTERMIN, "2018-05-30");
         values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "2018-05-25");
@@ -179,13 +183,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_FIRMA, "true");
         values.put(SQLiteInit.COLUMN_PRIVAT, "true");
         values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
-        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(d));
+        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(house));
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 2);
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 3);
         db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
 
         values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "beschr");
+        values.put(SQLiteInit.COLUMN_BESCHREIBUNG, "Grube ausheben.");
         values.put(SQLiteInit.COLUMN_STARTTERMIN, "2018-05-25");
         values.put(SQLiteInit.COLUMN_ENDTERMIN, "2018-05-30");
         values.put(SQLiteInit.COLUMN_ABLAUFDATUM, "2018-05-25");
@@ -193,9 +197,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_FIRMA, "true");
         values.put(SQLiteInit.COLUMN_PRIVAT, "true");
         values.put(SQLiteInit.COLUMN_KATEGORIE_ID_FK, 1);
-        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(d));
+        values.put(SQLiteInit.COLUMN_BILD, getBytesFromDrawable(bagger));
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 2);
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, 3);
         db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
         db.close();
     }
@@ -239,7 +243,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this, "7@repair.de"));
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, writeAdressePrivat("Kaiserstraße 1","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
-        db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
+        long u = db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
+        Log.e("u",u +"");
         db.close();
     }
 
@@ -256,9 +261,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_QUALIFIKATION, "Streichen");
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, new AktuellerBenutzer().getIdUser(
                 this, "8@repair.de"));
-        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, getIdAdressePrivat("Kaiserstraße 1","76351",
+        values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, writeAdressePrivat("Kaiserstraße 2","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
-        db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
+        long u = db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
+        Log.e("uo",u +" " + new AktuellerBenutzer().getIdUser(
+                this, "8@repair.de"));
         db.close();
     }
 
