@@ -18,7 +18,8 @@ import java.util.Calendar;
 
 public class Beschwerde extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mBtnZurück, mBtnSenden, mBtnDatum;
+    private ImageButton mBtnZurück;
+    private Button mBtnSenden, mBtnDatum;
     private Intent startActivityIntent;
     private String username;
 

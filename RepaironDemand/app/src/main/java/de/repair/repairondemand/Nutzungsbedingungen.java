@@ -21,7 +21,7 @@ public class Nutzungsbedingungen extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.faq);
+        setContentView(R.layout.nutzungsbedingungen);
         username = getIntent().getExtras().getString("username");
         bindViews();
         init();

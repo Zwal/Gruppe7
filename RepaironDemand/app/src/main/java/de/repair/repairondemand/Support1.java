@@ -33,7 +33,7 @@ public class Support1 extends AppCompatActivity implements View.OnClickListener 
 
     private void bindViews() {
         mBtnZurück = this.findViewById(R.id.btnZurück);
-        mBtnSupport2 = this.findViewById(R.id.btnSupport);
+        mBtnSupport2 = this.findViewById(R.id.btnSupport2);
     }
 
     private void init() {
@@ -51,7 +51,7 @@ public class Support1 extends AppCompatActivity implements View.OnClickListener 
                 startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
-            case R.id.btnSupport:
+            case R.id.btnSupport2:
                 startActivityIntent =  new Intent(this, Support2.class);
                 startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);

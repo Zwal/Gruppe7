@@ -14,7 +14,7 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
     private Button mBtnSenden;
     private Intent startActivityIntent;
     private String username;
-    private ImageButton mBtnZurück, mUpload;
+    private ImageButton mBtnZurück;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +26,11 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void bindViews() {
-        mUpload = this.findViewById(R.id.btnUpload);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnSenden = this.findViewById(R.id.btnSenden);
     }
 
     private void init() {
-        mUpload.setOnClickListener(this);
         mBtnSenden.setOnClickListener(this);
         mBtnZurück.setOnClickListener(this);
     }

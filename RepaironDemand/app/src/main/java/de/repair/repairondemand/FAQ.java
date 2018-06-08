@@ -41,6 +41,7 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
         mBtnSupportErreichen = this.findViewById(R.id.btnSupportErreichen);
         mBtnAuftragnehmer = this.findViewById(R.id.btnAuftragnehmer);
         mBtnZahlung = this.findViewById(R.id.btnZahlung);
+        check = "zu";
     }
 
     private void init() {
