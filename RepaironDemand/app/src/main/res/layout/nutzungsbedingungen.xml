@@ -36,8 +36,4 @@
         android:textSize="18dp"
         tools:layout_editor_absoluteX="35dp"
         tools:layout_editor_absoluteY="149dp" />
-
-
-
-
 </android.support.constraint.ConstraintLayout>
