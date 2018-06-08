@@ -42,6 +42,8 @@
             android:name=".AngebotAbgeben" />
         <activity
             android:name=".Profile" />
+        <activity
+            android:name=".ServiceCenter"/>
     </application>
 
 </manifest>
