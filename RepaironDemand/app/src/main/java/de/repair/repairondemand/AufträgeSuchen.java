@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -59,6 +60,9 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     private String kategorie, anfang, ende, radius;
     private Intent startActivityIntent;
     private String username;
+    ArrayAdapter<CharSequence> adapterSpinnerProfile;
+    private Spinner mSpinProfile;
+    private String[] mSpinnerCont;
     // private ListView mListResult;
 
 
@@ -94,6 +98,10 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                 android.R.layout.simple_spinner_dropdown_item);
         mSpinKategorie.setAdapter(adapterKategorie);
         mSeekbar = this.findViewById(R.id.seekBar);
+        mSpinProfile = this.findViewById(R.id.spinnerProfile);
+        adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinProfile.setAdapter(adapterSpinnerProfile);
         check = "zu";
     }
 
@@ -132,6 +140,28 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             mBtnRepEnde.setText(ende);
             mSeekbar.setProgress(Integer.valueOf(radius));
         }
+        mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
+        mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if(mSpinnerCont[position].equals("Ausloggen")){
+                    ausloggen();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+    }
+
+    public void ausloggen(){
+        new AktuellerBenutzer().deleteAktuellerUser(this);
+        startActivityIntent =  new Intent(this, MainActivity.class);
+        startActivity(startActivityIntent);
     }
 
     boolean b;

@@ -19,6 +19,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -49,6 +50,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private int checkBild;
     private Intent startActivityIntent;
     private String username;
+    private String[] mSpinnerCont;
 
     private Blob bild = null;
     public Button  mBtnErstellen, mBtnRepAnfang, mBtnRepEnde
@@ -60,6 +62,8 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     private TextView mTvHinweisLandText, mTvHinweisStrasseText, mTvHinweisStadtText, mTvHinweisPlzText,
             mTvHinweisRepzAnfangText, mTvHinweisRepzEndeText, mTvHinweisAblaufText,
             mTvHinweisKategorieText, mTvHinweisChecboxText, mUsername;
+    ArrayAdapter<CharSequence> adapterSpinnerProfile;
+    private Spinner mSpinProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,10 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mTvHinweisStrasseText = this.findViewById(R.id.hinweisStrasseText);
         mTvHinweisStadtText = this.findViewById(R.id.hinweisStadtText);
         mTvHinweisPlzText = this.findViewById(R.id.hinweisPlzText);
+        mSpinProfile = this.findViewById(R.id.spinnerProfile);
+        adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinProfile.setAdapter(adapterSpinnerProfile);
 
         btnColor("white");
     }
@@ -122,6 +130,28 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mBtnUpload.setOnClickListener(this);
         mBtnKamera.setOnClickListener(this);
         mUsername.setText(username);
+        mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
+        mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if(mSpinnerCont[position].equals("Ausloggen")){
+                    ausloggen();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+    }
+
+    public void ausloggen(){
+        new AktuellerBenutzer().deleteAktuellerUser(this);
+        startActivityIntent =  new Intent(this, MainActivity.class);
+        startActivity(startActivityIntent);
     }
 
     @Override
