@@ -6,12 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
 
@@ -32,6 +36,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private ImageView[] AiVp;
     private ImageView[] AiVf;
     private ImageView[] AiVg;
+    ArrayAdapter<CharSequence> adapterSpinnerProfile;
+    private Spinner mSpinProfile;
+    private String[] mSpinnerCont;
 
     String anfrageId = null;
 
@@ -95,6 +102,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         mIvGStar3 = this.findViewById(R.id.gStar3);
         mIvGStar4 = this.findViewById(R.id.gStar4);
         mIvGStar5 = this.findViewById(R.id.gStar5);
+        mSpinProfile = this.findViewById(R.id.spinnerProfile);
+        adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinProfile.setAdapter(adapterSpinnerProfile);
     }
 
     private void init() {
@@ -104,10 +115,32 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         AiVp = new ImageView[]{mIvPStar1,mIvPStar2,mIvPStar3,mIvPStar4,mIvPStar5};
         AiVf = new ImageView[]{mIvFStar1,mIvFStar2,mIvFStar3,mIvFStar4,mIvFStar5};
         AiVg = new ImageView[]{mIvGStar1,mIvGStar2,mIvGStar3,mIvGStar4,mIvGStar5};
+        mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
+        mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if(mSpinnerCont[position].equals("Ausloggen")){
+                    ausloggen();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
         getAnfrageUserData(getAnfrageUserId());
 
         getAnfrageIds(getAnfrageUserId());
+    }
+
+    public void ausloggen(){
+        new AktuellerBenutzer().deleteAktuellerUser(this);
+        startActivityIntent =  new Intent(this, MainActivity.class);
+        startActivity(startActivityIntent);
     }
 
     @Override

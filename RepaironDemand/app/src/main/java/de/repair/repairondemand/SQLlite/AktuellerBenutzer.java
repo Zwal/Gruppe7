@@ -110,4 +110,16 @@ public class AktuellerBenutzer {
         }
         return type;
     }
+
+    public void deleteAktuellerUser(Context context){
+        sqLite = new SQLite(context);
+        // Gets the data repository in write mode
+        SQLiteDatabase db = sqLite.getReadableDatabase();
+        try {
+            int i = db.delete(SQLiteInit.TABLE_AKTUELLER_BENUTZER, "rowid" + "=" + 1, null);
+            Log.e("tag", ""+ i);
+            db.close();
+        } catch (Exception ex) {
+        }
+    }
 }

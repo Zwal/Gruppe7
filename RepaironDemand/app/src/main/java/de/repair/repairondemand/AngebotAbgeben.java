@@ -10,11 +10,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -30,7 +33,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
     private EditText mTxtPreis, mTxtBeschreibung;
 
-    private TextView mTvHinweisPreis, mTvHinweisZeitraum;
+    private TextView mTvHinweisPreis, mTvHinweisZeitraum, mUsername;
 
     private Intent startActivityIntent;
 
@@ -38,13 +41,17 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
     private String anfrageId;
 
-    private String kategorie, anfang, ende, radius;
+    private String kategorie, anfang, ende, radius, username;
+    ArrayAdapter<CharSequence> adapterSpinnerProfile;
+    private Spinner mSpinProfile;
+    private String[] mSpinnerCont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.angebot_abgeben);
         anfrageId = getIntent().getExtras().getString("anfrageId");
+        username = getIntent().getExtras().getString("username");
         if(getIntent().hasExtra("kategorie")) {
             kategorie = getIntent().getExtras().getString("kategorie");
             anfang = getIntent().getExtras().getString("anfang");
@@ -56,6 +63,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
     }
 
     private void bindViews() {
+        mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnZeitStart = this.findViewById(R.id.zeitraum_auswahl_start);
         mBtnZeitEnde = this.findViewById(R.id.zeitraum_auswahl_Ende);
@@ -66,6 +74,10 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
         mTvHinweisPreis = this.findViewById(R.id.hinweisPreis);
         mTvHinweisZeitraum = this.findViewById(R.id.hinweis_zeitraum);
+        mSpinProfile = this.findViewById(R.id.spinnerProfile);
+        adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinProfile.setAdapter(adapterSpinnerProfile);
 
         btnColor("white");
     }
@@ -75,6 +87,29 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         mBtnZeitStart.setOnClickListener(this);
         mBtnZeitEnde.setOnClickListener(this);
         mBtnSenden.setOnClickListener(this);
+        mUsername.setText(username);
+        mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
+        mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if(mSpinnerCont[position].equals("Ausloggen")){
+                    ausloggen();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+    }
+
+    public void ausloggen(){
+        new AktuellerBenutzer().deleteAktuellerUser(this);
+        startActivityIntent =  new Intent(this, MainActivity.class);
+        startActivity(startActivityIntent);
     }
 
     @Override
@@ -88,6 +123,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.zeitraum_auswahl_start:
@@ -154,7 +190,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
             btnColor("white");
             FragmentManager fm = getSupportFragmentManager();
             AngebotAbgebenDialog alertDialog = AngebotAbgebenDialog.newInstance("Angebot abgeben",
-                    writeAngebotDb());
+                    writeAngebotDb(), username);
             alertDialog.show(fm, "fragment_alert");
         }
     }

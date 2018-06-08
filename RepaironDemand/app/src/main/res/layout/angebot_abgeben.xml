@@ -24,28 +24,35 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/baseline_arrow_back_black_24" />
 
-    <ImageView
-        android:id="@+id/iconBenutzer"
-        android:layout_width="35dp"
+    <Spinner
+        android:id="@+id/spinnerProfile"
+        android:layout_width="28dp"
         android:layout_height="28dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:background="@mipmap/baseline_account_circle_black_24"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/logoAngebot"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/baseline_account_circle_black_24" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Benutzername"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/benutzername"
         android:textAllCaps="false"
         android:textColor="#000"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/logohome"
-        app:layout_constraintEnd_toStartOf="@+id/iconBenutzer"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerProfile"
+        app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/btnZurück"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.363" />
 

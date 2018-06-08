@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,10 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
-import de.repair.repairondemand.SQLlite.Modells.Anfrage;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
 
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AktuellerBenutzer aktuellerBenutzer;
     private Button mBtnLogin;
     private TextView mTxtImpressum, mTxtPassVerg, mTxtRegister;
-    private EditText mEdTxtEmail, mEdTxtPasswort;
+    private EditText mEdTxtUsername, mEdTxtPasswort;
     private CheckBox mCboRemember;
 
     private SQLite sqLite;
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTxtPassVerg = this.findViewById(R.id.linkPasswortvergessen);
         mTxtRegister = this.findViewById(R.id.linkRegister);
 
-        mEdTxtEmail = this.findViewById(R.id.emailInput);
+        mEdTxtUsername = this.findViewById(R.id.emailInput);
         mEdTxtPasswort = this.findViewById(R.id.passwortInput);
 
         mCboRemember = this.findViewById(R.id.checkBoxRemember);
@@ -77,17 +75,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (viewId) {
             case R.id.btnlogin:
                 initData();
-                if(checkUser(mEdTxtEmail.getText().toString(), mEdTxtPasswort.getText().toString()) == 1) {
+                if(checkUser(mEdTxtUsername.getText().toString(), mEdTxtPasswort.getText().toString()) == 1) {
                     aktuellerBenutzer = new AktuellerBenutzer();
                     aktuellerBenutzer.writeId(
-                            aktuellerBenutzer.getIdUser(this,mEdTxtEmail.getText().toString()),this);
+                            aktuellerBenutzer.getIdUser(this, mEdTxtUsername.getText().toString()),this);
                     startActivityIntent = new Intent(this, Home.class);
+                    startActivityIntent.putExtra("username", mEdTxtUsername.getText().toString());
                     Log.e("aktuellerUser", "" + new AktuellerBenutzer().getId(this));
                     startActivity(startActivityIntent);
                 }
                 break;
             case R.id.linkImpressum:
                 startActivityIntent = new Intent(this, Impressum.class);
+                startActivityIntent.putExtra("main", "main");
                 startActivity(startActivityIntent);
                 break;
             case R.id.linkPasswortvergessen:
@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         writePrivatOther();
         writeAdresse();
         writeFeedback();
-        if(mEdTxtEmail.getText().toString().equals("")) {
-            mEdTxtEmail.setText("7@repair.de");
+        if(mEdTxtUsername.getText().toString().equals("")) {
+            mEdTxtUsername.setText("user1");
             mEdTxtPasswort.setText("123");
         }
     }
@@ -159,12 +159,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_USERNAME, "7@repair.de");
+        values.put(SQLiteInit.COLUMN_USERNAME, "user1");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
         long u1 = db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
         Log.e("u",u1 +"");
         values = new ContentValues();
-        values.put(SQLiteInit.COLUMN_USERNAME, "8@repair.de");
+        values.put(SQLiteInit.COLUMN_USERNAME, "user2");
         values.put(SQLiteInit.COLUMN_PASSWORT, "123");
         long u2 = db.insert(SQLiteInit.TABLE_BENUTZERKONTO, null, values);
         Log.e("u",u2 +"");
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_TELEFON, "000");
         values.put(SQLiteInit.COLUMN_QUALIFIKATION, "Streichen");
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, new AktuellerBenutzer().getIdUser(
-                this, "7@repair.de"));
+                this, "user1"));
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, writeAdressePrivat("Kaiserstraße 1","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
         long u = db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
@@ -260,12 +260,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put(SQLiteInit.COLUMN_TELEFON, "000");
         values.put(SQLiteInit.COLUMN_QUALIFIKATION, "Streichen");
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, new AktuellerBenutzer().getIdUser(
-                this, "8@repair.de"));
+                this, "user2"));
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, writeAdressePrivat("Kaiserstraße 2","76351",
                 "Linkenheim-Hochstetten","Deutschland"));
         long u = db.insert(SQLiteInit.TABLE_PRIVATPERSON, null, values);
         Log.e("uo",u +" " + new AktuellerBenutzer().getIdUser(
-                this, "8@repair.de"));
+                this, "user2"));
         db.close();
     }
 
@@ -313,13 +313,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
         // current user
-        values.put(SQLiteInit.COLUMN_ANFRAGE_ID_FK, 2);
-        values.put(SQLiteInit.COLUMN_FEEDBACK_TEXT, "feedbackText");
-        values.put(SQLiteInit.COLUMN_KOMPETENZ, "4");
-        values.put(SQLiteInit.COLUMN_FREUNDLICHKEIT, "5");
-        values.put(SQLiteInit.COLUMN_PÜNKTLICHKEIT, "5");
-        values.put(SQLiteInit.COLUMN_GESAMTEINDRUCK, "5");
-        db.insert(SQLiteInit.TABLE_AUFTRAGS_FEEDBACK, null, values);
+        try{
+            values.put(SQLiteInit.COLUMN_ANFRAGE_ID_FK, 2);
+            values.put(SQLiteInit.COLUMN_FEEDBACK_TEXT, "feedbackText");
+            values.put(SQLiteInit.COLUMN_KOMPETENZ, "4");
+            values.put(SQLiteInit.COLUMN_FREUNDLICHKEIT, "5");
+            values.put(SQLiteInit.COLUMN_PÜNKTLICHKEIT, "5");
+            values.put(SQLiteInit.COLUMN_GESAMTEINDRUCK, "5");
+            db.insert(SQLiteInit.TABLE_AUFTRAGS_FEEDBACK, null, values);
+        }catch (Exception ex){
+        }
+
         db.close();
     }
 }

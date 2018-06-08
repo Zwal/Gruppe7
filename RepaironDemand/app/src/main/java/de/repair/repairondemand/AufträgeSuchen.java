@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -51,19 +52,25 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     public Button mBtnRepAnfang, mBtnRepEnde, mBtnSuchen, mBtnKlappen;
     private Spinner mSpinKategorie;
     private SeekBar mSeekbar;
-    private TextView mTvRadius, mTvDateError, mTvKeineAufträge;
+    private TextView mTvRadius, mTvDateError, mTvKeineAufträge, mUsername;
     private ListView mLv;
     private View mklapView;
     private String check = null;
     private boolean keineAufträge;
     private String kategorie, anfang, ende, radius;
     private Intent startActivityIntent;
+    private String username;
+    ArrayAdapter<CharSequence> adapterSpinnerProfile;
+    private Spinner mSpinProfile;
+    private String[] mSpinnerCont;
     // private ListView mListResult;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anfrage_suche);
+        username = getIntent().getExtras().getString("username");
         if(getIntent().hasExtra("kategorie")) {
             kategorie = getIntent().getExtras().getString("kategorie");
             anfang = getIntent().getExtras().getString("anfang");
@@ -75,6 +82,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     private void bindViews() {
+        mUsername = this.findViewById(R.id.Benutzername);
         mTvKeineAufträge = this.findViewById(R.id.txtKeineAufträge);
         mklapView = this.findViewById(R.id.constraintLayout1);
         mLv = this.findViewById(R.id.listV);
@@ -90,10 +98,15 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                 android.R.layout.simple_spinner_dropdown_item);
         mSpinKategorie.setAdapter(adapterKategorie);
         mSeekbar = this.findViewById(R.id.seekBar);
+        mSpinProfile = this.findViewById(R.id.spinnerProfile);
+        adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinProfile.setAdapter(adapterSpinnerProfile);
         check = "zu";
     }
 
     private void init() {
+        mUsername.setText(username);
         mTvDateError.setTextColor(Color.RED);
         mTvKeineAufträge.setTextColor(Color.RED);
         mBtnZurück.setOnClickListener(this);
@@ -127,6 +140,28 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             mBtnRepEnde.setText(ende);
             mSeekbar.setProgress(Integer.valueOf(radius));
         }
+        mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
+        mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if(mSpinnerCont[position].equals("Ausloggen")){
+                    ausloggen();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+    }
+
+    public void ausloggen(){
+        new AktuellerBenutzer().deleteAktuellerUser(this);
+        startActivityIntent =  new Intent(this, MainActivity.class);
+        startActivity(startActivityIntent);
     }
 
     boolean b;
@@ -137,6 +172,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         switch (viewId) {
             case R.id.btnZurück:
                 startActivityIntent = new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnDateRepAnfang:
@@ -295,7 +331,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
         Adresse adresseUser = getAdresse(getAdresseFk(new AktuellerBenutzer().getId(this)));
         int count = 0;
-        Log.e("currentU", adresseUser.toString());
+        Log.e("currentU", adresseUser.toString() + new AktuellerBenutzer().getId(this) );
 
         for(Anfrage a : this.anfrageList){
             byte[] by = this.byteList.get(count);
@@ -327,9 +363,10 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     public String getAdresseFk(String id){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
+        String userId = new AktuellerBenutzer().getId(this);
         String fk = null;
         try{
-            Cursor cursor =
+            /*Cursor cursor =
                     db.query(SQLiteInit.TABLE_BENUTZERKONTO, // a. table
                             new String[]{SQLiteInit.COLUMN_USERNAME}, // b. column names
                             " benutzer_id_pk = ?", // c. selections
@@ -341,13 +378,13 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
 
             cursor.moveToFirst();
-            String username = cursor.getString(0);
+            String username = cursor.getString(0);*/
 
-            cursor =
+            Cursor cursor =
                     db.query(SQLiteInit.TABLE_PRIVATPERSON, // a. table
                             new String[]{SQLiteInit.COLUMN_ADRESSE_ID_FK}, // b. column names
-                            " email = ?", // c. selections
-                            new String[] {username}, // d. selections args
+                            " benutzer_id_fk = ?", // c. selections
+                            new String[] {userId}, // d. selections args
                             null, // e. group by
                             null, // f. having
                             null, // g. order by
@@ -359,8 +396,8 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                 cursor =
                         db.query(SQLiteInit.TABLE_FIRMA, // a. table
                                 new String[]{SQLiteInit.COLUMN_ADRESSE_ID_FK}, // b. column names
-                                " email = ?", // c. selections
-                                new String[] {username}, // d. selections args
+                                " benutzer_id_fk = ?", // c. selections
+                                new String[] {userId}, // d. selections args
                                 null, // e. group by
                                 null, // f. having
                                 null, // g. order by

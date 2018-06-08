@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
 import de.repair.repairondemand.SQLlite.SQLite;
 import de.repair.repairondemand.SQLlite.SQLiteInit;
 
@@ -23,13 +27,16 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
     private ImageButton mBtnZurück;
     private ImageView mImViAuftragBild;
 
-    private TextView mTvBeschreibung, mTvStandort;
+    private TextView mTvBeschreibung, mTvStandort, mUsername;
 
     private Intent startActivityIntent;
 
     private String anfrageId;
 
-    private String kategorie, anfang, ende, radius;
+    private String kategorie, anfang, ende, radius, username;
+    ArrayAdapter<CharSequence> adapterSpinnerProfile;
+    private Spinner mSpinProfile;
+    private String[] mSpinnerCont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         init();
         // über Intent von AngebotSuchen.java, kommt für den
         // folgenden Aufruf die ID des Auftrags
+        username = getIntent().getExtras().getString("username");
         if(getIntent().hasExtra("anfrageId")) {
             anfrageId = getIntent().getExtras().getString("anfrageId");
             kategorie = getIntent().getExtras().getString("kategorie");
@@ -51,18 +59,46 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
 
 
     private void bindViews() {
+        mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnProfil = this.findViewById(R.id.btnProfilansehen);
         mBtnAngebotAbgeben = this.findViewById(R.id.btnAngebotabgeben);
         mImViAuftragBild = this.findViewById(R.id.auftrag_bild);
         mTvBeschreibung = this.findViewById(R.id.beschreibung);
         mTvStandort = this.findViewById(R.id.standort);
+        mSpinProfile = this.findViewById(R.id.spinnerProfile);
+        adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
+                android.R.layout.simple_spinner_dropdown_item);
+        mSpinProfile.setAdapter(adapterSpinnerProfile);
     }
 
     private void init() {
         mBtnZurück.setOnClickListener(this);
         mBtnProfil.setOnClickListener(this);
         mBtnAngebotAbgeben.setOnClickListener(this);
+        mUsername.setText(username);
+        mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
+        mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if(mSpinnerCont[position].equals("Ausloggen")){
+                    ausloggen();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+    }
+
+    public void ausloggen(){
+        new AktuellerBenutzer().deleteAktuellerUser(this);
+        startActivityIntent =  new Intent(this, MainActivity.class);
+        startActivity(startActivityIntent);
     }
 
     @Override
@@ -75,6 +111,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnAngebotabgeben:
@@ -84,6 +121,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnProfilansehen:
@@ -93,6 +131,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
         }

@@ -24,12 +24,13 @@ public class AngebotAbgebenDialog extends DialogFragment {
     private Angebot angebot;
 
     private Intent startActivityIntent;
+    private  String username;
 
     public AngebotAbgebenDialog() {
         // Empty constructor required for DialogFragment
     }
 
-    public static AngebotAbgebenDialog newInstance(String title, Angebot angebot) {
+    public static AngebotAbgebenDialog newInstance(String title, Angebot angebot, String username) {
         AngebotAbgebenDialog frag = new AngebotAbgebenDialog();
         Bundle args = new Bundle();
         args.putString("title", title);
@@ -39,6 +40,7 @@ public class AngebotAbgebenDialog extends DialogFragment {
         args.putString("bschreibung", angebot.getmBeschreibung());
         args.putString("anfrageId", angebot.getmAnfrageId());
         args.putString("benutzerId", angebot.getmBenutzerId());
+        args.putString("username", username);
         frag.setArguments(args);
         return frag;
     }
@@ -53,6 +55,7 @@ public class AngebotAbgebenDialog extends DialogFragment {
         this.angebot.setmBeschreibung(getArguments().getString("beschreibung"));
         this.angebot.setmBenutzerId(getArguments().getString("benutzerId"));
         this.angebot.setmAnfrageId(getArguments().getString("anfrageId"));
+        this.username = getArguments().getString("username");
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setTitle(title);
         alertDialogBuilder.setMessage("Angebot verbindlich abgeben?");
@@ -90,6 +93,7 @@ public class AngebotAbgebenDialog extends DialogFragment {
 
         Toast.makeText(getActivity(), "Angebot verbindlich abgegeben.", Toast.LENGTH_LONG).show();
         startActivityIntent =  new Intent(getActivity(), Home.class);
+        startActivityIntent.putExtra("username", username);
         startActivity(startActivityIntent);
     }
 }
