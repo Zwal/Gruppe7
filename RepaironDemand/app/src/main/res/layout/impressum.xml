@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/background2">
 
     <ImageButton
         android:id="@+id/btnZurück"
@@ -60,7 +61,13 @@
         android:text="@string/impressum"
         android:textAllCaps="false"
         android:textColor="#000"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="171dp" />
+        android:background="#FFFFFF"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/impressumHead"
+        app:layout_constraintVertical_bias="0.321" />
 
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/background2"
     tools:layout_editor_absoluteY="25dp">
 
     <ImageButton
@@ -92,6 +93,9 @@
             android:entries="@array/category"
             android:prompt="@string/category_prompt"
             android:spinnerMode="dropdown"
+            android:background="#E4E4E4"
+            android:alpha="0.9"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/zeitraumText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
@@ -100,13 +104,15 @@
 
         <TextView
             android:id="@+id/zeitraumText"
-            android:layout_width="175dp"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:layout_marginBottom="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="@string/reparaturzeitraum_anfrage"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/btnDateRepAnfang"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
@@ -119,6 +125,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginStart="36dp"
             android:text="@string/anfang"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/txtDateError"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -131,6 +138,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:text="@string/ende"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -162,6 +170,8 @@
             android:layout_marginStart="8dp"
             android:max="10"
             android:progress="5"
+            android:background="@android:color/darker_gray"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/txtRadius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
@@ -169,12 +179,14 @@
 
         <TextView
             android:id="@+id/radiusText"
-            android:layout_width="48dp"
+            android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginBottom="164dp"
             android:layout_marginStart="60dp"
             android:text="Radius"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -186,6 +198,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Suchen"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/txtKeineAufträge"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -199,6 +212,8 @@
             android:layout_marginStart="8dp"
             android:text="50 km"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/btnSuchen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.598"

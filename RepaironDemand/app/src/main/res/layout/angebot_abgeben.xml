@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:background="@mipmap/background2"
     tools:layout_editor_absoluteY="25dp">
 
     <ImageButton
@@ -101,7 +102,7 @@
 
     <TextView
         android:id="@+id/zeitraum_head"
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginBottom="312dp"
         android:layout_marginEnd="8dp"
@@ -109,6 +110,8 @@
         android:text="Zeitraum"
         android:textAllCaps="false"
         android:textColor="#000"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -116,7 +119,7 @@
 
     <TextView
         android:id="@+id/zeitraum_start"
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -125,6 +128,8 @@
         android:text="Start"
         android:textAllCaps="false"
         android:textColor="#000"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/zeitraum_auswahl_start"
         app:layout_constraintEnd_toStartOf="@+id/zeitraum_ende"
         app:layout_constraintHorizontal_bias="0.431"
@@ -134,7 +139,7 @@
 
     <TextView
         android:id="@+id/zeitraum_ende"
-        android:layout_width="65dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="92dp"
@@ -142,6 +147,8 @@
         android:text="Ende"
         android:textAllCaps="false"
         android:textColor="#000"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/zeitraum_auswahl_Ende"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zeitraum_head"
@@ -155,6 +162,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="8dp"
         android:text="@string/start"
+        android:alpha="0.9"
         app:layout_constraintBottom_toTopOf="@+id/hinweis_zeitraum"
         app:layout_constraintEnd_toStartOf="@+id/zeitraum_auswahl_Ende"
         app:layout_constraintHorizontal_bias="0.558"
@@ -167,6 +175,7 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="32dp"
         android:text="@string/ende"
+        android:alpha="0.9"
         app:layout_constraintBottom_toTopOf="@+id/hinweis_zeitraum"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -188,13 +197,15 @@
 
     <TextView
         android:id="@+id/beschreibung_head"
-        android:layout_width="93dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Beschreibung"
         android:textAllCaps="false"
         android:textColor="#000"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/beschreibung"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -210,6 +221,8 @@
         android:hint="Beschreibung"
         android:inputType=""
         android:singleLine="false"
+        android:background="#FFFFFF"
+        android:alpha="0.9"
         app:layout_constraintBottom_toTopOf="@+id/btnSenden"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.314"
@@ -223,6 +236,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Senden"
+        android:alpha="0.9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

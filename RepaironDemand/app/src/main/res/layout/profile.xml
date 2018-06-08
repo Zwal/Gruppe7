@@ -14,6 +14,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="600dp"
+        android:background="@mipmap/background2"
         tools:layout_editor_absoluteY="25dp">
 
         <ImageButton
@@ -84,6 +85,8 @@
             android:text="Name: "
             android:textAllCaps="false"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/qualifikation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -98,6 +101,8 @@
             android:text="Qualifikation: "
             android:textAllCaps="false"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/durchBewertung"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
@@ -113,6 +118,8 @@
             android:text="Durchschnittsbewertung:"
             android:textAllCaps="false"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/dStar3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
@@ -122,49 +129,53 @@
             android:id="@+id/dStar1"
             android:layout_width="36dp"
             android:layout_height="33dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
             app:layout_constraintEnd_toStartOf="@+id/dStar2"
-            app:layout_constraintHorizontal_bias="0.733"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/dStar2"
             android:layout_width="36dp"
             android:layout_height="33dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
             app:layout_constraintEnd_toStartOf="@+id/dStar3"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/dStar3"
             android:layout_width="36dp"
             android:layout_height="33dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
-            app:layout_constraintEnd_toStartOf="@+id/dStar4"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/dStar4"
             android:layout_width="36dp"
             android:layout_height="33dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
-            app:layout_constraintEnd_toStartOf="@+id/dStar5"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintStart_toEndOf="@+id/dStar3"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/dStar5"
             android:layout_width="36dp"
             android:layout_height="33dp"
-            android:layout_marginEnd="76dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/kompetenz"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintStart_toEndOf="@+id/dStar4"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <TextView
             android:id="@+id/kompetenz"
@@ -176,6 +187,8 @@
             android:text="Kompetenz"
             android:textAllCaps="false"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/kStar3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -185,61 +198,52 @@
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/kStar2"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/kStar2"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
-            app:layout_constraintStart_toEndOf="@+id/kStar1"
-            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/kStar3"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/kStar3"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
-            app:layout_constraintStart_toEndOf="@+id/kStar2"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/kStar4"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
             app:layout_constraintStart_toEndOf="@+id/kStar3"
-            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/kStar5"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@+id/freundlichkeit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.009"
             app:layout_constraintStart_toEndOf="@+id/kStar4"
-            app:layout_constraintTop_toBottomOf="@+id/kompetenz"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <TextView
             android:id="@+id/freundlichkeit"
@@ -251,6 +255,8 @@
             android:text="Freundlichkeit"
             android:textAllCaps="false"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/fStar3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -260,60 +266,52 @@
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="88dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fStar3"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/fStar2"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/fStar2"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
-            app:layout_constraintStart_toEndOf="@+id/fStar1"
-            app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/fStar3"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/fStar3"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
-            app:layout_constraintStart_toEndOf="@+id/fStar2"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/fStar4"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
             app:layout_constraintStart_toEndOf="@+id/fStar3"
-            app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/fStar5"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             app:layout_constraintBottom_toTopOf="@+id/pünktlichkeit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/fStar4"
-            app:layout_constraintTop_toBottomOf="@+id/freundlichkeit"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <TextView
             android:id="@+id/pünktlichkeit"
@@ -325,6 +323,8 @@
             android:text="Pünktlichkeit"
             android:textAllCaps="false"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/pStar3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -334,34 +334,32 @@
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/pStar2"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/pStar2"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
-            app:layout_constraintStart_toEndOf="@+id/pStar1"
-            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/pStar3"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/pStar3"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
-            app:layout_constraintStart_toEndOf="@+id/pStar2"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/pStar4"
@@ -369,26 +367,19 @@
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
             app:layout_constraintStart_toEndOf="@+id/pStar3"
-            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/pStar5"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toTopOf="@+id/gesamteindruck"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/pStar4"
-            app:layout_constraintTop_toBottomOf="@+id/pünktlichkeit"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <TextView
             android:id="@+id/gesamteindruck"
@@ -400,6 +391,8 @@
             android:text="Gesamteindruck"
             android:textAllCaps="false"
             android:textColor="#000"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/gStar3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -407,63 +400,54 @@
         <ImageView
             android:id="@+id/gStar1"
             android:layout_width="30dp"
-            android:layout_height="21dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/gStar2"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/gStar2"
             android:layout_width="30dp"
             android:layout_height="24dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/gStar1"
-            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toStartOf="@+id/gStar3"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/gStar3"
             android:layout_width="30dp"
             android:layout_height="24dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/gStar2"
-            app:srcCompat="@drawable/stern_white" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/gStar4"
             android:layout_width="30dp"
             android:layout_height="24dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gStar3"
-            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
         <ImageView
             android:id="@+id/gStar5"
             android:layout_width="30dp"
             android:layout_height="24dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/gStar4"
-            app:layout_constraintTop_toBottomOf="@+id/gesamteindruck"
-            app:srcCompat="@drawable/stern_white" />
+            app:srcCompat="@mipmap/baseline_star_border_black_24" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
