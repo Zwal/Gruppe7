@@ -2,8 +2,6 @@ package de.repair.repairondemand;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -131,7 +129,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnServiceCenter:
-                startActivityIntent =  new Intent(this, NotAvailable.class);
+                startActivityIntent =  new Intent(this, ServiceCenter.class);
                 startActivity(startActivityIntent);
                 break;
             case R.id.linkImpressum:
