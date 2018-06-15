@@ -17,41 +17,38 @@
         android:roundIcon="@mipmap/logo_rund"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Home"/>
         <activity
-            android:name=".AnfrageErstellen" />
+            android:name=".AnfrageErstellen"/>
         <activity
-            android:name=".Home" />
+            android:name=".AufträgeSuchen"/>
         <activity
-            android:name=".AufträgeSuchen" />
+            android:name=".NotAvailable"/>
         <activity
-            android:name=".NotAvailable" />
+            android:name=".Impressum"/>
         <activity
-            android:name=".Impressum" />
+            android:name=".AuftragAnsicht"/>
         <activity
-            android:name=".AuftragAnsicht" />
+            android:name=".AngebotAbgeben"/>
         <activity
-            android:name=".AngebotAbgeben" />
+            android:name=".Profile"/>
         <activity
-            android:name=".Profile" />
+            android:name=".ServiceCenter"/>
         <activity
-            android:name=".ServiceCenter" />
+            android:name=".FAQ"/>
         <activity
-            android:name=".FAQ" />
+            android:name=".Nutzungsbedingungen"/>
         <activity
-            android:name=".Nutzungsbedingungen" />
+            android:name=".Support1"/>
         <activity
-            android:name=".Support1" />
-        <activity
-            android:name=".Support2" />
+            android:name=".Support2"/>
         <activity
             android:name=".Beschwerde" />
     </application>

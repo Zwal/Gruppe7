@@ -134,7 +134,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             }
         });
         mLv.setVisibility(ListView.INVISIBLE);
-        if(kategorie != null){
+        if(kategorie != null && !kategorie.equals("Kategorie")){
             mSpinKategorie.setSelection(Integer.parseInt(getKategorie(kategorie)));
             mBtnRepAnfang.setText(anfang);
             mBtnRepEnde.setText(ende);
@@ -356,7 +356,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         // Adapter setzen
         mLv.setAdapter(new AuftragAdapter(this, mLv, this.anfrageList, this.byteList, this.adresseList,
                 mSpinKategorie.getSelectedItem().toString(), mBtnRepAnfang.getText().toString(),
-                mBtnRepEnde.getText().toString(), String.valueOf(mSeekbar.getProgress())));
+                mBtnRepEnde.getText().toString(), String.valueOf(mSeekbar.getProgress()), username));
     }
 
 

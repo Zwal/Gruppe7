@@ -135,6 +135,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
                 showDatePickerDialog();
                 break;
             case R.id.btnSenden:
+                startActivityIntent.putExtra("username", username);
                 check();
                 break;
         }

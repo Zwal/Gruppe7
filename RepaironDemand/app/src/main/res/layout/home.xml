@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background2"
-    tools:layout_editor_absoluteY="25dp">
+    android:orientation="vertical"
+    android:theme="@style/Theme.AppCompat.Light"
+    tools:layout_editor_absoluteY="25dp"
+    tools:context=".MainActivity">
 
 
     <TextView
@@ -42,12 +45,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:alpha="0.9"
+        android:background="#FFFFFF"
         android:text="Impressum"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
-        android:background="#FFFFFF"
-        android:alpha="0.9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,30 +77,30 @@
                 android:layout_width="140dp"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_description_black_48"
                 android:gravity="bottom"
                 android:text="@string/anfrage_erstellen"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
 
             <Button
                 android:id="@+id/btnEingestellteAufträge"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_book_black_48"
+                android:gravity="bottom"
                 android:text="@string/eingestellte_aufträge"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:gravity="bottom"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
         </TableRow>
 
         <TableRow>
@@ -107,15 +110,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_search_black_48"
                 android:gravity="bottom"
                 android:text="@string/aufträge_suche"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
 
 
             <Button
@@ -123,15 +126,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_receipt_black_48"
                 android:gravity="bottom"
                 android:text="@string/abgegebene_angebote"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
         </TableRow>
 
         <TableRow>
@@ -141,30 +144,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_bar_chart_black_48"
                 android:gravity="bottom"
                 android:text="@string/feedback"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
 
             <Button
                 android:id="@+id/btnKalender"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_event_black_48"
                 android:gravity="bottom"
                 android:text="@string/kalender"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
         </TableRow>
 
         <TableRow>
@@ -174,30 +177,30 @@
                 android:layout_width="144dp"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_local_post_office_black_48"
                 android:gravity="bottom"
                 android:text="@string/benachrichtigungen"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
 
             <Button
                 android:id="@+id/btnServiceCenter"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
                 android:layout_weight="1"
+                android:alpha="0.9"
                 android:backgroundTint="@color/colorPrimary"
                 android:drawableTop="@mipmap/baseline_question_answer_black_48"
                 android:gravity="bottom"
                 android:text="@string/service_center"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#000"
-                android:textSize="@dimen/TxtSize"
-                android:textAlignment="center"
-                android:alpha="0.9"/>
+                android:textSize="@dimen/TxtSize" />
         </TableRow>
     </TableLayout>
 

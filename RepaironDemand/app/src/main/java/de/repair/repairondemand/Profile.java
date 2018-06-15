@@ -23,7 +23,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton mBtnZurück;
 
-    private TextView mTvName, mTvQuali;
+    private TextView mTvName, mTvQuali, mUsername;
 
     private ImageView mIvDStar1,mIvDStar2,mIvDStar3,mIvDStar4,mIvDStar5,
             mIvKStar1,mIvKStar2,mIvKStar3,mIvKStar4,mIvKStar5,
@@ -42,7 +42,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     String anfrageId = null;
 
-    private String kategorie, anfang, ende, radius;
+    private String kategorie, anfang, ende, radius, username;
 
     ArrayList<String> anfrageIds = null;
     ArrayList<String> kompetenz = null;
@@ -55,6 +55,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private Intent startActivityIntent;
 
     protected void onCreate(Bundle savedInstanceState) {
+        username = getIntent().getExtras().getString("username");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
         anfrageId = getIntent().getExtras().getString("anfrageId");
@@ -72,6 +73,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mTvName = this.findViewById(R.id.name);
         mTvQuali = this.findViewById(R.id.qualifikation);
+        mUsername = this.findViewById(R.id.Benutzername);
 
         mIvDStar1 = this.findViewById(R.id.dStar1);
         mIvDStar2 = this.findViewById(R.id.dStar2);
@@ -115,6 +117,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         AiVp = new ImageView[]{mIvPStar1,mIvPStar2,mIvPStar3,mIvPStar4,mIvPStar5};
         AiVf = new ImageView[]{mIvFStar1,mIvFStar2,mIvFStar3,mIvFStar4,mIvFStar5};
         AiVg = new ImageView[]{mIvGStar1,mIvGStar2,mIvGStar3,mIvGStar4,mIvGStar5};
+        mUsername.setText(username);
         mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

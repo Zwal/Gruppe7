@@ -1,3 +1,11 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+    android:fillViewport="true">
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -54,23 +62,39 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Nutzungsbedingungen"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logohome" />
+
+    <TextView
         android:id="@+id/text"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:alpha="0.9"
+        android:background="#FFFFFF"
         android:text="@string/nutzungsbedingungen"
         android:textAllCaps="false"
         android:textColor="#000"
         android:textSize="18dp"
-        android:background="#FFFFFF"
-        android:alpha="0.9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logohome" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/head" />
 
 
 </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -77,6 +78,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         mBtnProfil.setOnClickListener(this);
         mBtnAngebotAbgeben.setOnClickListener(this);
         mUsername.setText(username);
+        mUsername.setTextColor(Color.BLACK);
         mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
