@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
     private Spinner mSpinProfile;
     private String[] mSpinnerCont;
     private TextView mUsername;
-
+    private ImageView mLogohome;
     private Intent startActivityIntent;
     private String username;
     ArrayAdapter<CharSequence> adapterSpinnerProfile;
@@ -36,6 +37,7 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
     }
 
     private void bindViews() {
+        mLogohome = this.findViewById(R.id.logohome);
         mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück) ;
         mBtnFAQ = this.findViewById(R.id.btnFAQ);
@@ -49,6 +51,7 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
     }
 
     private void init() {
+        mLogohome.setOnClickListener(this);
         mBtnFAQ.setOnClickListener(this);
         mBtnSupport.setOnClickListener(this);
         mBtnBeschwerde.setOnClickListener(this);
@@ -83,6 +86,11 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.logohome:
+                startActivityIntent =  new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, Home.class);
                 startActivityIntent.putExtra("username", username);

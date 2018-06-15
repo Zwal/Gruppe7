@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
     private String[] mSpinnerCont;
     private TextView mUsername, mTvMeldung, mTvMeldungDate, mTvMeldungAuftrNr;
     private EditText mText,mTextAuftrNr;
+    private ImageView mLogohome;
 
     private Intent startActivityIntent;
     private String username;
@@ -47,6 +49,7 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
     }
 
     private void bindViews() {
+        mLogohome = this.findViewById(R.id.logohome);
         mText = this.findViewById(R.id.text);
         mTextAuftrNr = this.findViewById(R.id.textAuftrNr);
         mUsername = this.findViewById(R.id.Benutzername);
@@ -63,6 +66,7 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
     }
 
     private void init() {
+        mLogohome.setOnClickListener(this);
         mBtnDatum.setOnClickListener(this);
         mBtnSenden.setOnClickListener(this);
         mBtnZurück.setOnClickListener(this);
@@ -96,6 +100,11 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.logohome:
+                startActivityIntent =  new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, ServiceCenter.class);
                 startActivityIntent.putExtra("username", username);

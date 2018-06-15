@@ -22,7 +22,7 @@ import de.repair.repairondemand.SQLlite.SQLiteInit;
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton mBtnZurück;
-
+    private ImageView mLogohome;
     private TextView mTvName, mTvQuali, mUsername;
 
     private ImageView mIvDStar1,mIvDStar2,mIvDStar3,mIvDStar4,mIvDStar5,
@@ -74,6 +74,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         mTvName = this.findViewById(R.id.name);
         mTvQuali = this.findViewById(R.id.qualifikation);
         mUsername = this.findViewById(R.id.Benutzername);
+        mLogohome = this.findViewById(R.id.logohome);
 
         mIvDStar1 = this.findViewById(R.id.dStar1);
         mIvDStar2 = this.findViewById(R.id.dStar2);
@@ -111,6 +112,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void init() {
+        mLogohome.setOnClickListener(this);
         mBtnZurück.setOnClickListener(this);
         AiVd = new ImageView[]{mIvDStar1,mIvDStar2,mIvDStar3,mIvDStar4,mIvDStar5};
         AiVk = new ImageView[]{mIvKStar1,mIvKStar2,mIvKStar3,mIvKStar4,mIvKStar5};
@@ -150,6 +152,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.logohome:
+                startActivityIntent =  new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, AuftragAnsicht.class);
                 startActivityIntent.putExtra("anfrageId", anfrageId);

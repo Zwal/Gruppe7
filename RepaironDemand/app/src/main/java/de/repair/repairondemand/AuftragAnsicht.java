@@ -27,7 +27,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
     private Button mBtnProfil, mBtnAngebotAbgeben;
     private ImageButton mBtnZurück;
     private ImageView mImViAuftragBild;
-
+    private ImageView mLogohome;
     private TextView mTvBeschreibung, mTvStandort;
 
     private Intent startActivityIntent;
@@ -58,6 +58,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
 
 
     private void bindViews() {
+        mLogohome = this.findViewById(R.id.logohome);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnProfil = this.findViewById(R.id.btnProfilansehen);
         mBtnAngebotAbgeben = this.findViewById(R.id.btnAngebotabgeben);
@@ -67,6 +68,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
     }
 
     private void init() {
+        mLogohome.setOnClickListener(this);
         mBtnZurück.setOnClickListener(this);
         mBtnProfil.setOnClickListener(this);
         mBtnAngebotAbgeben.setOnClickListener(this);
@@ -83,6 +85,11 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.logohome:
+                startActivityIntent =  new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
             case R.id.btnZurück:
                 startActivityIntent = new Intent(this, AufträgeSuchen.class);
                 startActivityIntent.putExtra("kategorie", kategorie);

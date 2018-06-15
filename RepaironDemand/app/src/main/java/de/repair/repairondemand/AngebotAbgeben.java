@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
     private Button mBtnZeitStart, mBtnZeitEnde, mBtnSenden;
     private ImageButton mBtnZurück;
-
+    private ImageView mLogohome;
     private EditText mTxtPreis, mTxtBeschreibung;
 
     private TextView mTvHinweisPreis, mTvHinweisZeitraum, mUsername;
@@ -67,6 +68,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
     }
 
     private void bindViews() {
+        mLogohome = this.findViewById(R.id.logohome);
         mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnZeitStart = this.findViewById(R.id.zeitraum_auswahl_start);
@@ -87,6 +89,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
     }
 
     private void init() {
+        mLogohome.setOnClickListener(this);
         mBtnZurück.setOnClickListener(this);
         mBtnZeitStart.setOnClickListener(this);
         mBtnZeitEnde.setOnClickListener(this);
@@ -120,6 +123,11 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.logohome:
+                startActivityIntent =  new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, AuftragAnsicht.class);
                 startActivityIntent.putExtra("anfrageId", anfrageId);

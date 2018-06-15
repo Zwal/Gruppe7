@@ -99,7 +99,7 @@
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:text="Support direkt\n kontaktieren."
+        android:text="Support direkt\n kontaktieren"
         android:alpha="0.9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

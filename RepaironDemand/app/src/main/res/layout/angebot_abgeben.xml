@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.363" />
 
     <ImageView
-        android:id="@+id/logoAngebot"
+        android:id="@+id/logohome"
         android:layout_width="400dp"
         android:layout_height="113dp"
         android:layout_marginTop="40dp"
@@ -116,7 +116,6 @@
         android:id="@+id/zeitraum_start"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -125,18 +124,15 @@
         android:textColor="#000"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/zeitraum_auswahl_start"
         app:layout_constraintEnd_toStartOf="@+id/zeitraum_ende"
         app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zeitraum_head"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/zeitraum_head" />
 
     <TextView
         android:id="@+id/zeitraum_ende"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="92dp"
         android:layout_marginTop="16dp"
         android:text="Ende"
@@ -144,35 +140,30 @@
         android:textColor="#000"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/zeitraum_auswahl_Ende"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zeitraum_head"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/zeitraum_head" />
 
     <Button
         android:id="@+id/zeitraum_auswahl_start"
         android:layout_width="@dimen/TxtAnfrageWidth"
         android:layout_height="@dimen/TxtAnfrageHeight"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/start"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:alpha="0.9"
-        app:layout_constraintBottom_toTopOf="@+id/hinweis_zeitraum"
-        app:layout_constraintEnd_toStartOf="@+id/zeitraum_auswahl_Ende"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zeitraum_start" />
 
     <Button
         android:id="@+id/zeitraum_auswahl_Ende"
         android:layout_width="@dimen/TxtAnfrageWidth"
         android:layout_height="@dimen/TxtAnfrageHeight"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/ende"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
         android:alpha="0.9"
-        app:layout_constraintBottom_toTopOf="@+id/hinweis_zeitraum"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="@string/ende"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zeitraum_ende" />
 
     <TextView
         android:id="@+id/hinweis_zeitraum"
@@ -190,37 +181,21 @@
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/beschreibung_head"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Beschreibung"
-        android:textAllCaps="false"
-        android:textColor="#000"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/beschreibung"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/beschreibung"
         android:layout_width="244dp"
         android:layout_height="79dp"
+        android:layout_marginBottom="56dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:alpha="0.9"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="Beschreibung"
         android:inputType=""
         android:singleLine="false"
-        android:background="#FFFFFF"
-        android:alpha="0.9"
         app:layout_constraintBottom_toTopOf="@+id/btnSenden"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.314"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

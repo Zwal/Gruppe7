@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.DatePicker;
 //import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -47,6 +48,7 @@ import de.repair.repairondemand.SQLlite.SQLiteInit;
 
 public class AufträgeSuchen extends AppCompatActivity implements View.OnClickListener {
     private SQLite sqLite;
+    private ImageView mLogohome;
     private int checkBtn;
     public ImageButton mBtnZurück;
     public Button mBtnRepAnfang, mBtnRepEnde, mBtnSuchen, mBtnKlappen;
@@ -82,6 +84,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     private void bindViews() {
+        mLogohome = this.findViewById(R.id.logohome);
         mUsername = this.findViewById(R.id.Benutzername);
         mTvKeineAufträge = this.findViewById(R.id.txtKeineAufträge);
         mklapView = this.findViewById(R.id.constraintLayout1);
@@ -106,6 +109,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     private void init() {
+        mLogohome.setOnClickListener(this);
         mUsername.setText(username);
         mTvDateError.setTextColor(Color.RED);
         mTvKeineAufträge.setTextColor(Color.RED);
@@ -170,6 +174,11 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         int viewId = view.getId();
         switch (viewId) {
+            case R.id.logohome:
+                startActivityIntent =  new Intent(this, Home.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
             case R.id.btnZurück:
                 startActivityIntent = new Intent(this, Home.class);
                 startActivityIntent.putExtra("username", username);

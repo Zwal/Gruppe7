@@ -8,6 +8,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
     private Button mBtnPasswort, mBtnAufträgeEinsehen, mBtnAuftragAbbrechen, mBtnSupportErreichen,
             mBtnAuftragnehmer, mBtnZahlung, mBtnKlappe;
     private ImageButton mBtnZurück;
+    private ImageView mLogohome;
     private Spinner mSpinProfile;
     private String[] mSpinnerCont;
     private TextView mTvAntwort, mUsername;
@@ -46,6 +48,7 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
         mBtnKlappe = this.findViewById(R.id.btnKlappe);
         mTvAntwort = this.findViewById(R.id.antwort);
         mBtnZurück = this.findViewById(R.id.btnZurück);
+        mLogohome = this.findViewById(R.id.logohome);
         mBtnPasswort = this.findViewById(R.id.btnPasswort);
         mBtnAufträgeEinsehen = this.findViewById(R.id.btnAuftragEinsehen);
         mBtnAuftragAbbrechen = this.findViewById(R.id.btnAuftragAbbrechen);
@@ -61,6 +64,7 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
 
     private void init() {
         mBtnZurück.setOnClickListener(this);
+        mLogohome.setOnClickListener(this);
         mBtnPasswort.setOnClickListener(this);
         mBtnAufträgeEinsehen.setOnClickListener(this);
         mBtnAuftragAbbrechen.setOnClickListener(this);
@@ -100,6 +104,11 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
         switch (viewId) {
             case R.id.btnZurück:
                 startActivityIntent =  new Intent(this, ServiceCenter.class);
+                startActivityIntent.putExtra("username", username);
+                startActivity(startActivityIntent);
+                break;
+            case R.id.logohome:
+                startActivityIntent =  new Intent(this, Home.class);
                 startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;

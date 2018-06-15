@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+
     android:fillViewport="true"
     >
 
@@ -198,7 +198,7 @@
             android:id="@+id/tableLayout7"
             android:layout_width="321dp"
             android:layout_height="209dp"
-            android:layout_marginBottom="164dp"
+            android:layout_marginBottom="80dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
@@ -216,8 +216,8 @@
                     android:layout_height="@dimen/TxtAnfrageHeight"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:text="@string/anfang"
                     android:alpha="0.9"
+                    android:text="@string/anfang"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="377dp" />
 
@@ -280,8 +280,8 @@
                     android:layout_height="@dimen/TxtAnfrageHeight"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:text="@string/ablauf"
                     android:alpha="0.9"
+                    android:text="@string/ablauf"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="454dp" />
             </TableRow>
@@ -307,10 +307,10 @@
                     android:id="@+id/preisvorstellung"
                     android:layout_width="@dimen/TxtAnfrageWidth"
                     android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:alpha="0.9"
                     android:ems="10"
                     android:hint="@string/preisvorstellung_anfrage"
                     android:inputType=""
-                    android:alpha="0.9"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="533dp" />
 
@@ -318,10 +318,10 @@
                     android:id="@+id/kategorie"
                     android:layout_width="@dimen/TxtAnfrageWidth"
                     android:layout_height="@dimen/TxtAnfrageHeight"
+                    android:alpha="0.9"
                     android:entries="@array/category"
                     android:prompt="@string/category_prompt"
                     android:spinnerMode="dropdown"
-                    android:alpha="0.9"
                     tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteX="194dp"
                     tools:layout_editor_absoluteY="533dp" />
@@ -365,15 +365,17 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="An Firma"
-            android:padding="2dp"
-            android:textColor="#000"
-            android:background="#FFFFFF"
             android:alpha="0.9"
+            android:background="#FFFFFF"
+            android:padding="2dp"
+            android:text="An Firma"
+            android:textColor="#000"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.281"
             app:layout_constraintStart_toEndOf="@+id/checkBoxPrivat"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout7" />
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout7"
+            app:layout_constraintVertical_bias="0.98" />
 
         <CheckBox
             android:id="@+id/checkBoxPrivat"
@@ -382,14 +384,15 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="8dp"
+            android:alpha="0.9"
+            android:background="#FFFFFF"
             android:padding="2dp"
             android:text="An Privat"
             android:textColor="#000"
-            android:background="#FFFFFF"
-            android:alpha="0.9"
             app:layout_constraintBottom_toTopOf="@+id/hinweisCheckboxText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout7" />
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout7"
+            app:layout_constraintVertical_bias="0.98" />
 
 
         <Button
@@ -458,7 +461,7 @@
             android:id="@+id/hinweisCheckboxText"
             android:layout_width="330dp"
             android:layout_height="23dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Mindestens eine Checkbox muss ausgewählt sein."

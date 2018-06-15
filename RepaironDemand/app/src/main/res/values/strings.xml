@@ -47,7 +47,7 @@
     <string name="category_prompt">Kategorie</string>
     <string name="date_error">Das angegebene Enddatum muss größer als das Anfangsdatum sein.</string>
     <string name="keine_aufträge">Es wurden keine Aufträge gefunden.</string>
-    <string name="passwort_frage">Ich kann mein Passwort nicht ändern.</string>
+    <string name="passwort_frage">Wie kann ich mein Passwort ändern?</string>
     <string name="passwort_antwort">Gehen Sie oben rechts auf Profil und drücken Sie oben rechts auf Passwort ändern.</string>
     <string name="aufträgeEinsehen_frage">Wo kann ich meine Aufträge einsehen?</string>
     <string name="aufträgeEinsehen_antwort">Gehen Sie im Home-Menu auf eingestellte Aufträge.</string>
@@ -57,10 +57,11 @@
     <string name="supportErreichen_frage">Wie kann ich den Support erreichen?</string>
     <string name="supportErreichen_antwort">Gehen Sie im Service_center auf den Button Support.
         Dann werden Ihnen die Kontaktdaten eingeblendet.</string>
-    <string name="auftragnehmer_frage">Der Auftragnehmer ist nicht gekommen.</string>
+    <string name="auftragnehmer_frage">Was kann ich tun, wenn der Auftragnehmer nicht gekommen ist?</string>
     <string name="auftragnehmer_antwort">Nehmen Sie Kontakt mit dem Support auf, der sich darum kümmern wird.</string>
-    <string name="zahlung_frage">Keine Zahlungsmöglichkeit auswählbar.</string>
-    <string name="zahlung_antwort">Nehmen Sie Kontakt mit dem Support auf, der sich darum kümmern wird.</string>
+    <string name="zahlung_frage">Wie kann ich eine Zahlungsmöglichkeit auswählen?</string>
+    <string name="zahlung_antwort">Nach Auftragsannahme, werden Sie automatisch zu den Zahlungsmöglichkeiten weitergeleitet.
+        Ansonsten nehmen Sie Kontakt zu dem Support auf.</string>
     <string name="nutzungsbedingungen">Bitte lesen Sie die Bedingungen aufmerksam durch.\n\n <b>1. Haftungsbeschränkung</b>\n
 Die Inhalte des Internetauftritts wurden mit größtmöglicher Sorgfalt und nach bestem Gewissen erstellt. Dennoch übernimmt der Anbieter dieser Webseite keine Gewähr für die Aktualität, Vollständigkeit und Richtigkeit der bereitgestellten Seiten und Inhalte.\n
 Als Diensteanbieter ist der Anbieter dieser Webseite gemäß § 7 Abs. 1 TMG für eigene Inhalte und bereitgestellte Informationen auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich; nach den §§ 8 bis 10 TMG jedoch nicht verpflichtet, die übermittelten oder gespeicherten fremden Informationen zu überwachen. Eine Entfernung oder Sperrung dieser Inhalte erfolgt umgehend ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung. Eine Haftung ist erst ab dem Zeitpunkt der Kenntniserlangung möglich.\n\n
@@ -75,10 +76,6 @@ Sofern personenbezogene Daten erhoben werden, erfolgt dies, sofern möglich, nur
 Der Anbieter weist darauf hin, dass die Übertragung von Daten im Internet (z. B. per E-Mail) Sicherheitslücken aufweisen und ein lückenloser Schutz der Daten vor dem Zugriff Dritter nicht gewährleistet werden kann. Der Anbieter übernimmt keine Haftung für die durch solche Sicherheitslücken entstandenen Schäden.\n
 Der Verwendung der Kontaktdaten durch Dritte zur gewerblichen Nutzung wird ausdrücklich widersprochen. Es sei denn, der Anbieter hat zuvor seine schriftliche Einwilligung erteilt.\n
 Der Anbieter behält sich rechtliche Schritte für den Fall der unverlangten Zusendung von Werbeinformationen, z. B. durch Spam-Mails, vor.</string>
-    <string name="support_kontakt"><b>Kontaktieren Sie uns:</b>\n\n\n Telefon: 0789456123\n Erreichbar von 08:00 Uhr - 20:00 Uhr (Mo - Fr)\n\n
-    E-Mail: support@repairondemand.de\n\n
-    Potanschrift:\n
-    Repair on Demand\n
-    Mustermann Str. 1\n
-    76131 Karlsruhe</string>
+    <string name="support_kontakt"><b>Kontaktieren Sie uns:</b>\n\n\nTelefon: 0789456123\nerreichbar von 08:00 Uhr - 20:00 Uhr (Mo - Fr)\n\nE-Mail: support@repairondemand.de\n\nPostanschrift:\nRepair on Demand\nMustermann Str. 1\n76131 Karlsruhe</string>
 </resources>
+
