@@ -28,15 +28,13 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
     private ImageButton mBtnZurück;
     private ImageView mImViAuftragBild;
 
-    private TextView mTvBeschreibung, mTvStandort, mUsername;
+    private TextView mTvBeschreibung, mTvStandort;
 
     private Intent startActivityIntent;
 
     private String anfrageId;
 
     private String kategorie, anfang, ende, radius, username;
-    ArrayAdapter<CharSequence> adapterSpinnerProfile;
-    private Spinner mSpinProfile;
     private String[] mSpinnerCont;
 
     @Override
@@ -60,41 +58,19 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
 
 
     private void bindViews() {
-        mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnProfil = this.findViewById(R.id.btnProfilansehen);
         mBtnAngebotAbgeben = this.findViewById(R.id.btnAngebotabgeben);
         mImViAuftragBild = this.findViewById(R.id.auftrag_bild);
         mTvBeschreibung = this.findViewById(R.id.beschreibung);
         mTvStandort = this.findViewById(R.id.standort);
-        mSpinProfile = this.findViewById(R.id.spinnerProfile);
-        adapterSpinnerProfile = ArrayAdapter.createFromResource(this, R.array.spinnerProfile,
-                android.R.layout.simple_spinner_dropdown_item);
-        mSpinProfile.setAdapter(adapterSpinnerProfile);
     }
 
     private void init() {
         mBtnZurück.setOnClickListener(this);
         mBtnProfil.setOnClickListener(this);
         mBtnAngebotAbgeben.setOnClickListener(this);
-        mUsername.setText(username);
-        mUsername.setTextColor(Color.BLACK);
         mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
-        mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
-                if(mSpinnerCont[position].equals("Ausloggen")){
-                    ausloggen();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
     }
 
     public void ausloggen(){

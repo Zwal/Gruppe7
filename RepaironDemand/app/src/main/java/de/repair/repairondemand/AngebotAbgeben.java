@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,6 +23,9 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 
 import de.repair.repairondemand.SQLlite.AktuellerBenutzer;
 import de.repair.repairondemand.SQLlite.Modells.Angebot;
@@ -135,7 +139,6 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
                 showDatePickerDialog();
                 break;
             case R.id.btnSenden:
-                startActivityIntent.putExtra("username", username);
                 check();
                 break;
         }

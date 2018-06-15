@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
     private Spinner mSpinProfile;
     private String[] mSpinnerCont;
     private TextView mUsername, mTvMeldung, mTvMeldungDate, mTvMeldungAuftrNr;
+    private EditText mText,mTextAuftrNr;
 
     private Intent startActivityIntent;
     private String username;
@@ -45,6 +47,8 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
     }
 
     private void bindViews() {
+        mText = this.findViewById(R.id.text);
+        mTextAuftrNr = this.findViewById(R.id.textAuftrNr);
         mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnSenden = this.findViewById(R.id.btnSenden);
@@ -98,10 +102,12 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnSenden:
-                Toast.makeText(this, "Abgeschickt.", Toast.LENGTH_LONG).show();
-                startActivityIntent =  new Intent(this, Home.class);
-                startActivityIntent.putExtra("username", username);
-                startActivity(startActivityIntent);
+                if(check()) {
+                    Toast.makeText(this, "Abgeschickt.", Toast.LENGTH_LONG).show();
+                    startActivityIntent = new Intent(this, Home.class);
+                    startActivityIntent.putExtra("username", username);
+                    startActivity(startActivityIntent);
+                }
                 break;
             case R.id.btnDate:
                 showDatePickerDialog();
@@ -144,5 +150,21 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
 
     public void date(String date){
         mBtnDatum.setText(date);
+    }
+
+    public boolean check(){
+        boolean b = false;
+        if(!mText.getText().toString().equals("") && !mTextAuftrNr.getText().toString().equals("")
+        && !mBtnDatum.getText().toString().equals("Datum")){
+            mTvMeldung.setVisibility(TextView.INVISIBLE);
+            mTvMeldungAuftrNr.setVisibility(TextView.INVISIBLE);
+            mTvMeldungDate.setVisibility(TextView.INVISIBLE);
+            b = true;
+        }else{
+            mTvMeldung.setVisibility(TextView.VISIBLE);
+            mTvMeldungAuftrNr.setVisibility(TextView.VISIBLE);
+            mTvMeldungDate.setVisibility(TextView.VISIBLE);
+        }
+        return b;
     }
 }

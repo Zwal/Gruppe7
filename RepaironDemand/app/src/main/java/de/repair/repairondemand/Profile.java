@@ -157,6 +157,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivityIntent.putExtra("anfang", anfang);
                 startActivityIntent.putExtra("ende", ende);
                 startActivityIntent.putExtra("radius", radius);
+                startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
         }

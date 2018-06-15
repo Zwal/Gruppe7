@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
     private Spinner mSpinProfile;
     private String[] mSpinnerCont;
     private TextView mUsername, mTvMeldung;
+    private EditText mText;
 
     private Intent startActivityIntent;
     private String username;
@@ -37,6 +39,7 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void bindViews() {
+        mText = this.findViewById(R.id.text);
         mUsername = this.findViewById(R.id.Benutzername);
         mBtnZurück = this.findViewById(R.id.btnZurück);
         mBtnSenden = this.findViewById(R.id.btnSenden);
@@ -80,15 +83,28 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
         int viewId = view.getId();
         switch (viewId) {
             case R.id.btnZurück:
-                startActivityIntent =  new Intent(this, ServiceCenter.class);
+                startActivityIntent =  new Intent(this, Support1.class);
                 startActivityIntent.putExtra("username", username);
                 startActivity(startActivityIntent);
                 break;
             case R.id.btnSenden:
-                Toast.makeText(this, "Abgeschickt.", Toast.LENGTH_LONG).show();
-                startActivityIntent =  new Intent(this, Home.class);
-                startActivityIntent.putExtra("username", username);
-                startActivity(startActivityIntent);
+                if(check()) {
+                    Toast.makeText(this, "Abgeschickt.", Toast.LENGTH_LONG).show();
+                    startActivityIntent = new Intent(this, Home.class);
+                    startActivityIntent.putExtra("username", username);
+                    startActivity(startActivityIntent);
+                }
         }
+    }
+
+    public boolean check(){
+        boolean b = false;
+        if(!mText.getText().toString().equals("")){
+            mTvMeldung.setVisibility(TextView.INVISIBLE);
+            b = true;
+        }else{
+            mTvMeldung.setVisibility(TextView.VISIBLE);
+        }
+        return b;
     }
 }
