@@ -164,6 +164,7 @@
         android:id="@+id/meldungAuftrNr"
         android:layout_width="141dp"
         android:layout_height="29dp"
+        android:layout_marginStart="8dp"
         android:text="Bitte auswählen."
         android:textAllCaps="false"
         android:textColor="#ff3227"

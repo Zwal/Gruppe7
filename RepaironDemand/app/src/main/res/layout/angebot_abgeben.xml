@@ -66,51 +66,46 @@
         android:id="@+id/preis"
         android:layout_width="@dimen/TxtAnfrageWidth"
         android:layout_height="@dimen/TxtAnfrageHeight"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Preis"
         android:inputType=""
-        app:layout_constraintBottom_toTopOf="@+id/hinweisPreis"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoAngebot" />
+        app:layout_constraintTop_toBottomOf="@+id/logohome" />
 
     <TextView
         android:id="@+id/hinweisPreis"
         android:layout_width="197dp"
         android:layout_height="19dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Preis muss ausgefüllt werden."
         android:textAllCaps="false"
-        android:visibility="invisible"
         android:textColor="#ff3227"
-        app:layout_constraintBottom_toTopOf="@+id/zeitraum_head"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preis" />
 
     <TextView
         android:id="@+id/zeitraum_head"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginBottom="312dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Zeitraum"
         android:textAllCaps="false"
         android:textColor="#000"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hinweisPreis" />
 
     <TextView
         android:id="@+id/zeitraum_start"
@@ -169,48 +164,48 @@
         android:id="@+id/hinweis_zeitraum"
         android:layout_width="345dp"
         android:layout_height="21dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Zeitraum der Durchführung muss angegeben werden."
         android:textAllCaps="false"
         android:textColor="#ff3227"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/beschreibung_head"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zeitraum_auswahl_Ende" />
 
     <EditText
         android:id="@+id/beschreibung"
         android:layout_width="244dp"
         android:layout_height="79dp"
-        android:layout_marginBottom="56dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:alpha="0.9"
         android:background="#FFFFFF"
         android:ems="10"
         android:hint="Beschreibung"
         android:inputType=""
         android:singleLine="false"
-        app:layout_constraintBottom_toTopOf="@+id/btnSenden"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hinweis_zeitraum" />
 
     <Button
         android:id="@+id/btnSenden"
         android:layout_width="113dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Senden"
+        android:layout_marginTop="8dp"
         android:alpha="0.9"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Senden"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beschreibung" />
 
 
 </android.support.constraint.ConstraintLayout>

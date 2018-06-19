@@ -38,13 +38,12 @@
         android:layout_height="39dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="8dp"
         android:text="Filter"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logohome" />
 
     <Spinner
         android:id="@+id/spinnerProfile"
@@ -54,10 +53,8 @@
         android:layout_marginTop="8dp"
         android:background="@mipmap/baseline_account_circle_black_24"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/btnKlappen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Benutzername"
@@ -77,10 +74,9 @@
         android:id="@+id/listV"
         android:layout_width="362dp"
         android:layout_height="493dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnKlappen" />
@@ -88,13 +84,10 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="362dp"
-        android:layout_height="493dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="496dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnKlappen">
 
@@ -102,140 +95,137 @@
         <Spinner
             android:id="@+id/kategorie"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/TxtAnfrageHeight"
-            android:layout_marginBottom="20dp"
+            android:layout_height="41dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:alpha="0.9"
             android:background="#E4E4E4"
             android:entries="@array/category"
+            android:padding="2dp"
             android:prompt="@string/category_prompt"
             android:spinnerMode="dropdown"
             android:textAlignment="center"
-            android:padding="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/zeitraumText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/zeitraumText"
             android:layout_width="wrap_content"
             android:layout_height="23dp"
-            android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/reparaturzeitraum_anfrage"
             android:textColor="@android:color/black"
             android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btnDateRepAnfang"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kategorie" />
 
         <Button
             android:id="@+id/btnDateRepAnfang"
             android:layout_width="@dimen/TxtAnfrageWidth"
             android:layout_height="@dimen/TxtAnfrageHeight"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
             android:alpha="0.9"
             android:text="@string/anfang"
-            app:layout_constraintBottom_toTopOf="@+id/txtDateError"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/zeitraumText" />
 
         <Button
             android:id="@+id/btnDateRepEnde"
             android:layout_width="@dimen/TxtAnfrageWidth"
             android:layout_height="@dimen/TxtAnfrageHeight"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:alpha="0.9"
             android:text="@string/ende"
-            app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/btnDateRepAnfang"
-            app:layout_constraintTop_toBottomOf="@+id/zeitraumText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/zeitraumText" />
 
         <TextView
             android:id="@+id/txtDateError"
             android:layout_width="280dp"
             android:layout_height="36dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/date_error"
             android:textAllCaps="false"
             android:textColor="#000"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/radiusText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDateRepAnfang" />
 
         <SeekBar
             android:id="@+id/seekBar"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="217dp"
             android:layout_height="23dp"
-            android:layout_marginBottom="40dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
             android:alpha="0.9"
             android:background="@android:color/darker_gray"
             android:max="10"
             android:progress="5"
-            app:layout_constraintBottom_toTopOf="@+id/btnSuchen"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDateError" />
 
         <TextView
             android:id="@+id/radiusText"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
-            android:layout_marginBottom="148dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="60dp"
+            android:layout_marginTop="8dp"
             android:text="Radius"
             android:textColor="@android:color/black"
             android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/seekBar"
             app:layout_constraintHorizontal_bias="0.363"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDateError" />
 
         <Button
             android:id="@+id/btnSuchen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:alpha="0.9"
             android:text="Suchen"
-            app:layout_constraintBottom_toTopOf="@+id/txtKeineAufträge"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRadius" />
 
         <TextView
             android:id="@+id/txtRadius"
             android:layout_width="57dp"
             android:layout_height="17dp"
-            android:layout_marginBottom="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="50 km"
             android:textColor="@android:color/black"
             android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btnSuchen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.709"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.681"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <TextView
             android:id="@+id/txtKeineAufträge"

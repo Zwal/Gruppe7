@@ -58,16 +58,15 @@
         android:id="@+id/impressum"
         android:layout_width="327dp"
         android:layout_height="271dp"
+        android:layout_marginTop="24dp"
+        android:alpha="0.9"
+        android:background="#FFFFFF"
         android:text="@string/impressum"
         android:textAllCaps="false"
         android:textColor="#000"
-        android:background="#FFFFFF"
-        android:alpha="0.9"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/impressumHead"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toBottomOf="@+id/impressumHead" />
 
 </android.support.constraint.ConstraintLayout>
