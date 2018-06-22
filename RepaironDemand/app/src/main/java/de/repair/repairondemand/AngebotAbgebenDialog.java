@@ -27,7 +27,6 @@ public class AngebotAbgebenDialog extends DialogFragment {
     private  String username;
 
     public AngebotAbgebenDialog() {
-        // Empty constructor required for DialogFragment
     }
 
     public static AngebotAbgebenDialog newInstance(String title, Angebot angebot, String username) {
@@ -75,11 +74,11 @@ public class AngebotAbgebenDialog extends DialogFragment {
         return alertDialogBuilder.create();
     }
 
+    // hier wird das Angebot in die Datenbank geschrieben
     public void writeAngebotDb(){
         sqLite = new SQLite(getActivity());
-        // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getWritableDatabase();
-        // Create a new map of values, where column names are the keys
+        // Map wird mit Variablen erzeugt, wo Spaltennamen die PKs sind
         ContentValues values = new ContentValues();
         values.put(SQLiteInit.COLUMN_PREISVORSTELLUNG, angebot.getmPreis());
         values.put(SQLiteInit.COLUMN_STARTTERMIN, angebot.getmZeitStart());
@@ -88,7 +87,7 @@ public class AngebotAbgebenDialog extends DialogFragment {
         values.put(SQLiteInit.COLUMN_ANFRAGE_ID_FK, angebot.getmAnfrageId());
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, angebot.getmBenutzerId());
 
-        // Insert the new row, returning the primary key value of the new row
+        // neue Zeile wird eingefügt, PK der neuen Zeile wird zurückgegeben
         long newRowId = db.insert(SQLiteInit.TABLE_ANGEBOT, null, values);
 
         Toast.makeText(getActivity(), "Angebot verbindlich abgegeben.", Toast.LENGTH_LONG).show();

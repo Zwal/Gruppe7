@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Drawable house, bagger;
 
+    // hier wird Zurück-Button überschrieben, damit man von der Loginansicht nicht mehr zurück zum Home-Menü kommt nach dem Logout
     public void onBackPressed() {
         Intent a = new Intent(Intent.ACTION_MAIN);
         a.addCategory(Intent.CATEGORY_HOME);
@@ -106,9 +107,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // hier wird die User Id zu einem Username geholt
     public int checkUser(String email, String passwort){
         sqLite = new SQLite(this);
-        // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getReadableDatabase();
 
         int register = 0;
@@ -135,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return register;
     }
 
+    // hier werden die Testdaten in die Datenbank geschrieben
     public void initData(){
         writeKategorie();
         writeUser();
@@ -149,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // hier werden die Kategorien in die Datenbank geschrieben
     public void writeKategorie(){
         sqLite = new SQLite(this);
         String[] kategorien = new String[]{"Sanitär", "Dach"};
@@ -160,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // hier werden die User in die Datenbank geschrieben
     public void writeUser(){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
@@ -176,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db.close();
     }
 
+    // hier werden die Testaufträge in die Datenbank geschrieben
     public void writeAuftrag(){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
@@ -210,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    // hier wird ein Bitmap Bild in einen byte[] umgewandelt
     public static byte[] getBytesFromDrawable(Drawable drawable) {
         if (drawable!=null) {
             Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
@@ -220,10 +226,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return null;
     }
 
+    // hier wird eine Testadresse in die Datenbank geschrieben
     public void writeAdresse(){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, "Kaiserstraße 1");
         values.put(SQLiteInit.COLUMN_PLZ, "76133");
@@ -237,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // current user
         values.put(SQLiteInit.COLUMN_NAME, "Mustermann");
         values.put(SQLiteInit.COLUMN_VORNAME, "Max");
         values.put(SQLiteInit.COLUMN_GEBURTSDATUM, "01.01.1990");
@@ -253,11 +258,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db.close();
     }
 
+    // hier wird eine weitere Privatperson in die Datenbank geschrieben
     public void writePrivatOther() {
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // current user
         values.put(SQLiteInit.COLUMN_NAME, "Mustermann");
         values.put(SQLiteInit.COLUMN_VORNAME, "Max");
         values.put(SQLiteInit.COLUMN_GEBURTSDATUM, "01.01.1990");
@@ -274,11 +279,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db.close();
     }
 
+    // hier wird eine Testadresse in die Datenbank geschrieben
     public String writeAdressePrivat(String strasse, String plz, String ort, String land){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // current user
         values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, strasse );
         values.put(SQLiteInit.COLUMN_PLZ, plz);
         values.put(SQLiteInit.COLUMN_ORT, ort);
@@ -289,6 +294,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return getIdAdressePrivat(strasse, plz, ort, land);
     }
 
+    // gibt die Id zu einer Privatadresse zurück
     public String getIdAdressePrivat(String strasse, String plz, String ort, String land){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -313,11 +319,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return id;
     }
 
+    // hier werden Feedback Testdaten in die Datenbank geschrieben
     public void writeFeedback(){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // current user
         try{
             values.put(SQLiteInit.COLUMN_ANFRAGE_ID_FK, 2);
             values.put(SQLiteInit.COLUMN_FEEDBACK_TEXT, "feedbackText");

@@ -25,6 +25,7 @@ public class SQLite extends SQLiteOpenHelper{
     String[] tableArray;
 
     // Die onCreate-Methode wird nur aufgerufen, falls die Datenbank noch nicht existiert
+    // es werden die Tabellen angelegt
     @Override
     public void onCreate(SQLiteDatabase db) {
         sqLliteInit = new SQLiteInit();

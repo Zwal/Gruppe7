@@ -55,7 +55,6 @@ public class Nutzungsbedingungen extends AppCompatActivity implements View.OnCli
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -63,12 +62,12 @@ public class Nutzungsbedingungen extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
     }
 
+    // hier wird der User ausgeloggt
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);

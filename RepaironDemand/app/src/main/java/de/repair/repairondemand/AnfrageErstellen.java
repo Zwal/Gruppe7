@@ -134,7 +134,6 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -142,12 +141,11 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
     }
-
+    // aktueller Benutzer wird gelöscht und Main Activity wird gestartet
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -194,6 +192,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
     }
 
 
+    // Hier wird ein Kalender geöffnet in dem man das Datum auswählen kann
     public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(this.getFragmentManager(), "datePicker");
@@ -203,18 +202,17 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
+            // aktuelles Datum als Voreinstellung
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
+            //Rückgabe einer neuen Instanz
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
             AnfrageErstellen anfrageErstellen = (AnfrageErstellen) getActivity();
 
             Calendar calendar = Calendar.getInstance();
@@ -227,6 +225,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // hier wird das Datum gesetzt
     public void date(String date){
         if(checkBtn==1) {
             mBtnRepAnfang.setText(date);
@@ -237,6 +236,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // hier werden die Hinweise sichtbar/unsichtbar gesetzt
     public void btnColor(String color){
         if(color.equals("white")){
             mTvHinweisLandText.setVisibility(ListView.INVISIBLE);
@@ -261,6 +261,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // es wird überprüft ob alle Felder ausgefüllt sind, wenn ja wird die Anfrage in die Datenbank geschrieben
     public boolean check(String userId){
         String adressId = null;
         String dateAnfang = mBtnRepAnfang.getText().toString();
@@ -299,9 +300,9 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // hier wird die Adresse in die Datenbank geschrieben
     public String writeDbAdresse(String land, String straße, String stadt, String plz) {
         sqLite = new SQLite(this);
-        // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getReadableDatabase();
         String newRowId = null;
         try{
@@ -321,7 +322,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
                 newRowId = cursor.getString(0);
             }
         }catch(Exception ex){
-                // Create a new map of values, where column names are the keys
+                // Map wird mit Variablen erzeugt, wo Spaltennamen die PKs sind
                 ContentValues values = new ContentValues();
                 values.put(SQLiteInit.COLUMN_STRASSE_HAUSNUMMER, straße);
                 values.put(SQLiteInit.COLUMN_PLZ, plz);
@@ -332,12 +333,12 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         return newRowId;
     }
 
+    // hier wird die Anfrage in die Datenbank geschrieben
     public void writeDb(Anfrage anfrage) {
         sqLite = new SQLite(this);
-        // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getWritableDatabase();
 
-        // Create a new map of values, where column names are the keys
+        // Map wird mit Variablen erzeugt, wo Spaltennamen die PKs sind
         ContentValues values = new ContentValues();
         values.put(SQLiteInit.COLUMN_BESCHREIBUNG, anfrage.getmBeschreibung());
         values.put(SQLiteInit.COLUMN_STARTTERMIN, anfrage.getmStarttermin());
@@ -351,13 +352,14 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         values.put(SQLiteInit.COLUMN_BENUTZER_ID_FK, anfrage.getmUserId());
         values.put(SQLiteInit.COLUMN_ADRESSE_ID_FK, anfrage.getmAdresseIdFk());
 
-        // Insert the new row, returning the primary key value of the new row
+        // neue Zeile wird eingefügt, PK der neuen Zeile wird zurückgegeben
         long newRowId = db.insert(SQLiteInit.TABLE_ANFRAGE, null, values);
 
         Toast.makeText(this, "Auftrag erstellt.", Toast.LENGTH_LONG).show();
     }
 
 
+    // hier erfolgt der Kamera Zugriff um ein Bild der Anfrage hinzuzufügen
     public void bild(){
         if(checkBild == 1){
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -382,6 +384,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // hier erfolgt der Zugriff auf die Medien, aus denen man sich ein Bild für die Anfrage holen kann
     public void pickImage(Intent data){
         Uri selectedImage = data.getData();
         String[] filePathColumn = { MediaStore.Images.Media.DATA };
@@ -397,6 +400,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         imageBitmap = BitmapFactory.decodeFile(picturePath);
     }
 
+    // hier wird eine bitmap Datei in ein byte[] umgewandelt
     public static byte[] getBytesFromBitmap(Bitmap bitmap) {
         if (bitmap!=null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -406,6 +410,7 @@ public class AnfrageErstellen extends AppCompatActivity implements View.OnClickL
         return null;
     }
 
+    // hier wird die Kategorie zu der Auswahl abgefragt
     public String getKategorie(String kategorie){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();

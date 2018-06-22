@@ -22,6 +22,7 @@ import android.widget.DatePicker;
 //import android.widget.ListView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -65,7 +66,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     ArrayAdapter<CharSequence> adapterSpinnerProfile;
     private Spinner mSpinProfile;
     private String[] mSpinnerCont;
-    // private ListView mListResult;
+    private ProgressBar spinner;
 
 
     @Override
@@ -84,6 +85,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     private void bindViews() {
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
         mLogohome = this.findViewById(R.id.logohome);
         mUsername = this.findViewById(R.id.Benutzername);
         mTvKeineAufträge = this.findViewById(R.id.txtKeineAufträge);
@@ -109,6 +111,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     }
 
     private void init() {
+        spinner.setVisibility(View.GONE);
         mLogohome.setOnClickListener(this);
         mUsername.setText(username);
         mTvDateError.setTextColor(Color.RED);
@@ -118,22 +121,21 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         mBtnRepAnfang.setOnClickListener(this);
         mBtnRepEnde.setOnClickListener(this);
         mBtnSuchen.setOnClickListener(this);
+
+        //Entfernungsmessung wird hier angelegt
         mSeekbar.setMax(100);
         mSeekbar.setProgress(50);
         mSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // Write code to perform some action when progress is changed.
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // Write code to perform some action when touch is started.
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Write code to perform some action when touch is stopped.
                 mTvRadius.setText(String.valueOf(seekBar.getProgress()) + " km");
             }
         });
@@ -148,7 +150,6 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -156,12 +157,12 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
     }
 
+    // hier wird der aktuelle User ausgeloggt
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -170,8 +171,10 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
     boolean b;
 
+
     @Override
     public void onClick(View view) {
+        waiting();
         int viewId = view.getId();
         switch (viewId) {
             case R.id.logohome:
@@ -204,9 +207,17 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
             case R.id.btnKlappen:
                 klappen();
                 break;
+
         }
+        spinner.setVisibility(View.GONE);
     }
 
+    private void waiting() {
+        spinner.setVisibility(View.VISIBLE);
+    }
+
+    // hier wird überprüft ob das Enddatum kleiner als das Startdatum ist,
+    // wenn ja, wird eine Meldung angezeigt
     public boolean checkDate(){
         boolean b = true;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -225,6 +236,8 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         return b;
     }
 
+    // hier wird überprüft ob gerade Aufträge angezeigt werden
+    // wenn ja wird die Auswahlansicht angezeigt, wenn nein werden die Suchergebnisse angezeigt
     public void klappen(){
         if(check.equals("offen")){
             slideUp(mklapView);
@@ -237,6 +250,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    // hier werden die gefundenen Aufträge angezeigt
     public void slideDown(View view){
         TranslateAnimation animate = new TranslateAnimation(
                 0,                 // fromXDelta
@@ -247,6 +261,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         view.startAnimation(animate);
     }
 
+    // hier wird zur Ansicht der Suchmaske gewechselt
     public void slideUp(View view){
         view.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
@@ -257,7 +272,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         animate.setFillAfter(true);
         view.startAnimation(animate);
     }
-
+    // Hier wird ein Kalender geöffnet in dem man das Datum auswählen kann
     public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(this.getFragmentManager(), "datePicker");
@@ -267,18 +282,17 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
+            // aktuelles Datum als Voreinstellung
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
+            //Rückgabe einer neuen Instanz
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
             AufträgeSuchen aufträgeSuchen = (AufträgeSuchen) getActivity();
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);
@@ -290,6 +304,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    // hier wird das Datum gesetzt
     public void date(String date){
         if(checkBtn==1) {
             mBtnRepAnfang.setText(date);
@@ -301,8 +316,9 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     Geocoder geocoder;
     List<Address> address;
 
+    // hier wird die Distanz zwischen zwei Orten abgefragt
     public int getDistance(String adresse1, String adresse2){
-        // Hier Wert der bei der Suche nicht ausgewählt werden kann,
+        // Wert der bei der Suche nicht ausgewählt werden kann,
         // falls es zu einem Fehler bei der Abfrage kommt wird der Aufrag dann nicht angezeigt.
         int distance = 500;
         try {
@@ -331,6 +347,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
     ArrayList<byte[]> byteList = new ArrayList<byte[]>(){};
     ArrayList<Adresse> adresseList;
 
+    // hier werden die gefundenen Aufträge extrahiert, die in dem gesuchten Radius liegen
     public void extractAufträge(){
         int radius = mSeekbar.getProgress();
         Adresse adresse;
@@ -361,6 +378,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    // hier werden die passenden Aufträge der Liste hinzugefügt
     public void setAufträge(){
         // Adapter setzen
         mLv.setAdapter(new AuftragAdapter(this, mLv, this.anfrageList, this.byteList, this.adresseList,
@@ -368,27 +386,13 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
                 mBtnRepEnde.getText().toString(), String.valueOf(mSeekbar.getProgress()), username));
     }
 
-
+    // hier wird der Adresse-Fremdschlüssel aus der Datenbank gelesen
     public String getAdresseFk(String id){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
         String userId = new AktuellerBenutzer().getId(this);
         String fk = null;
         try{
-            /*Cursor cursor =
-                    db.query(SQLiteInit.TABLE_BENUTZERKONTO, // a. table
-                            new String[]{SQLiteInit.COLUMN_USERNAME}, // b. column names
-                            " benutzer_id_pk = ?", // c. selections
-                            new String[] {id}, // d. selections args
-                            null, // e. group by
-                            null, // f. having
-                            null, // g. order by
-                            null); // h. limit
-
-
-            cursor.moveToFirst();
-            String username = cursor.getString(0);*/
-
             Cursor cursor =
                     db.query(SQLiteInit.TABLE_PRIVATPERSON, // a. table
                             new String[]{SQLiteInit.COLUMN_ADRESSE_ID_FK}, // b. column names
@@ -420,6 +424,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         return fk;
     }
 
+    // hier wird eine Adresse zu einem Fremdschlüssel aus der Datenbank geholt
     public Adresse getAdresse(String fk){
         Adresse adresse = new Adresse();
         sqLite = new SQLite(this);
@@ -448,6 +453,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         return adresse;
     }
 
+    // hier werden die Aufträge zu den Suchkriterien, bis auf die Distanz, aus der Datenbank geholt
     public void getAufträgeDb(){
 
         sqLite = new SQLite(this);
@@ -518,6 +524,7 @@ public class AufträgeSuchen extends AppCompatActivity implements View.OnClickLi
         db.close();
     }
 
+    // hier wird die Kategorie zu der Auswahl geholt
     public String getKategorie(String kategorie){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();

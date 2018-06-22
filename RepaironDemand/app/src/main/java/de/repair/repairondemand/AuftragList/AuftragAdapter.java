@@ -42,7 +42,6 @@ public class AuftragAdapter extends BaseAdapter {
     public AuftragAdapter(Context context, ListView mLv, ArrayList<Anfrage> anfrageList,
                           ArrayList<byte[]> byteList, ArrayList<Adresse> addressList, String kategorie,
                           String anfang, String ende, String radius, String username) {
-        // TODO Auto-generated constructor stub
         this.context = context;
         this.anfrageList = anfrageList;
         this.byteList = byteList;
@@ -59,19 +58,16 @@ public class AuftragAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return anfrageList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return anfrageList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
@@ -83,7 +79,6 @@ public class AuftragAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         View view = null;
         aufträgeSuchen = new AufträgeSuchen();
         if (convertView == null){
@@ -101,7 +96,7 @@ public class AuftragAdapter extends BaseAdapter {
         }
 
         ViewHolder holder = (ViewHolder) view.getTag();
-        // hier jeweils Werte übergeben
+        // hier werden jeweils die Daten für die Anfrage gesetzt
         holder.beschreibung.setText(anfrageList.get(position).getmBeschreibung());
         holder.bild.setImageDrawable(new BitmapDrawable(context.getResources(),
                 BitmapFactory.decodeByteArray(byteList.get(position),

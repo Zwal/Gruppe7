@@ -99,7 +99,6 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -107,12 +106,12 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
     }
 
+    // aktueller Benutzer wird gelöscht und Main Activity wird gestartet
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -152,6 +151,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // Hier wird ein Kalender geöffnet in dem man das Datum auswählen kann
     public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(this.getFragmentManager(), "datePicker");
@@ -161,18 +161,17 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
+            // aktuelles Datum als Voreinstellung
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
+            //Rückgabe einer neuen Instanz
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
             AngebotAbgeben angebotAbgeben = (AngebotAbgeben) getActivity();
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);
@@ -184,6 +183,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // hier wird das Datum gesetzt
     public void date(String date){
         if(checkBtn==1) {
             mBtnZeitStart.setText(date);
@@ -192,6 +192,8 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // hier wird überprüft ob die erforderlichen Eingaben gemacht wurden, wenn ja wird das Angebot
+    // in die Datenbank geschrieben, nachdem der User die Abgabe nochmals bestätigt hat
     public void check() {
         String preis = mTxtPreis.getText().toString();
         String dateStart = mBtnZeitStart.getText().toString();
@@ -207,6 +209,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // hier werden die Hinweise sichtbar/unsichtbar gesetzt
     public void btnColor(String color){
         if(color.equals("white")){
             mTvHinweisPreis.setVisibility(ListView.INVISIBLE);
@@ -217,6 +220,7 @@ public class AngebotAbgeben extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // hier wird ein Angebotobjekt erzeugt
     public Angebot writeAngebotDb(){
         Angebot angebot = new Angebot();
         angebot.setmPreis(mTxtPreis.getText().toString());

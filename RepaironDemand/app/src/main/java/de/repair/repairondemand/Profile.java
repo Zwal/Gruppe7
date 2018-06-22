@@ -124,7 +124,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -132,7 +131,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
@@ -142,6 +140,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         getAnfrageIds(getAnfrageUserId());
     }
 
+    // hier wird der User ausgeloggt
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -170,6 +169,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    // hier wird die User Id zu einer Anfrage abgefragt
     public String getAnfrageUserId(){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -193,6 +193,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         return fk;
     }
 
+    // hier werden der Name und die Qualifikation eines Auftrags aus der Datenbank abgefragt
+    // und den Feldern zur Anzeige zugewiesen
     public void getAnfrageUserData(String anfrageUserId){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -228,6 +230,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    // hier werden alle Anfragen Ids des Users abgefragt, welcher die aktuelle Anfrage gestellt hat
     public void getAnfrageIds(String anfrageUserId){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -261,6 +264,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    // hier werden die Feedbacks zu allen Anfragen geholt, die vom aktuellen User gestellt worden sind
     public void getFeedback(){
         sqLite = new SQLite(this);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -295,6 +299,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         feedback();
     }
 
+    // hier werden die Methoden zur Feedback Berechnung und zum Feedback selbst aufgerufen
     public void feedback(){
         int kompetenz = getMittelwert(this.kompetenz);
         int freundlichkeit = getMittelwert(this.freundlichkeit);
@@ -309,6 +314,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         setFeedback(mittelwert, AiVd);
     }
 
+    // hier werden die entsprechenden Feedback Sterne gesetzt
     public void setFeedback(int count, ImageView[] iVA){
         for(int i = 0; i < count; i++){
             iVA[i].setImageDrawable(this.getDrawable(R.mipmap.baseline_star_black_24));
@@ -317,6 +323,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     int countMiddle = 0;
 
+    // hier werden die Feedbacks ausgerechnet
     public int getMittelwert(ArrayList<String> list){
         int count = 0;
         for(String zahl : list){

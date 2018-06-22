@@ -75,7 +75,6 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -83,13 +82,12 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
     }
 
-
+    // hier wird der User ausgeloggt
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -123,7 +121,7 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
-
+    // Hier wird ein Kalender geöffnet in dem man das Datum auswählen kann
     public void showDatePickerDialog() {
         DialogFragment newFragment = new Beschwerde.DatePickerFragment();
         newFragment.show(this.getFragmentManager(), "datePicker");
@@ -131,20 +129,18 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        // Kalender wird angelegt
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
             Beschwerde beschwerde = (Beschwerde) getActivity();
 
             Calendar calendar = Calendar.getInstance();
@@ -157,10 +153,12 @@ public class Beschwerde extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    // hier wird das Datum gesetzt
     public void date(String date){
         mBtnDatum.setText(date);
     }
 
+    // hier wird überprüft ob alle erforderlichen Felder ausgfüllt wurden, wenn nein werden Hinweise angezeigt
     public boolean check(){
         boolean b = false;
         if(!mText.getText().toString().equals("") && !mTextAuftrNr.getText().toString().equals("")

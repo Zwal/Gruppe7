@@ -62,7 +62,6 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -70,7 +69,6 @@ public class ServiceCenter extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });

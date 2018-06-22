@@ -61,7 +61,6 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -69,12 +68,12 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
     }
 
+    // hier wird der User ausgeloggt
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -105,6 +104,8 @@ public class Support2 extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
+    // hier wird überprüft ob die erforderlichen Felder ausgefüllt wurden, wenn
+    // nein, werden Hinweise angezeigt
     public boolean check(){
         boolean b = false;
         if(!mText.getText().toString().equals("")){

@@ -10,6 +10,7 @@ public class AktuellerBenutzer {
 
     private SQLite sqLite;
 
+    // Hier wird die Id des aktuell eingelogten Users geholt
     public String getId(Context context){
         sqLite = new SQLite(context);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -34,6 +35,7 @@ public class AktuellerBenutzer {
         return id;
     }
 
+    // hier wird die Ids des aktuell eingolggten Users in der Tabelle aktueller_benutzer gespeichert
     public void writeId(String id, Context context) {
         sqLite = new SQLite(context);
         // Gets the data repository in write mode
@@ -51,6 +53,7 @@ public class AktuellerBenutzer {
         }
     }
 
+    // hier wird die Id des Users aus der Tabelle Benutzerkonto geholt, der sich anmeldet
     public String getIdUser(Context context, String username){
         sqLite = new SQLite(context);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -75,6 +78,7 @@ public class AktuellerBenutzer {
         return id;
     }
 
+    // hier wird abgefragt ob der aktuell angemeldete User eine Privatperson oder eine Firma ist
     public String getTypeUser(Context context){
         sqLite = new SQLite(context);
         SQLiteDatabase db = sqLite.getReadableDatabase();
@@ -111,6 +115,7 @@ public class AktuellerBenutzer {
         return type;
     }
 
+    // hier wird der aktuelle User in die Datenbank geschrieben
     public void deleteAktuellerUser(Context context){
         sqLite = new SQLite(context);
         // Gets the data repository in write mode

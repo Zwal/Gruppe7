@@ -75,6 +75,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         mSpinnerCont = getResources().getStringArray(R.array.spinnerProfile);
     }
 
+    // hier meldet sich der User ab
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -122,9 +123,9 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // hier werden Daten von einer Anfrage zu einer Anfrage Id abgefragt
     public void getAuftrag(String auftragsId){
         sqLite = new SQLite(this);
-        // Gets the data repository in write mode
         SQLiteDatabase db = sqLite.getReadableDatabase();
         String beschreibung;
         String adresse_fk;
@@ -163,6 +164,7 @@ public class AuftragAnsicht extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // hier werden die Daten der zu anzeigenden Anfrage gesetzt
     public void setValues(String beschreibung, String stadt, byte[] bild) {
         mTvBeschreibung.setText(beschreibung);
         mTvStandort.setText(stadt);

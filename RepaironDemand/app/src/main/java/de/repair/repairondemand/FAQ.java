@@ -78,7 +78,6 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
         mSpinProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
                 if(mSpinnerCont[position].equals("Ausloggen")){
                     ausloggen();
                 }
@@ -86,12 +85,12 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
     }
 
+    // hier wird der User ausgeloggt
     public void ausloggen(){
         new AktuellerBenutzer().deleteAktuellerUser(this);
         startActivityIntent =  new Intent(this, MainActivity.class);
@@ -142,6 +141,8 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    // hier wird überprüft ob gerade eine Frage in der Detailansicht angezeigt wird
+    // wenn ja wird die Auswahlansicht angezeigt, wenn nein werden die Suchergebnisse angezeigt
     public void klappen(String text){
         if(check.equals("offen")){
             slideUp(mklapView);
@@ -157,6 +158,7 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    // hier wird die Ansicht für die Antwort angezeigt
     public void slideDown(View view){
         TranslateAnimation animate = new TranslateAnimation(
                 0,                 // fromXDelta
@@ -167,6 +169,7 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener {
         view.startAnimation(animate);
     }
 
+    // hier wird die Ansicht für die Fragen angezeigt
     public void slideUp(View view){
         view.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
